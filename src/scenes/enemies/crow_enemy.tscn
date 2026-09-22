@@ -1,0 +1,122 @@
+[gd_scene load_steps=17 format=3 uid="uid://c0etdxlpy7n5n"]
+
+[ext_resource type="Texture2D" uid="uid://c6j2fhqc2a43b" path="res://assets/art/characters/enemies/flying_enemy.png" id="1_u8e6j"]
+[ext_resource type="Script" uid="uid://y50qkebtkff4" path="res://src/scripts/gameplay/enemies/crow_enemy.gd" id="1_vxy0c"]
+[ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/Medium_Shadow.png" id="2_vxy0c"]
+[ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="4_js068"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qdyro"]
+
+[sub_resource type="Animation" id="Animation_x81kg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_js068"]
+resource_name = "fly"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_741gr"]
+_data = {
+&"RESET": SubResource("Animation_x81kg"),
+&"fly": SubResource("Animation_js068")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u8e6j"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vxy0c"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_js068"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x81kg"]
+advance_mode = 2
+advance_expression = "can_see_player()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_741gr"]
+advance_mode = 2
+advance_expression = "not can_see_player()"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qdyro"]
+states/Chase/node = SubResource("AnimationNodeAnimation_u8e6j")
+states/Chase/position = Vector2(407, 183)
+states/Idle/node = SubResource("AnimationNodeAnimation_vxy0c")
+states/Idle/position = Vector2(407, 100)
+states/Start/position = Vector2(203, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_js068"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_x81kg"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_741gr")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oxkvd"]
+graph_offset = Vector2(-62.805412, 38.99849)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qdyro")
+nodes/StateMachine/position = Vector2(20, 120)
+node_connections = [&"output", 0, &"StateMachine"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxy0c"]
+
+[node name="CrowEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_vxy0c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u8e6j")
+offset = Vector2(0, -24)
+hframes = 7
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+texture = ExtResource("2_vxy0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_qdyro")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_741gr")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_oxkvd")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(8, 0)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("4_js068")
+metadata/_custom_type_script = "uid://q3r7iiumy8l8"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, -22)
+shape = SubResource("CircleShape2D_vxy0c")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://rmlvuxhw0vsa"]
+
+[ext_resource type="Texture2D" uid="uid://7hfusuip0rit" path="res://assets/art/world/environment/Bush.png" id="1_u465e"]
+[ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/Medium_Shadow.png" id="2_5ummb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ummb"]
+radius = 11.0
+
+[node name="Bush" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_u465e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("CircleShape2D_5ummb")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(-8.34465e-07, -2)
+scale = Vector2(1.1875, 1)
+texture = ExtResource("2_5ummb")

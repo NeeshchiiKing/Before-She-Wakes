@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpk6q70vvd250"]
+
+[ext_resource type="Texture2D" uid="uid://duxj700enmqhk" path="res://assets/art/world/environment/Pine_Tree.png" id="1_nesx2"]
+[ext_resource type="Texture2D" uid="uid://dtjwrstmw63b6" path="res://assets/art/effects/LargeShadow.png" id="2_dabx0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8hr8"]
+size = Vector2(16, 14)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -78)
+texture = ExtResource("1_nesx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -30)
+shape = SubResource("RectangleShape2D_i8hr8")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(1.66893e-06, 0.5000007)
+scale = Vector2(3.1875, 1.4499999)
+texture = ExtResource("2_dabx0")
