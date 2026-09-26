@@ -1,9 +1,8 @@
 class_name PinetopLevel extends BaseLevel 
 
-@onready var player_spawn_marker : PlayerSpawn = $Entities/PlayerSpawn
-@onready var player_camera       : Camera2D = $Entities/PlayerCamera
+@onready var player_spawn_marker : PlayerSpawn = $Player/PlayerSpawn
+@onready var player_camera       : Camera2D = $Player/PlayerCamera
 @onready var level_transition: LevelTransition = $Transitions/LevelTransition
-
 
 func _ready() -> void:
 	level_transition.transition_requested.connect(_on_level_transition_requested)

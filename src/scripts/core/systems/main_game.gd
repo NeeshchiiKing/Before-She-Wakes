@@ -1,6 +1,15 @@
 class_name MainGame extends Node
 #Responsible for setting up the World Layers and Coordinating high-level systems
 
+#MainGame Application Root Loads when game runs
+#Systems GameManagers, Quest Tracker, Inventory, Crafting Systems, Dialogue Manager, Save load, Audio Manager
+#World Contains the World
+#HUD heads Health bars, minimap, quest trracker, ability cooldowns
+#Pause to pause the game which allowes to pause the game as you transition etc
+#Transisition handles visual effects mostly
+#Debug is currectly used so you can quit set fps, level name, noclip toggle, spawn enemy buttons
+
+
 #Future (Main Menu): Loading test level for prototype
 const TEST_LEVEL_01    : String = "uid://c7ta2yrs1skiv" 
 const PLAYER_SCENE_UID : String = "uid://dnjkaew63j15w"
@@ -73,13 +82,16 @@ func _perform_level_load(level_scene_uid : String) -> void:
 
 	_current_level = new_level as BaseLevel
 
-	level_root.add_child(_current_level)
+	level_root.add_child(_current_level) #this adds that level node to the Main game LevelRoot 
+	# Level is stored as _current_level : BaseLevel
 
+	_current_level = new_level as BaseLevel
+	level_root.add_child(_current_level)
 	_current_level.signal_level_transition.connect(load_level)
 
+	_attach_entity_root_to_level()   # <-- replaces _attach_player_to_level()
 	_place_player_at_level_spawn()
 	_setup_level_camera()
-
 
 
 ## Instantiates the player and adds it to the entity layer
@@ -95,15 +107,31 @@ func _init_player() -> void:
 		return
 
 	if player_instance is not Player:
-		player_instance.free() # Node must be freed to avoid unreferenced orphan nodes
+		player_instance.free()
 		push_error("Loaded player scene is not of type Player " + PLAYER_SCENE_UID)
 		return
 
 	player = player_instance as Player
-
 	entity_root.add_child(player)
 
+## Moves the entity_root (player, NPCs, enemies) into the newly loaded level's
+##  Y-sort container so everything inside it draws correctly relative to that
+##  level's trees, bushes, buildings, etc.
+func _attach_entity_root_to_level() -> void:
+	if _current_level == null:
+		push_error("Cannot attach entity_root to level because level is null")
+		return
 
+	var ysort_container : Node2D = _current_level.get_ysort_container()
+	if ysort_container == null:
+		push_error("Current level has no Y-sort container to attach entity_root to")
+		return
+
+	if entity_root.get_parent() != null:
+		entity_root.get_parent().remove_child(entity_root)
+
+	ysort_container.add_child(entity_root)
+	
 ## Finds the default spawn location in currently loaded level, and places
 ##  the Player at that position.
 func _place_player_at_level_spawn() -> void:
@@ -127,7 +155,7 @@ func _setup_level_camera() -> void:
 
 	# FUTURE (camera): Temporary hookup
 	# NOTE: target variable was added as part of the custom camera script used for the prototype
-	level_camera.target = player
+	level_camera.set_player_target(player)
 
 
 func _init_systems() -> void:

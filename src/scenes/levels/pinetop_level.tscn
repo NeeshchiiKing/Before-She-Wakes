@@ -1396,6 +1396,14 @@ y_sort_enabled = true
 script = ExtResource("1_4lyj1")
 metadata/_edit_group_ = true
 
+[node name="Player" type="Node2D" parent="."]
+
+[node name="PlayerCamera" parent="Player" instance=ExtResource("17_k837i")]
+enabled = true
+
+[node name="PlayerSpawn" parent="Player" instance=ExtResource("18_1jrbf")]
+position = Vector2(674, 737)
+
 [node name="Background" type="Node2D" parent="."]
 
 [node name="Grass" type="TextureRect" parent="Background"]
@@ -1421,19 +1429,7 @@ tile_set = SubResource("TileSet_j2gmx")
 tile_set = SubResource("TileSet_gb53w")
 
 [node name="LevelObjects" type="Node2D" parent="."]
-
-[node name="Bush" parent="LevelObjects" instance=ExtResource("6_5yxh6")]
-position = Vector2(193, 519)
-
-[node name="Grass" parent="LevelObjects" instance=ExtResource("7_qor0u")]
-position = Vector2(799, 527)
-
-[node name="Pinetree" parent="LevelObjects" instance=ExtResource("8_5mcfq")]
-position = Vector2(343, 590)
-
-[node name="fire_effect" parent="LevelObjects" instance=ExtResource("9_gv0hn")]
-position = Vector2(1001, 1201)
-frame_progress = 0.98833364
+y_sort_enabled = true
 
 [node name="Inn" type="TextureRect" parent="LevelObjects"]
 offset_left = 55.0
@@ -1463,6 +1459,19 @@ offset_right = 417.0
 offset_bottom = 900.0
 texture = ExtResource("13_ralhq")
 
+[node name="Grass" parent="LevelObjects" instance=ExtResource("7_qor0u")]
+position = Vector2(799, 527)
+
+[node name="Pinetree" parent="LevelObjects" instance=ExtResource("8_5mcfq")]
+position = Vector2(343, 590)
+
+[node name="fire_effect" parent="LevelObjects" instance=ExtResource("9_gv0hn")]
+position = Vector2(1001, 1201)
+frame_progress = 0.98833364
+
+[node name="Bush" parent="LevelObjects" instance=ExtResource("6_5yxh6")]
+position = Vector2(193, 519)
+
 [node name="Tent" type="TextureRect" parent="LevelObjects"]
 offset_left = 910.0
 offset_top = 1097.0
@@ -1483,14 +1492,6 @@ offset_top = 1047.0
 offset_right = 580.0
 offset_bottom = 1095.0
 texture = ExtResource("15_3ff8m")
-
-[node name="Entities" type="Node2D" parent="."]
-
-[node name="PlayerCamera" parent="Entities" instance=ExtResource("17_k837i")]
-enabled = true
-
-[node name="PlayerSpawn" parent="Entities" instance=ExtResource("18_1jrbf")]
-position = Vector2(674, 737)
 
 [node name="Transitions" type="Node2D" parent="."]
 
