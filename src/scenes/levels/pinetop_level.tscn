@@ -1400,6 +1400,7 @@ metadata/_edit_group_ = true
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("17_k837i")]
 enabled = true
+zoom = Vector2(1, 1)
 
 [node name="PlayerSpawn" parent="Player" instance=ExtResource("18_1jrbf")]
 position = Vector2(674, 737)
@@ -1431,32 +1432,20 @@ tile_set = SubResource("TileSet_gb53w")
 [node name="LevelObjects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Inn" type="TextureRect" parent="LevelObjects"]
-offset_left = 55.0
-offset_top = 128.0
-offset_right = 631.0
-offset_bottom = 512.0
+[node name="Inn" type="Sprite2D" parent="LevelObjects"]
+position = Vector2(342, 320)
 texture = ExtResource("10_r2vu5")
 
-[node name="Shop_Potions" type="TextureRect" parent="LevelObjects"]
-offset_left = 872.0
-offset_top = 160.0
-offset_right = 1188.0
-offset_bottom = 544.0
+[node name="Shop_Potions" type="Sprite2D" parent="LevelObjects"]
+position = Vector2(1009, 291)
 texture = ExtResource("11_rub47")
 
-[node name="Van" type="TextureRect" parent="LevelObjects"]
-offset_left = 108.0
-offset_top = 994.0
-offset_right = 308.0
-offset_bottom = 1130.0
+[node name="Van" type="Sprite2D" parent="LevelObjects"]
+position = Vector2(210, 1053)
 texture = ExtResource("12_54h85")
 
-[node name="Well" type="TextureRect" parent="LevelObjects"]
-offset_left = 292.0
-offset_top = 800.0
-offset_right = 417.0
-offset_bottom = 900.0
+[node name="Well" type="Sprite2D" parent="LevelObjects"]
+position = Vector2(340, 853)
 texture = ExtResource("13_ralhq")
 
 [node name="Grass" parent="LevelObjects" instance=ExtResource("7_qor0u")]
@@ -1472,11 +1461,8 @@ frame_progress = 0.98833364
 [node name="Bush" parent="LevelObjects" instance=ExtResource("6_5yxh6")]
 position = Vector2(193, 519)
 
-[node name="Tent" type="TextureRect" parent="LevelObjects"]
-offset_left = 910.0
-offset_top = 1097.0
-offset_right = 1106.0
-offset_bottom = 1217.0
+[node name="Tent" type="Sprite2D" parent="LevelObjects"]
+position = Vector2(1001, 1154)
 texture = ExtResource("14_jhq8u")
 
 [node name="Tables" type="TextureRect" parent="LevelObjects"]

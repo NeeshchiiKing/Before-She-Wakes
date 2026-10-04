@@ -9,6 +9,7 @@ class_name MainGame extends Node
 #Transisition handles visual effects mostly
 #Debug is currectly used so you can quit set fps, level name, noclip toggle, spawn enemy buttons
 
+@onready var world: Node2D = $World
 
 #Future (Main Menu): Loading test level for prototype
 const TEST_LEVEL_01    : String = "uid://c7ta2yrs1skiv" 
@@ -51,9 +52,14 @@ func load_level(level_scene : String) -> void:
 	# Make sure this is called during idle time
 	_perform_level_load.call_deferred(level_scene)
 
-
+func _detach_entity_root_from_level() -> void:
+	if entity_root.get_parent() != world:
+		entity_root.get_parent().remove_child(entity_root)
+		world.add_child(entity_root)
+		
 func _perform_level_load(level_scene_uid : String) -> void:
 	if is_instance_valid(_current_level):
+		_detach_entity_root_from_level()
 		_current_level.queue_free()
 		_current_level = null
 		# Wait to allow the queued deletion to process so it is out of the scene tree
@@ -85,8 +91,6 @@ func _perform_level_load(level_scene_uid : String) -> void:
 	level_root.add_child(_current_level) #this adds that level node to the Main game LevelRoot 
 	# Level is stored as _current_level : BaseLevel
 
-	_current_level = new_level as BaseLevel
-	level_root.add_child(_current_level)
 	_current_level.signal_level_transition.connect(load_level)
 
 	_attach_entity_root_to_level()   # <-- replaces _attach_player_to_level()

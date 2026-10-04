@@ -4,9 +4,6 @@ class_name PinetopLevel extends BaseLevel
 @onready var player_camera       : Camera2D = $Player/PlayerCamera
 @onready var level_transition: LevelTransition = $Transitions/LevelTransition
 
-func _ready() -> void:
-	level_transition.transition_requested.connect(_on_level_transition_requested)
-	
 # Provides a player spawn location
 func get_default_player_spawn() -> Vector2:
 	return player_spawn_marker.global_position
@@ -18,3 +15,4 @@ func get_player_camera() -> Camera2D:
 
 func _on_level_transition_requested(scene_uid: String) -> void:
 	signal_level_transition.emit(scene_uid)
+	

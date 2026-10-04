@@ -11,7 +11,6 @@ var _has_triggered : bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	
 
 func _on_body_entered(body : Node2D) -> void:
 	if _has_triggered:
@@ -22,6 +21,5 @@ func _on_body_entered(body : Node2D) -> void:
 	
 	_has_triggered = true
 	
-	#transition_requested.emit(TEST_LEVEL_02)
 	transition_requested.emit(destination_level_uid)
 	

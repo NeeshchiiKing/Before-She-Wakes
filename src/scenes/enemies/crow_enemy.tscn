@@ -113,7 +113,7 @@ target_position = Vector2(8, 0)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 script = ExtResource("4_js068")
 metadata/_custom_type_script = "uid://q3r7iiumy8l8"
 

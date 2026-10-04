@@ -808,7 +808,7 @@ position = Vector2(-1, -30)
 polygon = PackedVector2Array(0.5, 13.5, -10, 0, 0.5, -10.5, 10, 0)
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 16
+collision_layer = 0
 collision_mask = 16
 script = ExtResource("4_lvxji")
 metadata/_custom_type_script = "uid://bbpj4t4f303tq"
