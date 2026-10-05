@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
 const SPEED = 60
+const FRICTION = 200
 
 @export var aggro_range: = 200
+@export var min_range: = 8
+
+@export var stats: Stats
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -14,15 +18,18 @@ const SPEED = 60
 #we did this for the grass effect but not doing it for the player
 
 func _ready() -> void:
-	hurtbox.hurt.connect(func(_other_hitbox: Hitbox):
-		queue_free()
-		)
-
+	stats = stats.duplicate()
+	hurtbox.hurt.connect(take_hit.call_deferred)
+	stats.no_vitality.connect(queue_free)
+	
 func _physics_process(_delta: float) -> void:
 	var state = playback.get_current_node()
 	match state:
-		"Idle": pass
+		"Idle": 
+			print("idle") 
+			pass 
 		"Chase": 
+			print("chasing player")
 			var player = get_player()
 			if player is Player:
 				velocity = global_position.direction_to(player.global_position) * SPEED
@@ -31,7 +38,15 @@ func _physics_process(_delta: float) -> void:
 			else:
 				velocity = Vector2.ZERO
 			move_and_slide()
-
+		"Hit":
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * _delta)
+			move_and_slide()
+			
+func take_hit(other_hitbox: Hitbox) -> void:
+	stats.vitality -= other_hitbox.damage
+	velocity = other_hitbox.knockback_direction * other_hitbox.knockback_amount
+	playback.start("Hit")
+	print("changed hit state")	
 #using groups this gives us access to the player, use nodes_in_the_group to get a list of nodes
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
@@ -42,7 +57,7 @@ func is_player_in_range() -> bool:
 	var player: = get_player()
 	if player is Player:
 		var distance_to_player = global_position.distance_to(player.global_position)
-		if distance_to_player < aggro_range: 
+		if distance_to_player < aggro_range and distance_to_player > min_range: 
 			result = true 
 	return result
 	

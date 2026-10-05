@@ -5,16 +5,25 @@ const ROLL_SPEED = 125
 const SNEAK_SPEED = 20
 
 var input_vector: = Vector2.ZERO
-var last_input_vector = Vector2.ZERO
+var last_input_vector = Vector2.LEFT
 var is_sneaking: bool = false
 
 var camera_look_direction : Vector2 = Vector2.ZERO
 @onready var player_sprite_2d : Sprite2D = $PlayerSprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var hitbox: Hitbox = $Hitbox
+@onready var hurtbox: Hurtbox = $Hurtbox
+@onready var blink_animation: AnimationPlayer = $BlinkAnimation
 
 @export var stats: Stats
-##################################################
+
+#############################################################################################33
+
+func _ready():
+	hurtbox.hurt.connect(take_hit.call_deferred)
+	stats.no_vitality.connect(die)
+
 func _physics_process(_delta: float) -> void:
 	
 	var state = playback.get_current_node()
@@ -25,6 +34,14 @@ func _physics_process(_delta: float) -> void:
 		"RollState": roll_state(_delta)
 		"SneakState": sneak_state(_delta)
 		
+func take_hit(other_hitbox : Hitbox) -> void:
+	stats.vitality -= other_hitbox.damage
+	blink_animation.play("blink")
+
+func die() -> void:
+	hide()
+	remove_from_group("player")
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 func move_state(_delta: float) -> void:
 	# Vector is a combination of a x Value and y Value
@@ -32,6 +49,7 @@ func move_state(_delta: float) -> void:
 
 	#!= Means not Equal
 	if input_vector!= Vector2.ZERO:
+		hitbox.knockback_direction = input_vector.normalized()
 		#this remembers the last input we did "move left, right, up, down
 		last_input_vector = input_vector
 		#directional_vector made to pass the animation tree flipping +1 and -1
@@ -82,6 +100,9 @@ func sneak_state(_delta: float) -> void:
 
 	velocity = input_vector * SNEAK_SPEED
 	move_and_slide()
+
+func get_camera_look_direction() -> Vector2:
+	return last_input_vector.normalized()
 	
 ##This Function is Called in the Physics Process. All animations are in one area!
 func update_blend_positions(direction_vector: Vector2) -> void:

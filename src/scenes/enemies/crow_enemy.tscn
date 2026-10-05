@@ -1,11 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0etdxlpy7n5n"]
+[gd_scene load_steps=24 format=3 uid="uid://c0etdxlpy7n5n"]
 
 [ext_resource type="Texture2D" uid="uid://c6j2fhqc2a43b" path="res://assets/art/characters/enemies/flying_enemy.png" id="1_u8e6j"]
 [ext_resource type="Script" uid="uid://y50qkebtkff4" path="res://src/scripts/gameplay/enemies/crow_enemy.gd" id="1_vxy0c"]
+[ext_resource type="Script" uid="uid://mp3eiwlfsv0y" path="res://src/scripts/core/resources/stats/stats.gd" id="2_1xq6u"]
 [ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/Medium_Shadow.png" id="2_vxy0c"]
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="4_js068"]
+[ext_resource type="Script" uid="uid://bbpj4t4f303tq" path="res://src/scripts/gameplay/damage_boxes/hitbox.gd" id="6_qo4ag"]
+
+[sub_resource type="Resource" id="Resource_qo4ag"]
+script = ExtResource("2_1xq6u")
+vitality = 3
+max_vitality = 3
+metadata/_custom_type_script = "uid://mp3eiwlfsv0y"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdyro"]
+radius = 5.0990195
 
 [sub_resource type="Animation" id="Animation_x81kg"]
 length = 0.001
@@ -40,14 +49,35 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_bhbsf"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_741gr"]
 _data = {
 &"RESET": SubResource("Animation_x81kg"),
-&"fly": SubResource("Animation_js068")
+&"fly": SubResource("Animation_js068"),
+&"hit": SubResource("Animation_bhbsf")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u8e6j"]
 animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bhbsf"]
+animation = &"hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vxy0c"]
 animation = &"fly"
@@ -63,27 +93,38 @@ advance_expression = "can_see_player()"
 advance_mode = 2
 advance_expression = "not can_see_player()"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bhbsf"]
+advance_mode = 2
+advance_expression = "velocity == 
+Vector2(0,0)"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qdyro"]
 states/Chase/node = SubResource("AnimationNodeAnimation_u8e6j")
 states/Chase/position = Vector2(407, 183)
+states/Hit/node = SubResource("AnimationNodeAnimation_bhbsf")
+states/Hit/position = Vector2(687, 100)
 states/Idle/node = SubResource("AnimationNodeAnimation_vxy0c")
 states/Idle/position = Vector2(407, 100)
 states/Start/position = Vector2(203, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_js068"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_x81kg"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_741gr")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_js068"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_x81kg"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_741gr"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bhbsf")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oxkvd"]
-graph_offset = Vector2(-62.805412, 38.99849)
+graph_offset = Vector2(-120.886566, -10.107437)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qdyro")
 nodes/StateMachine/position = Vector2(20, 120)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxy0c"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qo4ag"]
+size = Vector2(18, 13)
+
 [node name="CrowEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_vxy0c")
+stats = SubResource("Resource_qo4ag")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_u8e6j")
@@ -95,7 +136,7 @@ show_behind_parent = true
 texture = ExtResource("2_vxy0c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(1, -25)
 shape = SubResource("CircleShape2D_qdyro")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -104,6 +145,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_discrete = 1
 tree_root = SubResource("AnimationNodeBlendTree_oxkvd")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
@@ -112,11 +154,22 @@ anim_player = NodePath("../AnimationPlayer")
 target_position = Vector2(8, 0)
 
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 0
+collision_layer = 0
+collision_mask = 16
 script = ExtResource("4_js068")
 metadata/_custom_type_script = "uid://q3r7iiumy8l8"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_vxy0c")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("6_qo4ag")
+metadata/_custom_type_script = "uid://bbpj4t4f303tq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, -25.5)
+shape = SubResource("RectangleShape2D_qo4ag")
+debug_color = Color(0.99195284, 0, 0.2648908, 0.41960785)

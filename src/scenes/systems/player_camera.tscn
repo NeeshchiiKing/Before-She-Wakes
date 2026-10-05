@@ -4,5 +4,4 @@
 
 [node name="PlayerCamera" type="Camera2D"]
 enabled = false
-zoom = Vector2(2, 2)
 script = ExtResource("1_67nmm")

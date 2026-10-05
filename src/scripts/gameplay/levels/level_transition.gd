@@ -1,7 +1,5 @@
 class_name LevelTransition extends Area2D
 
-# const TEST_LEVEL_02 : String = "uid://kjasdhf"
-
 signal transition_requested(scene_uid : String)
 
 @export var destination_level_uid : String = ""
@@ -21,5 +19,9 @@ func _on_body_entered(body : Node2D) -> void:
 	
 	_has_triggered = true
 	
+	if destination_level_uid.is_empty():
+		push_warning("LevelTransition '%s' has no destination set" % name)
+		return
+		
 	transition_requested.emit(destination_level_uid)
 	

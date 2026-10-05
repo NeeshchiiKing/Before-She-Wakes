@@ -12,7 +12,7 @@ class_name MainGame extends Node
 @onready var world: Node2D = $World
 
 #Future (Main Menu): Loading test level for prototype
-const TEST_LEVEL_01    : String = "uid://c7ta2yrs1skiv" 
+const PINETOP_LEVEL    : String = "uid://c7ta2yrs1skiv" 
 const PLAYER_SCENE_UID : String = "uid://dnjkaew63j15w"
 
 var player : Player = null
@@ -32,7 +32,7 @@ var _current_level : BaseLevel = null
 func _ready() -> void:
 	_init_player()
 	
-	load_level(TEST_LEVEL_01)
+	load_level(PINETOP_LEVEL)
 	
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
@@ -93,7 +93,7 @@ func _perform_level_load(level_scene_uid : String) -> void:
 
 	_current_level.signal_level_transition.connect(load_level)
 
-	_attach_entity_root_to_level()   # <-- replaces _attach_player_to_level()
+	_attach_entity_root_to_level()  
 	_place_player_at_level_spawn()
 	_setup_level_camera()
 

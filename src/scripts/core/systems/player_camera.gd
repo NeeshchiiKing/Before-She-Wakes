@@ -2,7 +2,7 @@ extends Camera2D
 
 const LERP_WEIGHT : float = 2.0
 const CAMERA_LOOK_AHEAD_VAL : Vector2 = Vector2(0.0, -8.0)
-const CAMERA_LOOK_AMOUNT    : float =  64.0
+const CAMERA_LOOK_AMOUNT    : float =  32.0
 
 var target : Node2D = null
 var _player_target : Node2D = null   # remembers the player so we can return to them
