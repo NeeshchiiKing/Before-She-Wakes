@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=2 format=3 uid="uid://bjfxfsr7g6gly"]
+
+[ext_resource type="Script" uid="uid://bs7a3w4m8jdm2" path="res://src/scripts/core/resources/abilities/abilities_definition.gd" id="1_u5sht"]
+
+[resource]
+script = ExtResource("1_u5sht")
+tier_names = Array[String](["Sunlight"])
+tier_descriptions = Array[String](["Lights the area around you, Lights the entire cave"])
+tier_requirements = Array[int]([6])
+metadata/_custom_type_script = "uid://bs7a3w4m8jdm2"

@@ -29,10 +29,19 @@ var _current_level : BaseLevel = null
 @onready var pause_root     : Control = $PauseLayer/PauseRoot
 @onready var transition_root: Control = $TransitionLayer/TransitionRoot
 
+@onready var stats_hud : StatsHud = $HudLayer/HudRoot/StatsHud
+
+@onready var pause_menu : PauseMenu = $PauseLayer/PauseRoot/PauseMenu
+
+@onready var quick_bar_hud : QuickBarHud = $HudLayer/HudRoot/QuickBarHud
 func _ready() -> void:
 	_init_player()
-	
+	if player:
+		stats_hud.bind_stats(player.stats)
+		quick_bar_hud.bind_player(player)
+		
 	load_level(PINETOP_LEVEL)
+	pause_menu.quit_requested.connect(quit_game)
 	
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
@@ -161,6 +170,29 @@ func _setup_level_camera() -> void:
 	# NOTE: target variable was added as part of the custom camera script used for the prototype
 	level_camera.set_player_target(player)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"menu"):
+		toggle_menu()
+		get_viewport().set_input_as_handled()
+
+func toggle_menu() -> void:
+	if player == null:
+		return
+	if pause_menu.visible:
+		_close_menu()
+	else:
+		_open_menu()
+
+func _open_menu() -> void:
+	var in_combat := player.is_in_combat()
+	get_tree().paused = not in_combat # safe = paused, combat = live
+	player.is_digging = in_combat
+	pause_menu.open(player, in_combat)
+
+func _close_menu() -> void:
+	pause_menu.close()
+	get_tree().paused = false
+	player.is_digging = false
 
 func _init_systems() -> void:
 	pass # FUTURE (systems): Will be called to set

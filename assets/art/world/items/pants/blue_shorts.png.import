@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyggiiklq6v4s"
-path="res://.godot/imported/Fire_Effect.png-f5384fb490cb3435259bb2784c62d8bb.ctex"
+uid="uid://yxqqoc3hdt2o"
+path="res://.godot/imported/blue_shorts.png-a4b63458ed1ce62137af79ca56ae0af0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/effects/Fire_Effect.png"
-dest_files=["res://.godot/imported/Fire_Effect.png-f5384fb490cb3435259bb2784c62d8bb.ctex"]
+source_file="res://assets/art/world/items/pants/blue_shorts.png"
+dest_files=["res://.godot/imported/blue_shorts.png-a4b63458ed1ce62137af79ca56ae0af0.ctex"]
 
 [params]
 

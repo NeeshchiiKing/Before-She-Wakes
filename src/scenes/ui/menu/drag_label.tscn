@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://ch3vmw1f72sgl"]
+
+[node name="DragLabel" type="Node2D"]

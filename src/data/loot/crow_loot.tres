@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=6 format=3 uid="uid://dcasje4hw6rsr"]
+
+[ext_resource type="Script" uid="uid://bury6gm5vwbmo" path="res://src/scripts/core/resources/loot/loot_entry.gd" id="1_u2y7l"]
+[ext_resource type="Resource" uid="uid://b1lox8tph3qes" path="res://src/data/item/feather.tres" id="2_klr45"]
+[ext_resource type="Script" uid="uid://is2lr2p0ykjx" path="res://src/scripts/core/resources/loot/loot_table.gd" id="2_le0uu"]
+[ext_resource type="PackedScene" uid="uid://qsqhwvx07s7m" path="res://src/scenes/pickups/world_pickup.tscn" id="3_4ucxi"]
+
+[sub_resource type="Resource" id="Resource_xgx4j"]
+script = ExtResource("1_u2y7l")
+item = ExtResource("2_klr45")
+chance = 0.5
+max_amount = 2
+metadata/_custom_type_script = "uid://bury6gm5vwbmo"
+
+[resource]
+script = ExtResource("2_le0uu")
+pickup_scene = ExtResource("3_4ucxi")
+entries = Array[ExtResource("1_u2y7l")]([SubResource("Resource_xgx4j")])
+metadata/_custom_type_script = "uid://is2lr2p0ykjx"

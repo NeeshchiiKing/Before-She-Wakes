@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj5khnbiewudw"]
+[gd_scene load_steps=5 format=3 uid="uid://cj5khnbiewudw"]
 
 [ext_resource type="Script" uid="uid://d0bba63pwseso" path="res://src/scripts/core/systems/main_game.gd" id="1_3fed5"]
+[ext_resource type="PackedScene" uid="uid://b7d4iw4q7olie" path="res://src/scenes/ui/hud/stats_hud.tscn" id="2_6yl8a"]
+[ext_resource type="PackedScene" uid="uid://d4f04dvyoavlc" path="res://src/scenes/ui/menu/pause_menu.tscn" id="3_6n4xl"]
+[ext_resource type="Script" uid="uid://cj71vx3tqwbve" path="res://src/scripts/ui/hud/quick_bar_hud.gd" id="3_ibp4d"]
 
 [node name="MainGame" type="Node"]
 process_mode = 3
@@ -24,21 +27,52 @@ layer = 10
 
 [node name="HudRoot" type="Control" parent="HudLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="StatsHud" parent="HudLayer/HudRoot" instance=ExtResource("2_6yl8a")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 4.0
+offset_right = 97.0
+offset_bottom = 80.0
+
+[node name="QuickBarHud" type="HBoxContainer" parent="HudLayer/HudRoot"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_ibp4d")
+
 [node name="PauseLayer" type="CanvasLayer" parent="."]
-process_mode = 2
+process_mode = 3
 layer = 20
 
 [node name="PauseRoot" type="Control" parent="PauseLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="PauseLayer/PauseRoot" instance=ExtResource("3_6n4xl")]
+layout_mode = 1
+mouse_filter = 2
 
 [node name="TransitionLayer" type="CanvasLayer" parent="."]
 process_mode = 3

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3 uid="uid://dy2eibbigq1cu"]
+
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_6tdu5"]
+[ext_resource type="Texture2D" uid="uid://dael5qfxcgqdf" path="res://assets/art/world/items/base_items/honey.png" id="1_m7g2l"]
+
+[resource]
+script = ExtResource("1_6tdu5")
+display_name = "Honey Comb"
+icon = ExtResource("1_m7g2l")
+short_name = "Honey"
+heals = "intelligence"
+heal_amount = 2
+metadata/_custom_type_script = "uid://ds1wsjhavgit8"

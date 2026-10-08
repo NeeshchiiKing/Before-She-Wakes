@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3 uid="uid://b8hitjwupx13h"]
+
+[ext_resource type="Texture2D" uid="uid://dpabwyb6y5xw5" path="res://assets/art/world/items/base_items/resin.png" id="1_fgq42"]
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_gt8g7"]
+
+[resource]
+script = ExtResource("1_gt8g7")
+display_name = "Pine Resin"
+icon = ExtResource("1_fgq42")
+short_name = "resin"
+heal_amount = 2
+metadata/_custom_type_script = "uid://ds1wsjhavgit8"

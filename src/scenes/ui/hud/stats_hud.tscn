@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7d4iw4q7olie"]
+
+[ext_resource type="Script" uid="uid://c8ou4bstbpe3p" path="res://src/scripts/ui/hud/stats_hud.gd" id="1_jcg58"]
+[ext_resource type="PackedScene" uid="uid://dpqcanj4ef18g" path="res://src/scenes/ui/hud/resource_bar.tscn" id="2_jikeh"]
+
+[node name="StatsHud" type="VBoxContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_constants/separation = 0
+script = ExtResource("1_jcg58")
+
+[node name="vitality" parent="." instance=ExtResource("2_jikeh")]
+layout_mode = 2
+
+[node name="intelligence" parent="." instance=ExtResource("2_jikeh")]
+layout_mode = 2
+stat_name = &"intelligence"
+short_name = "Int"
+fill_color = Color(0.80577445, 0.0022927565, 0.9915382, 1)
+
+[node name="charisma" parent="." instance=ExtResource("2_jikeh")]
+layout_mode = 2
+stat_name = &"charisma"
+short_name = "Cha"
+fill_color = Color(3.922656e-06, 0.64642984, 0.19771075, 1)
+
+[node name="strength" parent="." instance=ExtResource("2_jikeh")]
+layout_mode = 2
+stat_name = &"strength"
+short_name = "Str"
+fill_color = Color(0.7541004, 0.45534277, 0, 1)
+
+[node name="dexterity" parent="." instance=ExtResource("2_jikeh")]
+layout_mode = 2
+stat_name = &"dexterity"
+short_name = "Dex"
+fill_color = Color(1.92523e-07, 0.58769274, 0.7606778, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://c7ta2yrs1skiv"]
+[gd_scene load_steps=32 format=4 uid="uid://c7ta2yrs1skiv"]
 
 [ext_resource type="Script" uid="uid://cxutdub26i0xk" path="res://src/scenes/levels/pinetop_level.gd" id="1_4lyj1"]
 [ext_resource type="Texture2D" uid="uid://c6th1y07afllv" path="res://assets/art/world/background/Pinetop.png" id="1_5jvs3"]
@@ -20,6 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://daud4mdxxst8s" path="res://src/scenes/levels/player_spawn.tscn" id="18_1jrbf"]
 [ext_resource type="PackedScene" uid="uid://chgy8s6ntggq1" path="res://src/scenes/levels/level_transition.tscn" id="19_1jrbf"]
 [ext_resource type="PackedScene" uid="uid://c0etdxlpy7n5n" path="res://src/scenes/enemies/crow_enemy.tscn" id="20_5yxh6"]
+[ext_resource type="PackedScene" uid="uid://qsqhwvx07s7m" path="res://src/scenes/pickups/world_pickup.tscn" id="20_gv0hn"]
+[ext_resource type="Resource" uid="uid://dy2eibbigq1cu" path="res://src/data/item/honey.tres" id="21_r2vu5"]
+[ext_resource type="Resource" uid="uid://b8hitjwupx13h" path="res://src/data/item/resin.tres" id="22_rub47"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qq27"]
 texture = ExtResource("2_4lyj1")
@@ -1431,6 +1434,17 @@ tile_set = SubResource("TileSet_gb53w")
 
 [node name="LevelObjects" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="WorldPickup2" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
+position = Vector2(334, 575)
+item = ExtResource("22_rub47")
+requires_press = true
+
+[node name="WorldPickup" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
+position = Vector2(375, 590)
+item = ExtResource("21_r2vu5")
+amount = 2
+requires_press = true
 
 [node name="Inn" type="Sprite2D" parent="LevelObjects"]
 position = Vector2(342, 320)

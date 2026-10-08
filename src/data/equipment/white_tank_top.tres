@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" load_steps=3 format=3 uid="uid://gujxrlarfan3"]
+
+[ext_resource type="Script" uid="uid://djob8g4cogp0f" path="res://src/scripts/core/resources/equipment/equipment_definition.gd" id="1_4yyuv"]
+[ext_resource type="Texture2D" uid="uid://5tmb8qghy8n1" path="res://assets/art/world/items/armor/white_tank_top.png" id="1_uqtvn"]
+
+[resource]
+script = ExtResource("1_4yyuv")
+display_name = "White Tank Top"
+icon = ExtResource("1_uqtvn")
+stat_bonuses = Dictionary[String, int]({
+"defense": 1
+})
+metadata/_custom_type_script = "uid://djob8g4cogp0f"

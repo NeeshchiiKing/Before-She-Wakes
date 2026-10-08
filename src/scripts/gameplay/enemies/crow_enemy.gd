@@ -3,8 +3,14 @@ extends CharacterBody2D
 const SPEED = 60
 const FRICTION = 200
 
+@export var experience_reward : int = 5
+@export var loot : LootTable
+
+var _is_dead : bool = false
+
 @export var aggro_range: = 200
 @export var min_range: = 8
+
 
 @export var stats: Stats
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -20,8 +26,9 @@ const FRICTION = 200
 func _ready() -> void:
 	stats = stats.duplicate()
 	hurtbox.hurt.connect(take_hit.call_deferred)
-	stats.no_vitality.connect(queue_free)
-	
+	stats.no_vitality.connect(die)	
+	add_to_group("enemies")
+
 func _physics_process(_delta: float) -> void:
 	var state = playback.get_current_node()
 	match state:
@@ -68,4 +75,15 @@ func can_see_player() -> bool:
 	var has_los_to_player: = not ray_cast_2d.is_colliding()
 	return has_los_to_player
 	#los = Line Of Sight
-	
+
+func die() -> void:
+	if _is_dead:
+		return
+	_is_dead = true
+
+	var player : Player = get_player()
+	if player:
+		player.gain_experience(experience_reward)
+	if loot != null:
+		loot.drop(global_position, get_parent())
+	queue_free()

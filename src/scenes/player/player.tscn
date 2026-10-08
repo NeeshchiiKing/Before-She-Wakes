@@ -1,10 +1,30 @@
-[gd_scene load_steps=94 format=3 uid="uid://dnjkaew63j15w"]
+[gd_scene load_steps=122 format=3 uid="uid://dnjkaew63j15w"]
 
 [ext_resource type="Texture2D" uid="uid://xrp1nhbl6fxt" path="res://assets/art/characters/player/64_Player_Game.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bmeiguh5ibq4l" path="res://src/scripts/gameplay/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://mp3eiwlfsv0y" path="res://src/scripts/core/resources/stats/stats.gd" id="2_gmlin"]
+[ext_resource type="Script" uid="uid://ehq68vmtts01" path="res://src/scripts/core/resources/stats/attributes.gd" id="3_6ap8y"]
 [ext_resource type="Script" uid="uid://bbpj4t4f303tq" path="res://src/scripts/gameplay/damage_boxes/hitbox.gd" id="4_lvxji"]
+[ext_resource type="Script" uid="uid://dibecyaa458ah" path="res://src/scripts/core/resources/stats/level_data.gd" id="4_w8ig4"]
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="5_6gf5d"]
+[ext_resource type="Script" uid="uid://dg3qgwnlnhlo4" path="res://src/scripts/core/resources/orbs/orb_grid.gd" id="5_l84wi"]
+[ext_resource type="Script" uid="uid://bs7a3w4m8jdm2" path="res://src/scripts/core/resources/abilities/abilities_definition.gd" id="6_7vxwc"]
+[ext_resource type="Script" uid="uid://71gqms0btw5g" path="res://src/scripts/core/resources/abilities/ability_book.gd" id="7_8tvdu"]
+[ext_resource type="Resource" uid="uid://d2jv4s6dv4pk8" path="res://src/data/abilities/torch.tres" id="8_l84wi"]
+[ext_resource type="Resource" uid="uid://bjfxfsr7g6gly" path="res://src/data/spells/light.tres" id="9_sm61a"]
+[ext_resource type="Resource" uid="uid://c5xjpkt1737oa" path="res://src/data/spells/fireball.tres" id="10_0il57"]
+[ext_resource type="Script" uid="uid://b4ii6p5ma3fmr" path="res://src/scripts/core/resources/items/inventory.gd" id="10_ashbf"]
+[ext_resource type="Script" uid="uid://djob8g4cogp0f" path="res://src/scripts/core/resources/equipment/equipment_definition.gd" id="11_6ofwp"]
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="11_ld08d"]
+[ext_resource type="Resource" uid="uid://dy2eibbigq1cu" path="res://src/data/item/honey.tres" id="12_ef3mv"]
+[ext_resource type="Resource" uid="uid://b8hitjwupx13h" path="res://src/data/item/resin.tres" id="13_xgv0w"]
+[ext_resource type="Script" uid="uid://dhliqoj7aigd6" path="res://src/scripts/core/resources/currency/wallet.gd" id="14_xgv0w"]
+[ext_resource type="Resource" uid="uid://gujxrlarfan3" path="res://src/data/equipment/white_tank_top.tres" id="15_0il57"]
+[ext_resource type="Resource" uid="uid://tyvt2mn6k6w6" path="res://src/data/equipment/small_bag.tres" id="16_hafhl"]
+[ext_resource type="Resource" uid="uid://ueqyjicu522c" path="res://src/data/equipment/blue_shorts.tres" id="17_xuyuq"]
+[ext_resource type="Script" uid="uid://cvw1ixxjquwl8" path="res://src/scripts/core/resources/equipment/equipment.gd" id="18_pyeyo"]
+[ext_resource type="Resource" uid="uid://utab68n0kiet" path="res://src/data/equipment/tattered_shoes.tres" id="19_87sxd"]
+[ext_resource type="Resource" uid="uid://bj0ki04cyfrgi" path="res://src/data/equipment/throwing_rock.tres" id="20_5eyvc"]
 
 [sub_resource type="Resource" id="Resource_lvxji"]
 script = ExtResource("2_gmlin")
@@ -19,6 +39,50 @@ max_strength = 5
 dexterity = 5
 max_dexterity = 5
 metadata/_custom_type_script = "uid://mp3eiwlfsv0y"
+
+[sub_resource type="Resource" id="Resource_mc3vd"]
+script = ExtResource("3_6ap8y")
+metadata/_custom_type_script = "uid://ehq68vmtts01"
+
+[sub_resource type="Resource" id="Resource_7vxwc"]
+script = ExtResource("4_w8ig4")
+metadata/_custom_type_script = "uid://dibecyaa458ah"
+
+[sub_resource type="Resource" id="Resource_ashbf"]
+script = ExtResource("5_l84wi")
+orbs = 5
+metadata/_custom_type_script = "uid://dg3qgwnlnhlo4"
+
+[sub_resource type="Resource" id="Resource_l84wi"]
+script = ExtResource("7_8tvdu")
+starting_abilities = Array[ExtResource("6_7vxwc")]([ExtResource("8_l84wi")])
+metadata/_custom_type_script = "uid://71gqms0btw5g"
+
+[sub_resource type="Resource" id="Resource_sm61a"]
+script = ExtResource("7_8tvdu")
+starting_abilities = Array[ExtResource("6_7vxwc")]([ExtResource("9_sm61a"), ExtResource("10_0il57")])
+metadata/_custom_type_script = "uid://71gqms0btw5g"
+
+[sub_resource type="Resource" id="Resource_ef3mv"]
+script = ExtResource("10_ashbf")
+starting_items = Array[ExtResource("11_ld08d")]([ExtResource("12_ef3mv"), ExtResource("13_xgv0w"), ExtResource("12_ef3mv"), ExtResource("13_xgv0w"), null])
+metadata/_custom_type_script = "uid://b4ii6p5ma3fmr"
+
+[sub_resource type="Resource" id="Resource_auaqc"]
+script = ExtResource("18_pyeyo")
+armor = ExtResource("15_0il57")
+pants = ExtResource("17_xuyuq")
+shoes = ExtResource("19_87sxd")
+throwing = ExtResource("20_5eyvc")
+bag = ExtResource("16_hafhl")
+metadata/_custom_type_script = "uid://cvw1ixxjquwl8"
+
+[sub_resource type="Resource" id="Resource_4r4qr"]
+script = ExtResource("14_xgv0w")
+paper = 25
+gold = 2
+runes = 1
+metadata/_custom_type_script = "uid://dhliqoj7aigd6"
 
 [sub_resource type="Animation" id="Animation_gmlin"]
 length = 0.001
@@ -961,6 +1025,33 @@ node_connections = [&"output", 0, &"StateMachine"]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh6av"]
 size = Vector2(17, 21)
 
+[sub_resource type="Animation" id="Animation_6gf5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_cx3ie"]
 resource_name = "blink"
 length = 0.5
@@ -990,33 +1081,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_6gf5d"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurtbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lh6av"]
 _data = {
 &"RESET": SubResource("Animation_6gf5d"),
@@ -1029,6 +1093,14 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_dovo2")
 stats = SubResource("Resource_lvxji")
+attributes = SubResource("Resource_mc3vd")
+level_data = SubResource("Resource_7vxwc")
+orb_grid = SubResource("Resource_ashbf")
+tools = SubResource("Resource_l84wi")
+spells = SubResource("Resource_sm61a")
+inventory = SubResource("Resource_ef3mv")
+equipment = SubResource("Resource_auaqc")
+wallet = SubResource("Resource_4r4qr")
 
 [node name="PlayerSprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.5, -48.5)

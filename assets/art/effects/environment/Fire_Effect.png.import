@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bloho5i8os6xe"
-path="res://.godot/imported/Medium_Shadow.png-3414d279cb0a1ef9d4b17153503af2f3.ctex"
+uid="uid://cyggiiklq6v4s"
+path="res://.godot/imported/Fire_Effect.png-370ec5d3d248136dc0dee8dce7c1ed81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/effects/Medium_Shadow.png"
-dest_files=["res://.godot/imported/Medium_Shadow.png-3414d279cb0a1ef9d4b17153503af2f3.ctex"]
+source_file="res://assets/art/effects/environment/Fire_Effect.png"
+dest_files=["res://.godot/imported/Fire_Effect.png-370ec5d3d248136dc0dee8dce7c1ed81.ctex"]
 
 [params]
 

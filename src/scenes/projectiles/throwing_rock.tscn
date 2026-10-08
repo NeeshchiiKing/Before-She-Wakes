@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl6d8lphmwogk"]
+
+[ext_resource type="Script" uid="uid://b0ad6klrw1d4e" path="res://src/scripts/gameplay/combat/projectile.gd" id="1_s4kql"]
+[ext_resource type="Texture2D" uid="uid://b2tpx3rd5isge" path="res://assets/art/world/items/throwing/rock.png" id="2_atxrt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1iim8"]
+radius = 4.1231055
+
+[node name="ThrowingRock" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_s4kql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1iim8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_atxrt")

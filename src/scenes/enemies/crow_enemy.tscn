@@ -1,11 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0etdxlpy7n5n"]
+[gd_scene load_steps=26 format=3 uid="uid://c0etdxlpy7n5n"]
 
 [ext_resource type="Texture2D" uid="uid://c6j2fhqc2a43b" path="res://assets/art/characters/enemies/flying_enemy.png" id="1_u8e6j"]
 [ext_resource type="Script" uid="uid://y50qkebtkff4" path="res://src/scripts/gameplay/enemies/crow_enemy.gd" id="1_vxy0c"]
 [ext_resource type="Script" uid="uid://mp3eiwlfsv0y" path="res://src/scripts/core/resources/stats/stats.gd" id="2_1xq6u"]
-[ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/Medium_Shadow.png" id="2_vxy0c"]
+[ext_resource type="Resource" uid="uid://dcasje4hw6rsr" path="res://src/data/loot/crow_loot.tres" id="2_jidm5"]
+[ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/character/Medium_Shadow.png" id="2_vxy0c"]
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="4_js068"]
 [ext_resource type="Script" uid="uid://bbpj4t4f303tq" path="res://src/scripts/gameplay/damage_boxes/hitbox.gd" id="6_qo4ag"]
+[ext_resource type="PackedScene" uid="uid://ciwp4ycjy5dhi" path="res://src/scenes/ui/enemy_health_bar.tscn" id="7_v2bte"]
 
 [sub_resource type="Resource" id="Resource_qo4ag"]
 script = ExtResource("2_1xq6u")
@@ -124,6 +126,8 @@ collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_vxy0c")
+experience_reward = 50
+loot = ExtResource("2_jidm5")
 stats = SubResource("Resource_qo4ag")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -173,3 +177,9 @@ metadata/_custom_type_script = "uid://bbpj4t4f303tq"
 position = Vector2(1, -25.5)
 shape = SubResource("RectangleShape2D_qo4ag")
 debug_color = Color(0.99195284, 0, 0.2648908, 0.41960785)
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("7_v2bte")]
+offset_left = -10.0
+offset_top = -45.0
+offset_right = 14.0
+offset_bottom = -41.0

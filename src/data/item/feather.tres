@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3 uid="uid://b1lox8tph3qes"]
+
+[ext_resource type="Texture2D" uid="uid://cvswv1m6d3skx" path="res://assets/art/world/items/base_items/feather.png" id="1_k5wfb"]
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_v3sm2"]
+
+[resource]
+script = ExtResource("1_v3sm2")
+display_name = "Crow Feather"
+icon = ExtResource("1_k5wfb")
+short_name = "Feather"
+metadata/_custom_type_script = "uid://ds1wsjhavgit8"

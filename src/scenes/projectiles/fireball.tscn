@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://vlqo8ckryn8i"]
+
+[ext_resource type="Script" uid="uid://b0ad6klrw1d4e" path="res://src/scripts/gameplay/combat/projectile.gd" id="1_kq7oe"]
+[ext_resource type="Texture2D" uid="uid://clb07t6sxxn1c" path="res://assets/art/effects/spells/fireball (2).png" id="2_kq7oe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1iim8"]
+radius = 4.1231055
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfll7"]
+atlas = ExtResource("2_kq7oe")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kbh5"]
+atlas = ExtResource("2_kq7oe")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkwdq"]
+atlas = ExtResource("2_kq7oe")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbqpb"]
+atlas = ExtResource("2_kq7oe")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubdmk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfll7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kbh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkwdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbqpb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Fireball" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_kq7oe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1iim8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ubdmk")
+autoplay = "default"
+frame_progress = 0.43112558

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://rmlvuxhw0vsa"]
 
 [ext_resource type="Texture2D" uid="uid://7hfusuip0rit" path="res://assets/art/world/environment/Bush.png" id="1_u465e"]
-[ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/Medium_Shadow.png" id="2_5ummb"]
+[ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/character/Medium_Shadow.png" id="2_5ummb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5ummb"]
 radius = 11.0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpqcanj4ef18g"]
+
+[ext_resource type="Script" uid="uid://djcsel1mbmv35" path="res://src/scripts/ui/hud/resource_bar.gd" id="1_gfuo6"]
+
+[sub_resource type="Theme" id="Theme_gfuo6"]
+
+[node name="ResourceBar" type="HBoxContainer"]
+script = ExtResource("1_gfuo6")
+
+[node name="NameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+
+[node name="Bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(60, 6)
+layout_mode = 2
+theme = SubResource("Theme_gfuo6")
+value = 100.0
+show_percentage = false
+
+[node name="ValueLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6

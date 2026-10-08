@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" load_steps=3 format=3 uid="uid://ueqyjicu522c"]
+
+[ext_resource type="Script" uid="uid://djob8g4cogp0f" path="res://src/scripts/core/resources/equipment/equipment_definition.gd" id="1_lngen"]
+[ext_resource type="Texture2D" uid="uid://yxqqoc3hdt2o" path="res://assets/art/world/items/pants/blue_shorts.png" id="1_reb22"]
+
+[resource]
+script = ExtResource("1_lngen")
+display_name = "Blue Shorts"
+icon = ExtResource("1_reb22")
+slot_type = "pants"
+metadata/_custom_type_script = "uid://djob8g4cogp0f"

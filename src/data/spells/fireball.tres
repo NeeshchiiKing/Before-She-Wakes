@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" load_steps=4 format=3 uid="uid://c5xjpkt1737oa"]
+
+[ext_resource type="Script" uid="uid://bs7a3w4m8jdm2" path="res://src/scripts/core/resources/abilities/abilities_definition.gd" id="1_6l1ag"]
+[ext_resource type="Texture2D" uid="uid://dgd3qsb2xda13" path="res://assets/art/world/projectiles/fireball_icon.png" id="1_hg4ly"]
+[ext_resource type="PackedScene" uid="uid://vlqo8ckryn8i" path="res://src/scenes/projectiles/fireball.tscn" id="2_ah6lo"]
+
+[resource]
+script = ExtResource("1_6l1ag")
+tier_names = Array[String](["Fireball", "Greater Fireball"])
+tier_descriptions = Array[String](["Hurls a ball of fore", "A Bigger, Even HOTTER BALL OF FIRE!"])
+tier_requirements = Array[int]([0, 5])
+icon = ExtResource("1_hg4ly")
+projectile_scene = ExtResource("2_ah6lo")
+tier_damage = Array[int]([2, 4])
+projectile_speed = 100.0
+projectile_range = 200.0
+cast_cost = 1
+metadata/_custom_type_script = "uid://bs7a3w4m8jdm2"
