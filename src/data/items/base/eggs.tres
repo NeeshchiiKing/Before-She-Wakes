@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_item"]
+
+[resource]
+script = ExtResource("1_item")
+display_name = "Eggs"
+short_name = "Eggs"
+kind = "base"
+base_type = "eggs"
+heals = "strength"
+heal_amount = 2
+tier_cost = 1

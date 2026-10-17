@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqw5qumanlqmg"]
+
+[ext_resource type="Script" uid="uid://bvia3yduiaykr" path="res://src/scripts/gameplay/enemies/bee.gd" id="1_5wjgc"]
+[ext_resource type="Texture2D" uid="uid://dbbt5weioh45n" path="res://assets/art/characters/enemies/bee.png" id="2_xkcmy"]
+[ext_resource type="Script" uid="uid://bbpj4t4f303tq" path="res://src/scripts/gameplay/damage_boxes/hitbox.gd" id="3_js3ed"]
+[ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="4_gtu6v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqbcg"]
+atlas = ExtResource("2_xkcmy")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3cj5"]
+atlas = ExtResource("2_xkcmy")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sm2ac"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqbcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3cj5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ylw3"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hb8ie"]
+
+[node name="Bees" type="Node2D"]
+script = ExtResource("1_5wjgc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sm2ac")
+autoplay = "default"
+frame_progress = 0.53364635
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("3_js3ed")
+knockback_amount = 50
+metadata/_custom_type_script = "uid://bbpj4t4f303tq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_0ylw3")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("4_gtu6v")
+metadata/_custom_type_script = "uid://q3r7iiumy8l8"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_hb8ie")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]

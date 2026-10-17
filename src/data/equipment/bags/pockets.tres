@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" load_steps=3 format=3 uid="uid://benk046in5elt"]
+
+[ext_resource type="Texture2D" uid="uid://cwkf0s6oisj5d" path="res://assets/art/world/items/bag/small_bag.png" id="1_h6mfl"]
+[ext_resource type="Script" uid="uid://djob8g4cogp0f" path="res://src/scripts/core/resources/equipment/equipment_definition.gd" id="1_xx3fq"]
+
+[resource]
+script = ExtResource("1_xx3fq")
+display_name = "Pockets"
+icon = ExtResource("1_h6mfl")
+slot_type = "bag"
+bag_capacity = 4
+bag_quick_slots = 2
+metadata/_custom_type_script = "uid://djob8g4cogp0f"

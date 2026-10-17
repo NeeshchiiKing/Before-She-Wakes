@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://65ppydfui843"]
+
+[ext_resource type="PackedScene" uid="uid://qsqhwvx07s7m" path="res://src/scenes/pickups/world_pickup.tscn" id="1_6d8vj"]
+[ext_resource type="Texture2D" uid="uid://b2tpx3rd5isge" path="res://assets/art/world/items/throwing/rock.png" id="2_35uk3"]
+[ext_resource type="Resource" uid="uid://bj0ki04cyfrgi" path="res://src/data/equipment/throwing/throwing_rock.tres" id="2_oo11x"]
+
+[node name="rock" instance=ExtResource("1_6d8vj")]
+gear = ExtResource("2_oo11x")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 6)
+texture = ExtResource("2_35uk3")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-1, 0)
+
+[node name="PromptLabel" parent="." index="2"]
+offset_left = -25.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -12.0

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://c77uusy8yhabd"]
+
+[ext_resource type="Script" uid="uid://c5rhyr2p0b0yq" path="res://src/scripts/gameplay/npc/npc_base.gd" id="1_ldjor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t30gs"]
+size = Vector2(21, 46)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_46c44"]
+radius = 24.083189
+
+[node name="NpcBase" type="StaticBody2D"]
+script = ExtResource("1_ldjor")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_t30gs")
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_46c44")
+
+[node name="Prompt" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -55.0
+offset_right = 36.0
+offset_bottom = -32.0
+text = "E"

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=8 format=3 uid="uid://dcasje4hw6rsr"]
+
+[ext_resource type="Script" uid="uid://bury6gm5vwbmo" path="res://src/scripts/core/resources/loot/loot_entry.gd" id="1_0noha"]
+[ext_resource type="Resource" uid="uid://cxr64ay4jgj7j" path="res://src/data/items/base/feathers/crow_feather.tres" id="2_n68ll"]
+[ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="3_axfbv"]
+[ext_resource type="PackedScene" uid="uid://qsqhwvx07s7m" path="res://src/scenes/pickups/world_pickup.tscn" id="4_i4cr0"]
+[ext_resource type="Script" uid="uid://is2lr2p0ykjx" path="res://src/scripts/core/resources/loot/loot_table.gd" id="5_6qmt1"]
+
+[sub_resource type="Resource" id="Resource_xgx4j"]
+script = ExtResource("1_0noha")
+item = ExtResource("2_n68ll")
+chance = 0.5
+max_amount = 2
+metadata/_custom_type_script = "uid://bury6gm5vwbmo"
+
+[sub_resource type="Resource" id="Resource_52lhq"]
+script = ExtResource("1_0noha")
+currency = ExtResource("3_axfbv")
+max_amount = 3
+metadata/_custom_type_script = "uid://bury6gm5vwbmo"
+
+[resource]
+script = ExtResource("5_6qmt1")
+pickup_scene = ExtResource("4_i4cr0")
+entries = Array[ExtResource("1_0noha")]([SubResource("Resource_xgx4j"), SubResource("Resource_52lhq")])
+metadata/_custom_type_script = "uid://is2lr2p0ykjx"

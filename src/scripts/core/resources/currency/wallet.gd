@@ -7,6 +7,9 @@ const NAMES : Array[StringName] = [&"paper", &"gold", &"runes"]
 @export var gold  : int = 0
 @export var runes : int = 0
 
+## Display order + icons for the menu. Drag in paper.tres, gold.tres, runes.tres.
+@export var currency_types : Array[CurrencyDefinition] = []
+
 func amount_of(currency: StringName) -> int:
 	return get(currency)
 

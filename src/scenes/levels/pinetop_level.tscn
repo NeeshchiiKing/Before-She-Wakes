@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://c7ta2yrs1skiv"]
+[gd_scene load_steps=41 format=4 uid="uid://c7ta2yrs1skiv"]
 
 [ext_resource type="Script" uid="uid://cxutdub26i0xk" path="res://src/scenes/levels/pinetop_level.gd" id="1_4lyj1"]
 [ext_resource type="Texture2D" uid="uid://c6th1y07afllv" path="res://assets/art/world/background/Pinetop.png" id="1_5jvs3"]
@@ -9,8 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://rmlvuxhw0vsa" path="res://src/scenes/environment/bush.tscn" id="6_5yxh6"]
 [ext_resource type="PackedScene" uid="uid://c42yuba7fle7w" path="res://src/scenes/environment/grass.tscn" id="7_qor0u"]
 [ext_resource type="PackedScene" uid="uid://cpk6q70vvd250" path="res://src/scenes/environment/pine_tree.tscn" id="8_5mcfq"]
-[ext_resource type="PackedScene" uid="uid://7dsy8yawewa2" path="res://src/scenes/effects/fire_effect.tscn" id="9_gv0hn"]
-[ext_resource type="Texture2D" uid="uid://bmm3hffgqrxd1" path="res://assets/art/world/buildings/Pinetop_Inn.png" id="10_r2vu5"]
 [ext_resource type="Texture2D" uid="uid://o3wvqumhgbbg" path="res://assets/art/world/buildings/Witches_hut_2.png" id="11_rub47"]
 [ext_resource type="Texture2D" uid="uid://bwjosj4te0ttw" path="res://assets/art/world/buildings/Food_Truck.png" id="12_54h85"]
 [ext_resource type="Texture2D" uid="uid://cpv70mlnjqexo" path="res://assets/art/world/environment/Well.png" id="13_ralhq"]
@@ -21,8 +19,17 @@
 [ext_resource type="PackedScene" uid="uid://chgy8s6ntggq1" path="res://src/scenes/levels/level_transition.tscn" id="19_1jrbf"]
 [ext_resource type="PackedScene" uid="uid://c0etdxlpy7n5n" path="res://src/scenes/enemies/crow_enemy.tscn" id="20_5yxh6"]
 [ext_resource type="PackedScene" uid="uid://qsqhwvx07s7m" path="res://src/scenes/pickups/world_pickup.tscn" id="20_gv0hn"]
-[ext_resource type="Resource" uid="uid://dy2eibbigq1cu" path="res://src/data/item/honey.tres" id="21_r2vu5"]
-[ext_resource type="Resource" uid="uid://b8hitjwupx13h" path="res://src/data/item/resin.tres" id="22_rub47"]
+[ext_resource type="Resource" uid="uid://b7lxltf6eucdp" path="res://src/data/items/base/resin/pine_sap.tres" id="21_rub47"]
+[ext_resource type="Resource" uid="uid://cxr64ay4jgj7j" path="res://src/data/items/base/feathers/crow_feather.tres" id="22_54h85"]
+[ext_resource type="PackedScene" uid="uid://cv8lrb47mky10" path="res://src/scenes/enemies/beehive.tscn" id="22_gv0hn"]
+[ext_resource type="PackedScene" uid="uid://rcpengr3pwdc" path="res://src/scenes/npc/pinetop/puck.tscn" id="23_r2vu5"]
+[ext_resource type="PackedScene" uid="uid://lhgf3ytrss4t" path="res://src/scenes/buildings/inn.tscn" id="23_rub47"]
+[ext_resource type="Script" uid="uid://cifuctryor0h6" path="res://src/scripts/gameplay/npc/shop_entry.gd" id="24_2eo4s"]
+[ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="25_8barc"]
+[ext_resource type="PackedScene" uid="uid://dlfr05sbyfd08" path="res://src/scenes/pickups/throw_equipment/rubber_ducky.tscn" id="25_rub47"]
+[ext_resource type="PackedScene" uid="uid://65ppydfui843" path="res://src/scenes/pickups/throw_equipment/rock.tscn" id="26_54h85"]
+[ext_resource type="Resource" uid="uid://b5rbghxbvbmkw" path="res://src/data/equipment/bags/pouch.tres" id="26_uwfvn"]
+[ext_resource type="Resource" uid="uid://gdcp1vf02vou" path="res://src/data/equipment/throwing/rubber_ducky.tres" id="27_gm40i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qq27"]
 texture = ExtResource("2_4lyj1")
@@ -1395,6 +1402,21 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.63888466, 0.23935625, 0.11109849, 1)
 sources/0 = SubResource("TileSetAtlasSource_1yooq")
 
+[sub_resource type="Resource" id="Resource_5pmsa"]
+script = ExtResource("24_2eo4s")
+item = ExtResource("26_uwfvn")
+currency = ExtResource("25_8barc")
+price = 25
+sold_out_flag = "puck_sold_pouch"
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="Resource" id="Resource_r8erc"]
+script = ExtResource("24_2eo4s")
+item = ExtResource("27_gm40i")
+currency = ExtResource("25_8barc")
+price = 50
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
 [node name="Pinetop_Level" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_4lyj1")
@@ -1436,19 +1458,12 @@ tile_set = SubResource("TileSet_gb53w")
 y_sort_enabled = true
 
 [node name="WorldPickup2" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
-position = Vector2(334, 575)
-item = ExtResource("22_rub47")
-requires_press = true
+position = Vector2(336, 564)
+item = ExtResource("21_rub47")
 
-[node name="WorldPickup" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
-position = Vector2(375, 590)
-item = ExtResource("21_r2vu5")
-amount = 2
-requires_press = true
-
-[node name="Inn" type="Sprite2D" parent="LevelObjects"]
-position = Vector2(342, 320)
-texture = ExtResource("10_r2vu5")
+[node name="WorldPickup3" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
+position = Vector2(304, 622)
+item = ExtResource("22_54h85")
 
 [node name="Shop_Potions" type="Sprite2D" parent="LevelObjects"]
 position = Vector2(1009, 291)
@@ -1468,12 +1483,8 @@ position = Vector2(799, 527)
 [node name="Pinetree" parent="LevelObjects" instance=ExtResource("8_5mcfq")]
 position = Vector2(343, 590)
 
-[node name="fire_effect" parent="LevelObjects" instance=ExtResource("9_gv0hn")]
-position = Vector2(1001, 1201)
-frame_progress = 0.98833364
-
 [node name="Bush" parent="LevelObjects" instance=ExtResource("6_5yxh6")]
-position = Vector2(193, 519)
+position = Vector2(195, 532)
 
 [node name="Tent" type="Sprite2D" parent="LevelObjects"]
 position = Vector2(1001, 1154)
@@ -1493,7 +1504,36 @@ position = Vector2(877, 893)
 [node name="CrowEnemy2" parent="LevelObjects" instance=ExtResource("20_5yxh6")]
 position = Vector2(1127, 1054)
 
+[node name="Building" parent="LevelObjects" instance=ExtResource("23_rub47")]
+position = Vector2(53, 516)
+
+[node name="Beehive" parent="LevelObjects" instance=ExtResource("22_gv0hn")]
+position = Vector2(371, 558)
+
+[node name="Puck" parent="LevelObjects" instance=ExtResource("23_r2vu5")]
+position = Vector2(473, 881)
+stock = Array[ExtResource("24_2eo4s")]([SubResource("Resource_5pmsa"), SubResource("Resource_r8erc")])
+npc_name = "Puck "
+
 [node name="Transitions" type="Node2D" parent="."]
 
 [node name="LevelTransition" parent="Transitions" instance=ExtResource("19_1jrbf")]
 destination_level_uid = "uid://c7ta2yrs1skiv"
+
+[node name="rubber ducky" parent="." instance=ExtResource("25_rub47")]
+position = Vector2(545, 657)
+
+[node name="rock" parent="." instance=ExtResource("26_54h85")]
+position = Vector2(523, 622)
+
+[node name="rock2" parent="." instance=ExtResource("26_54h85")]
+position = Vector2(508, 661)
+
+[node name="rubber ducky2" parent="." instance=ExtResource("25_rub47")]
+position = Vector2(583, 635)
+
+[node name="rubber ducky3" parent="." instance=ExtResource("25_rub47")]
+position = Vector2(475, 621)
+
+[node name="rock3" parent="." instance=ExtResource("26_54h85")]
+position = Vector2(512, 713)

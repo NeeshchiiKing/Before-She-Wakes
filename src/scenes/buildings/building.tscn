@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://jkqjbyugurqw"]
+
+[ext_resource type="Script" uid="uid://dtawmxkykvkaq" path="res://src/scripts/gameplay/environment/building.gd" id="1_ux8gm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbqje"]
+size = Vector2(577.125, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i7hd"]
+size = Vector2(19, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyqxy"]
+size = Vector2(17.75, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ol0x"]
+size = Vector2(44, 4.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h54rv"]
+size = Vector2(474, 5.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy7ly"]
+size = Vector2(564, 216)
+
+[node name="Building" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_ux8gm")
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(0, -384)
+centered = false
+
+[node name="Furniture" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -384)
+
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(0, -384)
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(288, -192)
+collision_mask = 0
+
+[node name="back wall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -110)
+shape = SubResource("RectangleShape2D_sbqje")
+
+[node name="left wall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-285, 82.25)
+shape = SubResource("RectangleShape2D_0i7hd")
+
+[node name="right wall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(285, 82)
+shape = SubResource("RectangleShape2D_eyqxy")
+
+[node name="front wall, left of door" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-260, 175.25)
+shape = SubResource("RectangleShape2D_5ol0x")
+
+[node name="front wall, right of door" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(45, 175.75)
+shape = SubResource("RectangleShape2D_h54rv")
+
+[node name="InteriorArea" type="Area2D" parent="."]
+position = Vector2(288, -192)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteriorArea"]
+position = Vector2(0, 79.5)
+shape = SubResource("RectangleShape2D_fy7ly")

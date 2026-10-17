@@ -31,9 +31,11 @@ const WORST_TIER : int = 4
 
 @export var vitality: = 1 :
 	set(value):
+		var was_alive := vitality > 0
 		vitality = value
 		emit_changed()
-		if vitality <= 0: no_vitality.emit()
+		if was_alive and vitality <= 0: no_vitality.emit()
+		
 @export var max_vitality: = 1 :
 	set(value):
 		max_vitality = value
@@ -127,3 +129,8 @@ func try_spend(resource: StringName, amount: int) -> bool:
 		return false
 	set(resource, current - amount)
 	return true
+
+## Town facilities call this: fills a Resource to max and resets its status to the starting tier
+func fully_restore(resource: StringName) -> void:
+	set(resource, get("max_" + resource))
+	reset_status(resource)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://b7lxltf6eucdp"]
+
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_1rbuj"]
+[ext_resource type="Texture2D" uid="uid://dpabwyb6y5xw5" path="res://assets/art/world/items/base_items/resin.png" id="1_ss3pm"]
+[ext_resource type="Texture2D" uid="uid://tgd0lol278gv" path="res://assets/art/world/items/world_items/resin.png" id="3_5dhuo"]
+
+[resource]
+script = ExtResource("1_1rbuj")
+display_name = "Pine Sap"
+short_name = "Pine Sap"
+icon = ExtResource("1_ss3pm")
+world_sprite = ExtResource("3_5dhuo")
+base_type = "resin"
+heal_amount = 2

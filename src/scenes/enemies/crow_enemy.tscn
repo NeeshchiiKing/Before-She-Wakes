@@ -3,16 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://c6j2fhqc2a43b" path="res://assets/art/characters/enemies/flying_enemy.png" id="1_u8e6j"]
 [ext_resource type="Script" uid="uid://y50qkebtkff4" path="res://src/scripts/gameplay/enemies/crow_enemy.gd" id="1_vxy0c"]
 [ext_resource type="Script" uid="uid://mp3eiwlfsv0y" path="res://src/scripts/core/resources/stats/stats.gd" id="2_1xq6u"]
-[ext_resource type="Resource" uid="uid://dcasje4hw6rsr" path="res://src/data/loot/crow_loot.tres" id="2_jidm5"]
+[ext_resource type="Resource" uid="uid://dcasje4hw6rsr" path="res://src/data/enemy_drop_loot/crow_loot.tres" id="2_jidm5"]
 [ext_resource type="Texture2D" uid="uid://bloho5i8os6xe" path="res://assets/art/effects/character/Medium_Shadow.png" id="2_vxy0c"]
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="4_js068"]
 [ext_resource type="Script" uid="uid://bbpj4t4f303tq" path="res://src/scripts/gameplay/damage_boxes/hitbox.gd" id="6_qo4ag"]
 [ext_resource type="PackedScene" uid="uid://ciwp4ycjy5dhi" path="res://src/scenes/ui/enemy_health_bar.tscn" id="7_v2bte"]
 
-[sub_resource type="Resource" id="Resource_qo4ag"]
+[sub_resource type="Resource" id="Resource_jidm5"]
 script = ExtResource("2_1xq6u")
-vitality = 3
-max_vitality = 3
+vitality_tier = 1
+vitality = 4
+max_vitality = 4
 metadata/_custom_type_script = "uid://mp3eiwlfsv0y"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdyro"]
@@ -89,16 +90,17 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x81kg"]
 advance_mode = 2
-advance_expression = "can_see_player()"
+advance_expression = "is_hunting()s"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_741gr"]
 advance_mode = 2
-advance_expression = "not can_see_player()"
+advance_expression = "not is_hunting()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bhbsf"]
 advance_mode = 2
 advance_expression = "velocity == 
-Vector2(0,0)"
+Vector2(0,0)
+can_see_player()"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qdyro"]
 states/Chase/node = SubResource("AnimationNodeAnimation_u8e6j")
@@ -109,9 +111,10 @@ states/Idle/node = SubResource("AnimationNodeAnimation_vxy0c")
 states/Idle/position = Vector2(407, 100)
 states/Start/position = Vector2(203, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_js068"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_x81kg"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_741gr"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bhbsf")]
+graph_offset = Vector2(160, 27)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oxkvd"]
-graph_offset = Vector2(-120.886566, -10.107437)
+graph_offset = Vector2(-52.64734, 73.40131)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qdyro")
 nodes/StateMachine/position = Vector2(20, 120)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -123,12 +126,12 @@ size = Vector2(18, 13)
 
 [node name="CrowEnemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_vxy0c")
 experience_reward = 50
 loot = ExtResource("2_jidm5")
-stats = SubResource("Resource_qo4ag")
+stats = SubResource("Resource_jidm5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_u8e6j")

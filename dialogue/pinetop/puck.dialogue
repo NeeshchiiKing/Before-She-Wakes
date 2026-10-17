@@ -1,0 +1,33 @@
+~ start
+Puck The Merchant: Coren![wait=0.2] Business is slow,[wait=0.3] but the road is never quiet.
+=> menu
+
+~ menu
+Puck The Merchant: What can I do for you?
+- What are you selling?
+	=> shop
+- Heard any rumors?
+	Puck The Merchant: Folk out east whisper about ruins...[wait=0.3] with machines still humming inside.
+	Puck The Merchant: Your girl Faith asked me the same thing, you know.
+	=> END
+- Goodbye.
+	Puck The Merchant: Safe travels, friend.
+	=> END
+
+~ shop
+Puck The Merchant: Take a look. Everything's priced fair...mostly[wait=0.6]. 
+- {{get_listing(0)}} [if not is_sold_out(0)]
+	if buy(0)
+		Puck The Merchant: Pleasure doing business, friend.
+	else
+		Puck The Merchant: You're short on {{get_currency_name(0)}}.
+	=> END
+- {{get_listing(1)}} [if not is_sold_out(1)]
+	if buy(1)
+		Puck The Merchant: Pleasure doing business, friend.
+	else
+		Puck The Merchant: You're short on {{get_currency_name(1)}}.
+	=> END
+- Never mind.
+	Puck The Merchant: Suit yourself.
+	=> END

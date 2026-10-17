@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0iuoefyla1yn"]
+
+[ext_resource type="PackedScene" uid="uid://dyeqsmsgfk2gl" path="res://src/scenes/furniture/rest_station.tscn" id="1_oxdbl"]
+[ext_resource type="Texture2D" uid="uid://cdlrvksssajwf" path="res://assets/art/world/resource_furniture/Bath.png" id="2_gqth0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivncq"]
+size = Vector2(96, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nerst"]
+size = Vector2(113, 71)
+
+[node name="RestStation" instance=ExtResource("1_oxdbl")]
+restores = "charisma"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_gqth0")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ivncq")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_nerst")
+
+[node name="PromptLabel" parent="." index="3"]
+offset_top = -60.0
+offset_bottom = -37.0

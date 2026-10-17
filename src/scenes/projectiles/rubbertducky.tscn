@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds6v7g7bebh6c"]
+
+[ext_resource type="PackedScene" uid="uid://dl6d8lphmwogk" path="res://src/scenes/projectiles/throwing_rock.tscn" id="1_mmbkk"]
+[ext_resource type="Texture2D" uid="uid://jn2ua2011ocl" path="res://assets/art/world/items/throwing/ducky.png" id="2_jrtxe"]
+
+[node name="rubbertducky" instance=ExtResource("1_mmbkk")]
+damage = 2
+knockback_amount = 100
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_jrtxe")

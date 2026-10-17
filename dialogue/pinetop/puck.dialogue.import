@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dy3kufjjdyrer"
+path="res://.godot/imported/puck.dialogue-d6e1aa85f838e4f1bc46588f4c87082b.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/puck.dialogue"
+dest_files=["res://.godot/imported/puck.dialogue-d6e1aa85f838e4f1bc46588f4c87082b.tres"]
+
+[params]
+
+defaults=true

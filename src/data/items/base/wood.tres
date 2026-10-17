@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3 uid="uid://baqssomj3ba7f"]
+
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_item"]
+
+[resource]
+script = ExtResource("1_item")
+display_name = "Wood"
+short_name = "Wood"
+base_type = "wood"
+heals = "dexterity"
+heal_amount = 2

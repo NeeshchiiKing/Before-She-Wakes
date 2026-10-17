@@ -17,9 +17,11 @@ func _build() -> void:
 
 	_add_label(info, "")
 	_add_label(info, "Currency")
-	for currency in Wallet.NAMES:
-		_add_label(info, "%s: %d" % [String(currency).capitalize(), player.wallet.amount_of(currency)])
-
+	for currency in player.wallet.currency_types:
+		var row := HBoxContainer.new()
+		info.add_child(row)
+		row.add_child(_make_icon(currency.icon))
+		_add_label(row, "%s: %d" % [currency.display_name, player.wallet.amount_of(StringName(currency.id))])
 	var gear := _new_scroll_column()
 	_add_label(gear, "Equipment")
 	for slot in Equipment.SLOT_ORDER:

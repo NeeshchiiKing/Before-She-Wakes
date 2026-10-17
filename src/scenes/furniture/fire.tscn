@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://fk0g1l1o6cwe"]
+
+[ext_resource type="PackedScene" uid="uid://dyeqsmsgfk2gl" path="res://src/scenes/furniture/rest_station.tscn" id="1_r1gnh"]
+[ext_resource type="PackedScene" uid="uid://7dsy8yawewa2" path="res://src/scenes/effects/fire_effect.tscn" id="2_prnr0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_konct"]
+size = Vector2(20, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5oel"]
+size = Vector2(28, 30)
+
+[node name="RestStation" instance=ExtResource("1_r1gnh")]
+restores = "dexterity"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_konct")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_d5oel")
+
+[node name="PromptLabel" parent="." index="3"]
+offset_top = -40.0
+offset_bottom = -17.0
+
+[node name="fire_effect" parent="." index="4" instance=ExtResource("2_prnr0")]

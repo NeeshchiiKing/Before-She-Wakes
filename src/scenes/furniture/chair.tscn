@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2eu1fg3gf7wi"]
+
+[ext_resource type="PackedScene" uid="uid://dyeqsmsgfk2gl" path="res://src/scenes/furniture/rest_station.tscn" id="1_dwoxx"]
+[ext_resource type="Texture2D" uid="uid://u6gpq7vb8lnt" path="res://assets/art/world/resource_furniture/Chair.png" id="2_2bc1v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2uw1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs84q"]
+size = Vector2(28, 27)
+
+[node name="RestStation" instance=ExtResource("1_dwoxx")]
+restores = "intelligence"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_2bc1v")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_2uw1b")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_fs84q")
+
+[node name="PromptLabel" parent="." index="3"]
+offset_top = -40.0
+offset_bottom = -17.0

@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://lhgf3ytrss4t"]
+
+[ext_resource type="PackedScene" uid="uid://jkqjbyugurqw" path="res://src/scenes/buildings/building.tscn" id="1_x8u0p"]
+[ext_resource type="Texture2D" uid="uid://d40bur67ljx3" path="res://assets/art/world/buildings/Pinetop_Inn/Inn_Floor.png" id="2_na6pu"]
+[ext_resource type="PackedScene" uid="uid://djusqmmufaykh" path="res://src/scenes/furniture/bed.tscn" id="3_6ip6c"]
+[ext_resource type="Texture2D" uid="uid://bmm3hffgqrxd1" path="res://assets/art/world/buildings/Pinetop_Inn/Pinetop_Inn.png" id="3_cjiu3"]
+[ext_resource type="PackedScene" uid="uid://c3472dwixuybl" path="res://src/scenes/furniture/toilet.tscn" id="4_20y3i"]
+[ext_resource type="PackedScene" uid="uid://fk0g1l1o6cwe" path="res://src/scenes/furniture/fire.tscn" id="5_md3dy"]
+[ext_resource type="PackedScene" uid="uid://b2eu1fg3gf7wi" path="res://src/scenes/furniture/chair.tscn" id="6_t2tcx"]
+[ext_resource type="PackedScene" uid="uid://c0iuoefyla1yn" path="res://src/scenes/furniture/bath.tscn" id="7_v5wjo"]
+
+[node name="Building" instance=ExtResource("1_x8u0p")]
+position = Vector2(0, -38)
+
+[node name="Floor" parent="." index="0"]
+texture = ExtResource("2_na6pu")
+
+[node name="RestStation" parent="Furniture" index="0" instance=ExtResource("3_6ip6c")]
+position = Vector2(120, 199)
+
+[node name="RestStation2" parent="Furniture" index="1" instance=ExtResource("4_20y3i")]
+position = Vector2(190, 188)
+
+[node name="RestStation3" parent="Furniture" index="2" instance=ExtResource("5_md3dy")]
+position = Vector2(258, 190)
+
+[node name="RestStation4" parent="Furniture" index="3" instance=ExtResource("6_t2tcx")]
+position = Vector2(324, 194)
+
+[node name="RestStation5" parent="Furniture" index="4" instance=ExtResource("7_v5wjo")]
+position = Vector2(420, 208)
+
+[node name="Top" parent="." index="2"]
+texture = ExtResource("3_cjiu3")
+
+[node name="back wall" parent="StaticBody2D" index="0"]
+position = Vector2(-0.5625, -129.5)
+
+[node name="left wall" parent="StaticBody2D" index="1"]
+position = Vector2(-278.5, 58)
+
+[node name="right wall" parent="StaticBody2D" index="2"]
+position = Vector2(278.875, 58)
+
+[node name="front wall, left of door" parent="StaticBody2D" index="3"]
+position = Vector2(-260, 172.5)
+
+[node name="front wall, right of door" parent="StaticBody2D" index="4"]
+position = Vector2(45, 172.5)
+
+[node name="CollisionShape2D" parent="InteriorArea" index="0"]
+position = Vector2(0, 65)

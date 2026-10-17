@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://rcpengr3pwdc"]
+
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_ylfrb"]
+[ext_resource type="Resource" uid="uid://dy3kufjjdyrer" path="res://dialogue/pinetop/puck.dialogue" id="2_l2gqk"]
+[ext_resource type="Script" uid="uid://dccg6kqckfwv4" path="res://src/scripts/gameplay/npc/merchant_npc.gd" id="2_u5gg8"]
+[ext_resource type="Script" uid="uid://cifuctryor0h6" path="res://src/scripts/gameplay/npc/shop_entry.gd" id="3_0q0lx"]
+[ext_resource type="Texture2D" uid="uid://cybuuxqou48av" path="res://assets/art/characters/npc/2. Merchant.png" id="3_1hadi"]
+[ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="4_07u2t"]
+[ext_resource type="Resource" uid="uid://b5rbghxbvbmkw" path="res://src/data/equipment/bags/pouch.tres" id="5_u5vep"]
+
+[sub_resource type="Resource" id="Resource_5pmsa"]
+script = ExtResource("3_0q0lx")
+item = ExtResource("5_u5vep")
+currency = ExtResource("4_07u2t")
+price = 25
+sold_out_flag = "puck_sold_pouch"
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5gg8"]
+atlas = ExtResource("3_1hadi")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0q0lx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5gg8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Puck" instance=ExtResource("1_ylfrb")]
+script = ExtResource("2_u5gg8")
+stock = Array[ExtResource("3_0q0lx")]([SubResource("Resource_5pmsa")])
+npc_name = "Puck"
+dialogue = ExtResource("2_l2gqk")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_0q0lx")
+animation = &"idle"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-2.5, 9)
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(-4, 22)
+
+[node name="Prompt" parent="." index="3"]
+z_index = 10
+z_as_relative = false
+offset_left = -56.0
+offset_top = -53.0
+offset_bottom = -4.0
+theme_override_constants/line_spacing = -8
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "    Merchant"

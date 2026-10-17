@@ -10,12 +10,15 @@ func drop(at: Vector2, parent: Node2D) -> void:
 		push_warning("LootTable has no Pickup Scene set")
 		return
 	for entry in entries:
-		if entry == null or entry.item == null:
+		if entry == null or (entry.item == null and entry.currency == null):
 			continue
 		if randf() > entry.chance:
 			continue
 		var pickup := pickup_scene.instantiate() as WorldPickup
 		pickup.item = entry.item
+		pickup.currency = entry.currency
+		if entry.currency != null:
+			pickup.requires_press = false # money is grabbed by walking over it
 		pickup.amount = randi_range(entry.min_amount, entry.max_amount)
 		var scatter := Vector2(randf_range(-6.0, 6.0), randf_range(-4.0, 4.0))
 		pickup.position = parent.to_local(at + scatter)

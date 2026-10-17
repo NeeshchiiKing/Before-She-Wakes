@@ -8,12 +8,15 @@ var _throw_cooldown : float = 0.0
 var _spell_cooldown : float = 0.0
 
 var is_digging : bool = false ## True while the menu is open during combat
+var in_dialogue : bool = false ## True while talking to an NPC. Freezes movement and actions
 
 var input_vector: = Vector2.ZERO
 var last_input_vector = Vector2.LEFT
-var is_sneaking: bool = false
-
+var is_sneaking: bool:
+	get:
+		return playback.get_current_node() == "SneakState"
 var camera_look_direction : Vector2 = Vector2.ZERO
+var _quiet_attack : bool = false ## True if the current swing started from sneak
 
 @onready var player_sprite_2d : Sprite2D = $PlayerSprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -49,12 +52,19 @@ func _ready():
 	level_data.leveled_up.connect(_on_leveled_up)
 	equipment.changed.connect(_on_equipment_changed)
 	_on_equipment_changed()
-
+	
+	DialogueManager.dialogue_started.connect(func(_r): in_dialogue = true)
+	DialogueManager.dialogue_ended.connect(func(_r): in_dialogue = false)
 
 func _physics_process(_delta: float) -> void:
 	_throw_cooldown = maxf(_throw_cooldown - _delta, 0.0)
 	_spell_cooldown = maxf(_spell_cooldown - _delta, 0.0)
+	if in_dialogue:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 	var state = playback.get_current_node()
+	set_collision_mask_value(3, state != "RollState") # roll passes through enemies (layer 3) but never walls
 	match state:
 		"MoveState": move_state(_delta)
 		"AttackState": pass
@@ -70,6 +80,8 @@ func _unhandled_input(event: InputEvent) -> void:
 ######Health################################
 
 func take_hit(other_hitbox : Hitbox) -> void:
+	if playback.get_current_node() == "RollState":
+		return # i-frames: a roll dodges every hit
 	stats.vitality -= other_hitbox.damage
 	blink_animation.play("blink")
 	
@@ -123,9 +135,7 @@ func sneak_state(_delta: float) -> void:
 		var direction_vector := Vector2(input_vector.x, -input_vector.y)
 		update_blend_positions(direction_vector)
 
-			
 	if Input.is_action_just_pressed("sneak"):
-		is_sneaking = false
 		playback.travel("MoveState")
 
 	if Input.is_action_just_pressed("attack"):
@@ -145,8 +155,9 @@ func sneak_state(_delta: float) -> void:
 
 func _try_attack() -> void:
 	if stats.try_spend(&"strength", attack_cost):
+		_quiet_attack = playback.get_current_node() == "SneakState"
 		playback.travel("AttackState")
-
+		
 func _try_roll() -> void:
 	if stats.is_worst_status(&"dexterity"):
 		return # Encumbered: dodge roll disabled
@@ -155,8 +166,19 @@ func _try_roll() -> void:
 
 func _try_sneak() -> void:
 	if stats.try_spend(&"charisma", sneak_cost):
-		is_sneaking = true
 		playback.travel("SneakState")
+		
+## Used by enemy hearing. Sneak attacks stay silent so you can still get behind them.
+func is_making_noise() -> bool:
+	match playback.get_current_node():
+		"SneakState":
+			return false
+		"AttackState":
+			return true
+		"RollState":
+			return true
+	return velocity.length() > 1.0		
+		
 ######Leveling################################
 
 func gain_experience(amount: int) -> void:
@@ -265,15 +287,42 @@ func throw() -> void:
 	_throw_cooldown = weapon.cooldown
 
 	var hit_damage := weapon.damage + CombatStats.total(attributes, orb_grid, equipment, &"attack_power")
-	_launch(weapon.projectile_scene, weapon.throw_speed, weapon.throw_range, hit_damage)
-
+	equipment.unequip("throwing") # it's in the air now. Go get it!
+	var projectile := _launch(weapon.projectile_scene, weapon.throw_speed, weapon.throw_range, hit_damage)
+	if projectile != null:
+		projectile.drop_gear = weapon
+	_reload_throwing(weapon)
+	
+## After a throw, grab the next throwable from spare gear: same kind first, then anything throwable
+func _reload_throwing(thrown: EquipmentDefinition) -> void:
+	var next : EquipmentDefinition = null
+	for piece in inventory.get_gear():
+		if piece.slot_type != "throwing" or not piece.meets_requirement(attributes):
+			continue
+		if piece.display_name == thrown.display_name:
+			next = piece # same kind: take it right away
+			break
+		if next == null:
+			next = piece # different kind: remember it in case there's no match
+	if next != null:
+		inventory.remove_gear(next)
+		equipment.equip(next)
+	
+## Gear picked up off the floor. A thrown weapon goes straight back in hand if the slot is free.
+func pick_up_gear(item: EquipmentDefinition) -> void:
+	if item.slot_type == "throwing" and equipment.throwing == null and item.meets_requirement(attributes):
+		equipment.equip(item)
+	else:
+		inventory.add_gear(item)
+		
 ## Spawns a projectile at chest height, flying the way the player faces
-func _launch(scene: PackedScene, speed: float, max_range: float, hit_damage: int) -> void:
+func _launch(scene: PackedScene, speed: float, max_range: float, hit_damage: int) -> Projectile:
 	var projectile := scene.instantiate() as Projectile
 	projectile.setup(last_input_vector.normalized(), speed, max_range, hit_damage)
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position + Vector2(0, -30) # chest height
-
+	projectile.height = 30.0 # so it can land on the ground, not in the air
+	return projectile
 ######Camera&Animation#####################
 
 func get_camera_look_direction() -> Vector2:

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CurrencyDefinition" load_steps=3 format=3 uid="uid://b505vph8srrjv"]
+
+[ext_resource type="Texture2D" uid="uid://dkl753jkbru4f" path="res://assets/art/world/items/currency/green_paperback.png" id="1_4newf"]
+[ext_resource type="Script" uid="uid://tri5jvvee8wc" path="res://src/scripts/core/resources/currency/currency_definition.gd" id="1_ji1nd"]
+
+[resource]
+script = ExtResource("1_ji1nd")
+display_name = "Green Paperback"
+icon = ExtResource("1_4newf")
+metadata/_custom_type_script = "uid://tri5jvvee8wc"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://up16qa47utag"]
+
+[ext_resource type="Texture2D" uid="uid://dael5qfxcgqdf" path="res://assets/art/world/items/base_items/sweetener.png" id="1_p2kjl"]
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="2_5ly4q"]
+[ext_resource type="Texture2D" uid="uid://ccdfbbbvmlwe0" path="res://assets/art/world/items/world_items/sweetener.png" id="3_ivp7y"]
+
+[resource]
+script = ExtResource("2_5ly4q")
+display_name = "Honey"
+short_name = "Honey"
+icon = ExtResource("1_p2kjl")
+world_sprite = ExtResource("3_ivp7y")
+base_type = "sweetener"
+heals = "intelligence"
+heal_amount = 2
