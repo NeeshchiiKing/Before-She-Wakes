@@ -15,7 +15,6 @@ var last_input_vector = Vector2.LEFT
 var is_sneaking: bool:
 	get:
 		return playback.get_current_node() == "SneakState"
-var camera_look_direction : Vector2 = Vector2.ZERO
 var _quiet_attack : bool = false ## True if the current swing started from sneak
 
 @onready var player_sprite_2d : Sprite2D = $PlayerSprite2D
@@ -25,6 +24,14 @@ var _quiet_attack : bool = false ## True if the current swing started from sneak
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var blink_animation: AnimationPlayer = $BlinkAnimation
 
+# res://scenes/player/player.gd  (wherever your player script lives)
+@onready var weapon_pivot: Node2D = $WeaponPivot
+@onready var weapon_sprite: Sprite2D = $WeaponPivot/WeaponSprite
+@onready var hitbox_shape: CollisionShape2D = _find_hitbox_shape()
+
+func _find_hitbox_shape() -> CollisionShape2D:
+	var found := hitbox.find_children("*", "CollisionShape2D", true, false)
+	return found.front() if not found.is_empty() else null
 @export var attack_cost : int = 0 ## Strength per swing. Bare hands are free; weapons will add their own cost
 @export var roll_cost   : int = 1 ## Dexterity spent per dodge roll
 @export var sneak_cost  : int = 1 ## Charisma spent to start sneaking
@@ -42,11 +49,13 @@ var _quiet_attack : bool = false ## True if the current swing started from sneak
 @export var equipment : Equipment
 @export var wallet : Wallet
 
+@export var starting_weapon: WeaponData
+var weapon: WeaponInstance
+
 
 #############################################################################################33
 
 func _ready():
-	
 	hurtbox.hurt.connect(take_hit.call_deferred)
 	stats.no_vitality.connect(die)
 	level_data.leveled_up.connect(_on_leveled_up)
@@ -56,6 +65,26 @@ func _ready():
 	DialogueManager.dialogue_started.connect(func(_r): in_dialogue = true)
 	DialogueManager.dialogue_ended.connect(func(_r): in_dialogue = false)
 
+	if starting_weapon:
+		var inst := WeaponInstance.new()
+		inst.data = starting_weapon
+		inst.durability = starting_weapon.max_durability
+		equip_weapon(inst)
+
+func equip_weapon(inst: WeaponInstance) -> void:
+	weapon = inst
+	weapon_pivot.visible = false   # shown only by attack animations
+	if inst == null:
+		if hitbox_shape:
+			hitbox_shape.shape = null   # bare hands: no leftover weapon hitbox
+		return
+	weapon_sprite.texture = inst.data.texture
+	weapon_sprite.offset = -inst.data.grip_offset
+	if hitbox_shape:
+		hitbox_shape.shape = inst.data.hitbox_shape
+	else:
+		push_warning("Player hitbox has no CollisionShape2D to swap the weapon shape into")
+
 func _physics_process(_delta: float) -> void:
 	_throw_cooldown = maxf(_throw_cooldown - _delta, 0.0)
 	_spell_cooldown = maxf(_spell_cooldown - _delta, 0.0)
@@ -64,15 +93,18 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		return
 	var state = playback.get_current_node()
-	set_collision_mask_value(3, state != "RollState") # roll passes through enemies (layer 3) but never walls
+	if state != "AttackState" and state != "SlashState":
+		weapon_pivot.visible = false   # safety net: never show the sword outside an attack
+	set_collision_mask_value(3, state != "RollState")
 	match state:
 		"MoveState": move_state(_delta)
 		"AttackState": pass
+		"SlashState": pass
 		"DefendState": pass
 		"RollState": roll_state(_delta)
 		"SneakState": sneak_state(_delta)
-	
 func _unhandled_input(event: InputEvent) -> void:
+	
 	for i in 4:
 		if event.is_action_pressed("quick_%d" % (i + 1)):
 			use_quick_slot(i)
@@ -95,10 +127,8 @@ func die() -> void:
 func move_state(_delta: float) -> void:
 	# Vector is a combination of a x Value and y Value
 	input_vector = Input.get_vector("move_left","move_right", "move_up", "move_down")
-
 	#!= Means not Equal
 	if input_vector!= Vector2.ZERO:
-		hitbox.knockback_direction = input_vector.normalized()
 		#this remembers the last input we did "move left, right, up, down
 		last_input_vector = input_vector
 		#directional_vector made to pass the animation tree flipping +1 and -1
@@ -154,10 +184,15 @@ func sneak_state(_delta: float) -> void:
 	move_and_slide()
 
 func _try_attack() -> void:
+	hitbox.knockback_direction = last_input_vector.normalized()
+
 	if stats.try_spend(&"strength", attack_cost):
 		_quiet_attack = playback.get_current_node() == "SneakState"
-		playback.travel("AttackState")
-		
+		if weapon != null:
+			playback.travel("SlashState")
+		else:
+			playback.travel("AttackState")
+			
 func _try_roll() -> void:
 	if stats.is_worst_status(&"dexterity"):
 		return # Encumbered: dodge roll disabled
@@ -173,10 +208,11 @@ func is_making_noise() -> bool:
 	match playback.get_current_node():
 		"SneakState":
 			return false
-		"AttackState":
-			return true
+		"AttackState", "SlashState":
+			return not _quiet_attack
 		"RollState":
 			return true
+	
 	return velocity.length() > 1.0		
 		
 ######Leveling################################
@@ -276,22 +312,22 @@ func unequip_to_inventory(slot: String) -> void:
 		inventory.add_gear(old)
 
 func throw() -> void:
-	var weapon := equipment.throwing
-	if weapon == null or weapon.projectile_scene == null or _throw_cooldown > 0.0:
+	var thrown := equipment.throwing
+	if thrown == null or thrown.projectile_scene == null or _throw_cooldown > 0.0:
 		return
-	if weapon.use_cost_resource != "none":
-		var current : int = stats.get(weapon.use_cost_resource)
-		if current < weapon.use_cost:
+	if thrown.use_cost_resource != "none":
+		var current : int = stats.get(thrown.use_cost_resource)
+		if current < thrown.use_cost:
 			return
-		stats.set(weapon.use_cost_resource, current - weapon.use_cost)
-	_throw_cooldown = weapon.cooldown
+		stats.set(thrown.use_cost_resource, current - thrown.use_cost)
+	_throw_cooldown = thrown.cooldown
 
-	var hit_damage := weapon.damage + CombatStats.total(attributes, orb_grid, equipment, &"attack_power")
+	var hit_damage := thrown.damage + CombatStats.total(attributes, orb_grid, equipment, &"attack_power")
 	equipment.unequip("throwing") # it's in the air now. Go get it!
-	var projectile := _launch(weapon.projectile_scene, weapon.throw_speed, weapon.throw_range, hit_damage)
+	var projectile := _launch(thrown.projectile_scene, thrown.throw_speed, thrown.throw_range, hit_damage)
 	if projectile != null:
-		projectile.drop_gear = weapon
-	_reload_throwing(weapon)
+		projectile.drop_gear = thrown
+	_reload_throwing(thrown)
 	
 ## After a throw, grab the next throwable from spare gear: same kind first, then anything throwable
 func _reload_throwing(thrown: EquipmentDefinition) -> void:
@@ -337,3 +373,4 @@ func update_blend_positions(direction_vector: Vector2) -> void:
 	animation_tree.set("parameters/StateMachine/RollState/blend_position", direction_vector)
 	animation_tree.set("parameters/StateMachine/SneakState/SneakState/blend_position", direction_vector)
 	animation_tree.set("parameters/StateMachine/SneakState/StandState/blend_position", direction_vector)
+	animation_tree.set("parameters/StateMachine/SlashState/blend_position", direction_vector)

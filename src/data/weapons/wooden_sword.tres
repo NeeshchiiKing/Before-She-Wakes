@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://bxel07r7yixxu"]
+
+[ext_resource type="Script" uid="uid://ksele114qyee" path="res://src/scripts/gameplay/combat/attack_step.gd" id="1_2vfew"]
+[ext_resource type="Script" uid="uid://j2nm2pdnv7gt" path="res://src/scripts/core/resources/items/WeaponData.gd" id="2_r0vj3"]
+[ext_resource type="Texture2D" uid="uid://c7yswn1j7l73y" path="res://assets/art/world/items/sword/Wooden_Sword.png" id="3_r0vj3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0vj3"]
+size = Vector2(24, 24)
+
+[resource]
+script = ExtResource("2_r0vj3")
+base_name = "Wooden Sword"
+texture = ExtResource("3_r0vj3")
+hitbox_shape = SubResource("RectangleShape2D_r0vj3")
+metadata/_custom_type_script = "uid://j2nm2pdnv7gt"

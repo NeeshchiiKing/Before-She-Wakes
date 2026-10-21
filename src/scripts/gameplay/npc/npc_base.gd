@@ -32,7 +32,6 @@ func talk() -> void:
 	prompt.visible = false
 	_balloon = DialogueManager.show_dialogue_balloon(dialogue, dialogue_start, [self])
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	print("DIALOGUE ended")
 	if not is_talking:
 		return
 	# Safety net: make sure the balloon is gone so it can't keep swallowing input

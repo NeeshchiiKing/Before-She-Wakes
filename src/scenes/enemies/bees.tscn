@@ -58,5 +58,3 @@ metadata/_custom_type_script = "uid://q3r7iiumy8l8"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_hb8ie")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]

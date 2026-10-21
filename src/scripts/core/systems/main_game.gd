@@ -73,7 +73,9 @@ func _perform_level_load(level_scene_uid : String) -> void:
 		_current_level = null
 		# Wait to allow the queued deletion to process so it is out of the scene tree
 		await get_tree().process_frame
-
+	for child in entity_root.get_children():
+		if child != player:
+			child.queue_free()
 
 	var new_level_packed : PackedScene = (
 			ResourceLoader.load(level_scene_uid, "PackedScene") as PackedScene

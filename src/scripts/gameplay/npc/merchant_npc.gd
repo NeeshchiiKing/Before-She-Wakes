@@ -75,3 +75,9 @@ func get_listing(index: int) -> String:
 
 func get_currency_name(index: int) -> String:
 	return stock[index].currency.display_name
+
+func get_fail_reason(index: int) -> String:
+	var entry := stock[index]
+	if entry.item is ItemDefinition and not _get_inventory().can_add(entry.item):
+		return "Your bag's full, friend."
+	return "You're short on %s." % entry.currency.display_name

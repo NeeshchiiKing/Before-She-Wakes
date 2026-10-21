@@ -3,7 +3,7 @@ extends Node2D
 #const GRASS_EFFECT = preload("res://scenes/effects/grass_effect.tscn")
 #hold control to get an onready var also this GRASS_EFFECT IS HARD CODED IF WE MOVE THE TSCN WE ARE SCREWED
 
-@export var GRASS_EFFECT: PackedScene
+@export var grass_effect_scene: PackedScene
 #grasseffect now is a type which ":" means is type 
 
 @onready var hurtbox: Hurtbox = $Hurtbox
@@ -14,8 +14,8 @@ func _ready() -> void:
 	hurtbox.hurt.connect(_on_hurt)
 
 func _on_hurt(_other_hitbox: Hitbox) -> void:
-	var grass_effect_instance = GRASS_EFFECT.instantiate()
-	get_tree().current_scene.add_child(grass_effect_instance)
+	var grass_effect_instance = grass_effect_scene.instantiate()
+	get_tree().add_child(grass_effect_instance)
 	#need instance to be at global position where it is destroyed
 	grass_effect_instance.global_position = global_position
 	queue_free()

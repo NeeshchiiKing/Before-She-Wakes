@@ -9,7 +9,6 @@ class_name AbilityDefinition extends Resource
 @export var upgrade_attribute : StringName = &"wisdom"
 ## Attribute level needed to upgrade INTO each tier. The first entry (base tier) is ignored.
 @export var tier_requirements : Array[int] = [0]
-## Intelligence spent per cast (spells only)
 @export var icon : Texture2D ## Shown on quick slots
 
 
@@ -21,6 +20,7 @@ class_name AbilityDefinition extends Resource
 @export var projectile_speed : float = 200.0
 @export var projectile_range : float = 160.0
 @export var cooldown : float = 0.8 ## Seconds between casts
+## Intelligence spent per cast (spells only)
 @export var cast_cost : int = 0
 
 func max_tier() -> int:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://dnjkaew63j15w"]
+[gd_scene load_steps=139 format=3 uid="uid://dnjkaew63j15w"]
 
 [ext_resource type="Texture2D" uid="uid://xrp1nhbl6fxt" path="res://assets/art/characters/player/64_Player_Game.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bmeiguh5ibq4l" path="res://src/scripts/gameplay/player/player.gd" id="1_dovo2"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://dibecyaa458ah" path="res://src/scripts/core/resources/stats/level_data.gd" id="4_w8ig4"]
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="5_6gf5d"]
 [ext_resource type="Script" uid="uid://dg3qgwnlnhlo4" path="res://src/scripts/core/resources/orbs/orb_grid.gd" id="5_l84wi"]
-[ext_resource type="Script" uid="uid://bs7a3w4m8jdm2" path="res://src/scripts/core/resources/abilities/abilities_definition.gd" id="6_7vxwc"]
+[ext_resource type="Script" uid="uid://bs7a3w4m8jdm2" path="res://src/scripts/core/resources/abilities/ability_definition.gd" id="6_7vxwc"]
 [ext_resource type="Script" uid="uid://71gqms0btw5g" path="res://src/scripts/core/resources/abilities/ability_book.gd" id="7_8tvdu"]
 [ext_resource type="Resource" uid="uid://d2jv4s6dv4pk8" path="res://src/data/abilities/torch.tres" id="8_l84wi"]
 [ext_resource type="Resource" uid="uid://bjfxfsr7g6gly" path="res://src/data/spells/light.tres" id="9_sm61a"]
@@ -27,6 +27,8 @@
 [ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="23_5eyvc"]
 [ext_resource type="Resource" uid="uid://ceb15jjqewe6v" path="res://src/data/currency/gold.tres" id="24_auaqc"]
 [ext_resource type="Resource" uid="uid://0gxvtk2e62xx" path="res://src/data/currency/runes.tres" id="25_fkpjo"]
+[ext_resource type="Resource" uid="uid://bxel07r7yixxu" path="res://src/data/weapons/wooden_sword.tres" id="25_pyeyo"]
+[ext_resource type="Texture2D" uid="uid://c7yswn1j7l73y" path="res://assets/art/world/items/sword/Wooden_Sword.png" id="29_87sxd"]
 
 [sub_resource type="Resource" id="Resource_lvxji"]
 script = ExtResource("2_gmlin")
@@ -114,6 +116,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [PackedVector2Array()]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponPivot/WeaponSprite:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hitbox/WeaponShape:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponPivot:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_gx1jg"]
@@ -628,6 +690,314 @@ tracks/0/keys = {
 "values": [36, 37, 36, 38, 36, 37, 36, 38]
 }
 
+[sub_resource type="Animation" id="Animation_xuyuq"]
+resource_name = "slash_right"
+length = 1.28
+step = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.6666667, 0.8333333, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [312, 313, 314, 315, 316, 317]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/WeaponSprite:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/WeaponShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponPivot:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pyeyo"]
+resource_name = "slash_left"
+length = 1.28
+step = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.6666667, 0.8333333, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [323, 322, 321, 320, 319, 318]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/WeaponSprite:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/WeaponShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponPivot:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_87sxd"]
+resource_name = "slash_down"
+length = 1.28
+step = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.6666667, 0.8333333, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [324, 325, 326, 327, 328, 329]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 1, 1.1666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-20, -30), Vector2(-18, -36), Vector2(-7.999998, -54), Vector2(-7.999998, -54), Vector2(-0.5, -6), Vector2(-0.5, -6), Vector2(-14.999999, -35)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 1, 1.1666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.5707964, -1.5707964, -0.7853982, -0.7853982, -3.9269907, -3.9269907, -1.3089969]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/WeaponSprite:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/WeaponShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponPivot:visible")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5eyvc"]
+resource_name = "slash_up"
+length = 1.28
+step = 0.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.6666667, 0.8333333, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [335, 333, 332, 331, 330, 334]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponPivot/WeaponSprite:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/WeaponShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponPivot:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvxji"]
 _data = {
 &"RESET": SubResource("Animation_gmlin"),
@@ -647,6 +1017,10 @@ _data = {
 &"run_left": SubResource("Animation_qek5x"),
 &"run_right": SubResource("Animation_0owmy"),
 &"run_up": SubResource("Animation_h17s1"),
+&"slash_down": SubResource("Animation_87sxd"),
+&"slash_left": SubResource("Animation_pyeyo"),
+&"slash_right": SubResource("Animation_xuyuq"),
+&"slash_up": SubResource("Animation_5eyvc"),
 &"sneak_down": SubResource("Animation_yj68g"),
 &"sneak_left": SubResource("Animation_8ydkj"),
 &"sneak_right": SubResource("Animation_lgqa7"),
@@ -791,6 +1165,28 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_3j4b4")
 blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pyeyo"]
+animation = &"slash_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_87sxd"]
+animation = &"slash_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5eyvc"]
+animation = &"slash_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_auaqc"]
+animation = &"slash_down"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_fkpjo"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_pyeyo")
+blend_point_0/pos = Vector2(-0.90000004, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_87sxd")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_5eyvc")
+blend_point_2/pos = Vector2(0.90000004, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_auaqc")
+blend_point_3/pos = Vector2(0, -1)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6cv16"]
 animation = &"sneak_up"
 
@@ -886,6 +1282,14 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvxji"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pyeyo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_87sxd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5eyvc"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kvlxm"]
 states/AttackState/node = SubResource("AnimationNodeBlendSpace2D_ugbui")
 states/AttackState/position = Vector2(270, 201)
@@ -895,17 +1299,22 @@ states/MoveState/node = SubResource("AnimationNodeStateMachine_fcs02")
 states/MoveState/position = Vector2(379, 107)
 states/RollState/node = SubResource("AnimationNodeBlendSpace2D_lgqa7")
 states/RollState/position = Vector2(379, 24)
+states/SlashState/node = SubResource("AnimationNodeBlendSpace2D_fkpjo")
+states/SlashState/position = Vector2(345, 277)
 states/SneakState/node = SubResource("AnimationNodeStateMachine_iqsei")
 states/SneakState/position = Vector2(681, 107)
 states/Start/position = Vector2(214, 107)
-transitions = ["Start", "MoveState", SubResource("AnimationNodeStateMachineTransition_myrg7"), "MoveState", "AttackState", SubResource("AnimationNodeStateMachineTransition_dovo2"), "AttackState", "MoveState", SubResource("AnimationNodeStateMachineTransition_gmlin"), "MoveState", "DefendState", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "DefendState", "MoveState", SubResource("AnimationNodeStateMachineTransition_3j4b4"), "MoveState", "RollState", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "RollState", "MoveState", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "SneakState", "MoveState", SubResource("AnimationNodeStateMachineTransition_p47bc"), "SneakState", "RollState", SubResource("AnimationNodeStateMachineTransition_75vfm"), "SneakState", "DefendState", SubResource("AnimationNodeStateMachineTransition_0owmy"), "SneakState", "AttackState", SubResource("AnimationNodeStateMachineTransition_qek5x"), "MoveState", "SneakState", SubResource("AnimationNodeStateMachineTransition_lvxji")]
+transitions = ["Start", "MoveState", SubResource("AnimationNodeStateMachineTransition_myrg7"), "MoveState", "AttackState", SubResource("AnimationNodeStateMachineTransition_dovo2"), "AttackState", "MoveState", SubResource("AnimationNodeStateMachineTransition_gmlin"), "MoveState", "DefendState", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "DefendState", "MoveState", SubResource("AnimationNodeStateMachineTransition_3j4b4"), "MoveState", "RollState", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "RollState", "MoveState", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "SneakState", "MoveState", SubResource("AnimationNodeStateMachineTransition_p47bc"), "SneakState", "RollState", SubResource("AnimationNodeStateMachineTransition_75vfm"), "SneakState", "DefendState", SubResource("AnimationNodeStateMachineTransition_0owmy"), "SneakState", "AttackState", SubResource("AnimationNodeStateMachineTransition_qek5x"), "MoveState", "SneakState", SubResource("AnimationNodeStateMachineTransition_lvxji"), "MoveState", "SlashState", SubResource("AnimationNodeStateMachineTransition_pyeyo"), "SneakState", "SlashState", SubResource("AnimationNodeStateMachineTransition_87sxd"), "SlashState", "MoveState", SubResource("AnimationNodeStateMachineTransition_5eyvc")]
+graph_offset = Vector2(224, 61)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uf5tr"]
-graph_offset = Vector2(-195.5322, 155.89746)
+graph_offset = Vector2(-398.33878, 13.693848)
 nodes/output/position = Vector2(80, 160)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_kvlxm")
 nodes/StateMachine/position = Vector2(-260, 120)
 node_connections = [&"output", 0, &"StateMachine"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyeyo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh6av"]
 size = Vector2(17, 21)
@@ -986,6 +1395,7 @@ spells = SubResource("Resource_sm61a")
 inventory = SubResource("Resource_ef3mv")
 equipment = SubResource("Resource_auaqc")
 wallet = SubResource("Resource_4r4qr")
+starting_weapon = ExtResource("25_pyeyo")
 
 [node name="PlayerSprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.5, -48.5)
@@ -1009,6 +1419,7 @@ parameters/StateMachine/DefendState/blend_position = Vector2(0, 0)
 parameters/StateMachine/MoveState/RunState/blend_position = Vector2(0, 0)
 parameters/StateMachine/MoveState/StandState/blend_position = Vector2(0.014899254, -0.19282508)
 parameters/StateMachine/RollState/blend_position = Vector2(0, 0)
+parameters/StateMachine/SlashState/blend_position = Vector2(-0.9691834, 0.017094016)
 parameters/StateMachine/SneakState/SneakState/blend_position = Vector2(0, 0)
 parameters/StateMachine/SneakState/StandState/blend_position = Vector2(0, 0)
 
@@ -1025,6 +1436,10 @@ metadata/_custom_type_script = "uid://bbpj4t4f303tq"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
 
+[node name="WeaponShape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_pyeyo")
+disabled = true
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 8
@@ -1039,3 +1454,8 @@ shape = SubResource("RectangleShape2D_lh6av")
 libraries = {
 &"": SubResource("AnimationLibrary_lh6av")
 }
+
+[node name="WeaponPivot" type="Node2D" parent="."]
+
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot"]
+texture = ExtResource("29_87sxd")

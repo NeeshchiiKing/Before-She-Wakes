@@ -11,9 +11,6 @@ var hive : Beehive
 @export var wander_radius : float = 40.0 ## How far from the hive a bee will roam
 @export var wander_speed : float = 40.0 ## Lazy buzzing speed (dives still use dive_speed)
 
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
-
-@export var orbit_radius : float = 28.0
 @export var orbit_speed : float = 2.0 ## How fast it circles (radians per second)
 @export var dive_speed : float = 150.0
 @export var attack_interval : float = 2.5 ## Seconds between dives
@@ -21,7 +18,6 @@ var hive : Beehive
 
 var _wander_target : Vector2 = Vector2.ZERO
 
-var orbit_angle : float = 0.0
 
 var _state : State = State.ORBIT
 var _attack_timer : float = 0.0
@@ -44,8 +40,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if _is_dead or not _awake:
 		return
-	orbit_angle += orbit_speed * delta
-	var _orbit_point := Vector2(cos(orbit_angle), sin(orbit_angle) * 0.5) * orbit_radius
 
 	match _state:
 		State.ORBIT:

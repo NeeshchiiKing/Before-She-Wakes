@@ -16,19 +16,19 @@ position = Vector2(0, -38)
 texture = ExtResource("2_na6pu")
 
 [node name="RestStation" parent="Furniture" index="0" instance=ExtResource("3_6ip6c")]
-position = Vector2(120, 199)
+position = Vector2(34, 166)
 
 [node name="RestStation2" parent="Furniture" index="1" instance=ExtResource("4_20y3i")]
-position = Vector2(190, 188)
+position = Vector2(414, 168)
 
 [node name="RestStation3" parent="Furniture" index="2" instance=ExtResource("5_md3dy")]
-position = Vector2(258, 190)
+position = Vector2(55, 306)
 
 [node name="RestStation4" parent="Furniture" index="3" instance=ExtResource("6_t2tcx")]
-position = Vector2(324, 194)
+position = Vector2(38, 338)
 
 [node name="RestStation5" parent="Furniture" index="4" instance=ExtResource("7_v5wjo")]
-position = Vector2(420, 208)
+position = Vector2(502, 177)
 
 [node name="Top" parent="." index="2"]
 texture = ExtResource("3_cjiu3")

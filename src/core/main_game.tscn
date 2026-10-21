@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://cj5khnbiewudw"]
 
-[ext_resource type="Script" uid="uid://d0bba63pwseso" path="res://src/scripts/core/systems/main_game.gd" id="1_3fed5"]
-[ext_resource type="PackedScene" uid="uid://b7d4iw4q7olie" path="res://src/scenes/ui/hud/stats_hud.tscn" id="2_6yl8a"]
-[ext_resource type="PackedScene" uid="uid://d4f04dvyoavlc" path="res://src/scenes/ui/menu/pause_menu.tscn" id="3_6n4xl"]
-[ext_resource type="Script" uid="uid://cj71vx3tqwbve" path="res://src/scripts/ui/hud/quick_bar_hud.gd" id="3_ibp4d"]
+[ext_resource type="Script" uid="uid://d0bba63pwseso" path="res://src/scripts/core/systems/main_game.gd" id="1_bycoy"]
+[ext_resource type="PackedScene" uid="uid://b7d4iw4q7olie" path="res://src/scenes/ui/hud/stats_hud.tscn" id="2_rt44x"]
+[ext_resource type="Script" uid="uid://cj71vx3tqwbve" path="res://src/scripts/ui/hud/quick_bar_hud.gd" id="3_nx426"]
+[ext_resource type="PackedScene" uid="uid://d4f04dvyoavlc" path="res://src/scenes/ui/menu/pause_menu.tscn" id="4_qhv2s"]
 
 [node name="MainGame" type="Node"]
 process_mode = 3
-script = ExtResource("1_3fed5")
+script = ExtResource("1_bycoy")
 
 [node name="Systems" type="Node" parent="."]
 
@@ -34,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="StatsHud" parent="HudLayer/HudRoot" instance=ExtResource("2_6yl8a")]
+[node name="StatsHud" parent="HudLayer/HudRoot" instance=ExtResource("2_rt44x")]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 4.0
@@ -54,7 +54,7 @@ offset_right = 20.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("3_ibp4d")
+script = ExtResource("3_nx426")
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -70,7 +70,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenu" parent="PauseLayer/PauseRoot" instance=ExtResource("3_6n4xl")]
+[node name="PauseMenu" parent="PauseLayer/PauseRoot" instance=ExtResource("4_qhv2s")]
 layout_mode = 1
 mouse_filter = 2
 

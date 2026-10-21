@@ -31,9 +31,8 @@ func _ready() -> void:
 	for i in bee_count:
 		var bee := BEE_SCENE.instantiate()
 		bees.add_child(bee)
-		bee.orbit_angle = TAU * i / bee_count # spread bees evenly around the hive
 	_sprite_home = sprite.position
-
+	
 func take_hit(other_hitbox: Hitbox) -> void:
 	if _is_dead:
 		return

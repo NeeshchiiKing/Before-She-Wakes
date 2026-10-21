@@ -9,6 +9,7 @@ size = Vector2(21, 46)
 radius = 24.083189
 
 [node name="NpcBase" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource("1_ldjor")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

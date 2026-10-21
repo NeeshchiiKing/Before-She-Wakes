@@ -6,3 +6,5 @@
 script = ExtResource("1_item")
 display_name = "Sweetener"
 short_name = "Sweetener"
+base_type = "sweetener"
+heals = "intelligence"
