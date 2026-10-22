@@ -1,0 +1,24 @@
+~ start
+if quest_complete()
+	Minerva: The mushroom was exactly what I needed. Come back when you want company.
+	=> END
+elif quest_started() and has_items()
+	Minerva: You found it. Give it here.
+	if turn_in()
+		Minerva: Wonderful. Take this for your trouble, {{reward_text()}}.
+	=> END
+elif quest_started()
+	Minerva: Still no mushroom? Keep looking.
+	=> END
+else
+	=> offer
+
+~ offer
+Minerva: I need a mushroom. Will you find one for me?
+- I'll look for it.
+	do start_quest()
+	Minerva: Good. Don't eat it.
+	=> END
+- Not right now.
+	Minerva: Then go away, I'm busy.
+	=> END

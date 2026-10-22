@@ -7,6 +7,10 @@ enum Element { NONE, FIRE, FROST, SHOCK, TOXIC }
 enum ResourceType { VITALITY, INTELLIGENCE, CHARISMA, STRENGTH, DEXTERITY }
 enum Attribute { FORTITUDE, STAMINA, WISDOM, WILLPOWER, GUILE,
 		PERCEPTION, POWER, ENDURANCE, REFLEXES, AGILITY }
+const RESOURCE_NAMES : Array[StringName] = [&"vitality", &"intelligence", &"charisma", &"strength", &"dexterity"]
+
+func cost_resource() -> StringName:
+	return RESOURCE_NAMES[use_cost_resource]
 
 @export_group("Identity")
 @export var base_name: String = "Sword"        # the prefix/suffix generator wraps this
@@ -15,6 +19,11 @@ enum Attribute { FORTITUDE, STAMINA, WISDOM, WILLPOWER, GUILE,
 @export var texture: Texture2D
 @export var grip_offset: Vector2
 @export var hitbox_shape: Shape2D
+
+@export_group("Wear")
+@export var texture_damaged: Texture2D   ## shown once durability drops to the threshold
+@export var texture_broken: Texture2D    ## shown at 0 durability
+@export_range(0.0, 1.0) var damaged_threshold: float = 0.5
 
 @export_group("Stats")
 @export var base_damage: float = 10.0

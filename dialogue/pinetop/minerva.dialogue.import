@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://d1i4chdedsov4"
+path="res://.godot/imported/minerva.dialogue-2dd917a3a05e48ea15b0646f1d329154.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/minerva.dialogue"
+dest_files=["res://.godot/imported/minerva.dialogue-2dd917a3a05e48ea15b0646f1d329154.tres"]
+
+[params]
+
+defaults=true

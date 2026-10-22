@@ -1,21 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://c77uusy8yhabd"]
+[gd_scene load_steps=13 format=3 uid="uid://c77uusy8yhabd"]
 
-[ext_resource type="Script" uid="uid://c5rhyr2p0b0yq" path="res://src/scripts/gameplay/npc/npc_base.gd" id="1_ldjor"]
+[ext_resource type="Script" uid="uid://b3c8hsjyum1xa" path="res://src/scripts/gameplay/npc/quest_npc.gd" id="1_lrwu3"]
+[ext_resource type="Resource" uid="uid://raruqudwf4no" path="res://src/data/quests/minervas_mushroom.tres" id="2_qsy6g"]
+[ext_resource type="Texture2D" uid="uid://d02si5sp8f1e" path="res://assets/art/characters/npc/2. Witch.png" id="2_t30gs"]
+[ext_resource type="Resource" uid="uid://d1i4chdedsov4" path="res://dialogue/pinetop/minerva.dialogue" id="3_ptq62"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46c44"]
+atlas = ExtResource("2_t30gs")
+region = Rect2(0, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrwu3"]
+atlas = ExtResource("2_t30gs")
+region = Rect2(40, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsy6g"]
+atlas = ExtResource("2_t30gs")
+region = Rect2(80, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptq62"]
+atlas = ExtResource("2_t30gs")
+region = Rect2(120, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rydey"]
+atlas = ExtResource("2_t30gs")
+region = Rect2(160, 0, 40, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3u66o"]
+animations = [{
+"frames": [{
+"duration": 120.0,
+"texture": SubResource("AtlasTexture_46c44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrwu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsy6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptq62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rydey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t30gs"]
-size = Vector2(21, 46)
+size = Vector2(21, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_46c44"]
 radius = 24.083189
 
-[node name="NpcBase" type="StaticBody2D"]
+[node name="Minverva" type="StaticBody2D"]
 collision_mask = 0
-script = ExtResource("1_ldjor")
+script = ExtResource("1_lrwu3")
+quest = ExtResource("2_qsy6g")
+npc_name = "Minerva"
+dialogue = ExtResource("3_ptq62")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_3u66o")
+autoplay = "default"
+frame_progress = 0.23135844
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_t30gs")
 
 [node name="InteractArea" type="Area2D" parent="."]
@@ -26,8 +78,8 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_46c44")
 
 [node name="Prompt" type="Label" parent="."]
-offset_left = -4.0
+offset_left = -22.0
 offset_top = -55.0
-offset_right = 36.0
+offset_right = 22.0
 offset_bottom = -32.0
-text = "E"
+text = "Witch"

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://hbt6l3dkgeo5"]
+
+[ext_resource type="Script" uid="uid://j3iyopbbwuon" path="res://src/scripts/gameplay/environment/interior_wall.gd" id="1_kie2q"]
+
+[node name="InteriorWall" type="StaticBody2D"]
+script = ExtResource("1_kie2q")
+faded_alpha = null
+fade_time = null
+fade_margin = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(32, 4)
+
+[node name="FadeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FadeArea"]

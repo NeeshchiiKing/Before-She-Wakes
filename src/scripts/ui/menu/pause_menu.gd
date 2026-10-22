@@ -27,6 +27,8 @@ func open(player: Player, is_live: bool = false) -> void:
 		player.inventory.changed.connect(_refresh_current_tab)
 	if not player.equipment.changed.is_connected(_refresh_current_tab):
 		player.equipment.changed.connect(_refresh_current_tab)
+	if not QuestLog.changed.is_connected(_refresh_current_tab):
+		QuestLog.changed.connect(_refresh_current_tab)	
 	if is_live:
 		tabs.current_tab = $Panel/Tabs/Inventory.get_index()
 	show()

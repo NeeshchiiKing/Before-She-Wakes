@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7xy03idq2vr"
-path="res://.godot/imported/Merchant_Tent.png-cd42c0b20bea84cb70cb3e48d13a1f18.ctex"
+uid="uid://cbgkfrlqabtpm"
+path="res://.godot/imported/Steel_Sword.png-1e8d5c71b0349121e02d55e69c2f641f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/buildings/Pinetop_Inn/Merchant_Tent.png"
-dest_files=["res://.godot/imported/Merchant_Tent.png-cd42c0b20bea84cb70cb3e48d13a1f18.ctex"]
+source_file="res://assets/art/world/items/sword/Steel_Sword.png"
+dest_files=["res://.godot/imported/Steel_Sword.png-1e8d5c71b0349121e02d55e69c2f641f.ctex"]
 
 [params]
 

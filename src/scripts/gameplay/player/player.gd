@@ -4,6 +4,10 @@ const SPEED = 100.00
 const ROLL_SPEED = 125
 const SNEAK_SPEED = 20
 const DIGGING_SPEED = 40.0
+
+const WORLD_PICKUP := preload("res://src/scenes/pickups/world_pickup.tscn")
+var _worn_durability : Dictionary = {} ## EquipmentDefinition -> durability left
+
 var _throw_cooldown : float = 0.0
 var _spell_cooldown : float = 0.0
 
@@ -21,6 +25,7 @@ var _quiet_attack : bool = false ## True if the current swing started from sneak
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 @onready var hitbox: Hitbox = $Hitbox
+@onready var _fist_damage : int = hitbox.damage   # remembers the scene's bare-hand damage
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var blink_animation: AnimationPlayer = $BlinkAnimation
 
@@ -49,7 +54,6 @@ func _find_hitbox_shape() -> CollisionShape2D:
 @export var equipment : Equipment
 @export var wallet : Wallet
 
-@export var starting_weapon: WeaponData
 var weapon: WeaponInstance
 
 
@@ -65,25 +69,28 @@ func _ready():
 	DialogueManager.dialogue_started.connect(func(_r): in_dialogue = true)
 	DialogueManager.dialogue_ended.connect(func(_r): in_dialogue = false)
 
-	if starting_weapon:
-		var inst := WeaponInstance.new()
-		inst.data = starting_weapon
-		inst.durability = starting_weapon.max_durability
-		equip_weapon(inst)
-
 func equip_weapon(inst: WeaponInstance) -> void:
+	if weapon != null and weapon.changed.is_connected(_refresh_weapon_sprite):
+		weapon.changed.disconnect(_refresh_weapon_sprite)
 	weapon = inst
 	weapon_pivot.visible = false   # shown only by attack animations
 	if inst == null:
 		if hitbox_shape:
 			hitbox_shape.shape = null   # bare hands: no leftover weapon hitbox
 		return
-	weapon_sprite.texture = inst.data.texture
+	inst.changed.connect(_refresh_weapon_sprite)
 	weapon_sprite.offset = -inst.data.grip_offset
+	_refresh_weapon_sprite()
 	if hitbox_shape:
 		hitbox_shape.shape = inst.data.hitbox_shape
 	else:
 		push_warning("Player hitbox has no CollisionShape2D to swap the weapon shape into")
+
+func _refresh_weapon_sprite() -> void:
+	if weapon != null:
+		weapon_sprite.texture = weapon.current_texture()
+
+
 
 func _physics_process(_delta: float) -> void:
 	_throw_cooldown = maxf(_throw_cooldown - _delta, 0.0)
@@ -95,6 +102,7 @@ func _physics_process(_delta: float) -> void:
 	var state = playback.get_current_node()
 	if state != "AttackState" and state != "SlashState":
 		weapon_pivot.visible = false   # safety net: never show the sword outside an attack
+		player_sprite_2d.z_index = 0   # and never leave the body raised
 	set_collision_mask_value(3, state != "RollState")
 	match state:
 		"MoveState": move_state(_delta)
@@ -184,15 +192,51 @@ func sneak_state(_delta: float) -> void:
 	move_and_slide()
 
 func _try_attack() -> void:
-	hitbox.knockback_direction = last_input_vector.normalized()
+	var current := playback.get_current_node()
+	if current == "SlashState" or current == "AttackState":
+		return
+	var facing := _cardinal(last_input_vector)
+	hitbox.knockback_direction = facing
+	# The animation tree wants y flipped, same as in move_state
+	var attack_blend := Vector2(facing.x, -facing.y)
+	animation_tree.set("parameters/StateMachine/SlashState/blend_position", attack_blend)
+	animation_tree.set("parameters/StateMachine/AttackState/blend_position", attack_blend)
+	hitbox.clear_hit_targets()
+	_quiet_attack = current == "SneakState"
 
-	if stats.try_spend(&"strength", attack_cost):
-		_quiet_attack = playback.get_current_node() == "SneakState"
-		if weapon != null:
+	# A broken weapon can't be swung, so it falls back to bare hands
+	var sword : WeaponInstance = weapon if weapon != null and not weapon.is_broken() else null
+
+	# Try the sword first
+	if sword != null:
+		var cost := attack_cost + int(sword.data.use_cost_amount)
+		if stats.try_spend(sword.data.cost_resource(), cost):
+			hitbox.damage = _weapon_damage(sword)
+			sword.spend_durability()
 			playback.travel("SlashState")
 		else:
-			playback.travel("AttackState")
-			
+			_drop_weapon() # out of strength: the sword slips from your hands
+		return
+
+	if stats.try_spend(&"strength", attack_cost):
+		hitbox.damage = _fist_damage
+		playback.travel("AttackState")
+
+	_quiet_attack = playback.get_current_node() == "SneakState"
+	if sword != null:
+		hitbox.damage = _weapon_damage(sword)
+		sword.spend_durability()   # one per swing, hit or miss
+		playback.travel("SlashState")
+	else:
+		hitbox.damage = _fist_damage
+		playback.travel("AttackState")
+
+func _weapon_damage(sword: WeaponInstance) -> int:
+	var dmg := sword.data.base_damage
+	if not sword.data.combo.is_empty():
+		dmg *= sword.data.combo[0].damage_multiplier
+	return roundi(dmg) + CombatStats.total(attributes, orb_grid, equipment, &"attack_power")
+	
 func _try_roll() -> void:
 	if stats.is_worst_status(&"dexterity"):
 		return # Encumbered: dodge roll disabled
@@ -290,10 +334,41 @@ func can_use_quick(thing: Resource) -> bool:
 
 ######Equipment&Throwing######################################
 
+var _synced_main_hand : EquipmentDefinition
+
 func _on_equipment_changed() -> void:
 	if equipment.bag != null:
 		inventory.apply_bag(equipment.bag)
+	_sync_main_hand()
 
+## Builds the live WeaponInstance from whatever sits in the main-hand slot
+
+func _sync_main_hand() -> void:
+	var piece := equipment.main_hand
+	if piece == _synced_main_hand:
+		return
+	if weapon != null and _synced_main_hand != null:
+		_worn_durability[_synced_main_hand] = weapon.durability # remember the wear
+	_synced_main_hand = piece
+	if piece == null or piece.weapon_data == null:
+		equip_weapon(null)
+		return
+	var inst := WeaponInstance.new()
+	inst.data = piece.weapon_data
+	inst.durability = _worn_durability.get(piece, piece.weapon_data.max_durability)
+	equip_weapon(inst)
+	
+func _drop_weapon() -> void:
+	var piece := equipment.main_hand
+	if piece == null:
+		return
+	equipment.unequip("main_hand") # fires the change, so durability is saved and you're back to fists
+	var pickup := WORLD_PICKUP.instantiate()
+	pickup.gear = piece
+	get_parent().add_child(pickup)
+	pickup.global_position = global_position
+	pickup.fall_from(10.0, last_input_vector.normalized() * 24.0, true)
+	
 ## Equip from the bag. Whatever was in that slot goes back into the bag.
 func equip_from_inventory(item: EquipmentDefinition) -> void:
 	if not item.meets_requirement(attributes):
@@ -374,3 +449,9 @@ func update_blend_positions(direction_vector: Vector2) -> void:
 	animation_tree.set("parameters/StateMachine/SneakState/SneakState/blend_position", direction_vector)
 	animation_tree.set("parameters/StateMachine/SneakState/StandState/blend_position", direction_vector)
 	animation_tree.set("parameters/StateMachine/SlashState/blend_position", direction_vector)
+
+## Attacks only face up, down, left or right. Picks whichever axis you're leaning on most.
+func _cardinal(v: Vector2) -> Vector2:
+	if absf(v.x) >= absf(v.y):
+		return Vector2(signf(v.x), 0.0) # a tie goes to left/right
+	return Vector2(0.0, signf(v.y))

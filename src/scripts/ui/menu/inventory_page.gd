@@ -27,9 +27,11 @@ func _build() -> void:
 		use.disabled = player.stats.is_worst_status(item.heals)
 		use.pressed.connect(_on_use_pressed.bind(item))
 		row.add_child(use)
+		
 
 	_add_label(column, "")
 	_add_label(column, "Gear")
+	
 	var gear := inventory.get_gear()
 	if gear.is_empty():
 		_add_label(column, "No spare gear")
@@ -40,11 +42,14 @@ func _build() -> void:
 		var text := "%s  (%s)  %s  %s" % [piece.display_name, piece.slot_type.capitalize(), piece.bonus_text(), piece.requirement_text()]
 		var label := _add_label(row, text)
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.tooltip_text = piece.tooltip_text(player)
+		label.mouse_filter = Control.MOUSE_FILTER_PASS
 		var equip := Button.new()
 		equip.text = "Equip"
 		equip.disabled = not piece.meets_requirement(player.attributes)
 		equip.pressed.connect(_on_equip_pressed.bind(piece))
 		row.add_child(equip)
+
 
 func _on_use_pressed(item: ItemDefinition) -> void:
 	player.use_item(item)

@@ -26,6 +26,9 @@ class_name EquipmentDefinition extends Resource
 @export_enum("none", "vitality", "intelligence", "charisma", "strength", "dexterity") var use_cost_resource : String = "none"
 @export var use_cost : int = 0
 
+@export_group("Weapon")
+@export var weapon_data : WeaponData ## Main-hand gear: the sprite, hitbox and swing come from this
+
 func meets_requirement(attributes: Attributes) -> bool:
 	if required_attribute == "none":
 		return true
@@ -44,3 +47,14 @@ func bonus_text() -> String:
 	for stat in stat_bonuses:
 		parts.append("%s +%d" % [stat.capitalize(), stat_bonuses[stat]])
 	return ", ".join(parts)
+
+func tooltip_text(player: Player) -> String:
+	var lines : Array[String] = [display_name]
+	if weapon_data != null:
+		var wd := weapon_data
+		lines.append("Damage %d   Strength cost %d" % [int(wd.base_damage), int(wd.use_cost_amount)])
+		var left : int = player._worn_durability.get(self, wd.max_durability)
+		lines.append("Durability %d / %d" % [left, wd.max_durability])
+	lines.append(bonus_text())
+	lines.append(requirement_text())
+	return "\n".join(lines)

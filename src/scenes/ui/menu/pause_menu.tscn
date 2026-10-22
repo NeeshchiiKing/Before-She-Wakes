@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ch0sprkrs207r" path="res://src/scripts/ui/menu/attributes_page.gd" id="3_p25y1"]
 [ext_resource type="Script" uid="uid://ccuschi4p0018" path="res://src/scripts/ui/menu/orb_grid_page.gd" id="4_lyumt"]
 [ext_resource type="Script" uid="uid://cs07tlo6hormv" path="res://src/scripts/ui/menu/inventory_page.gd" id="5_ibfrs"]
-[ext_resource type="Script" uid="uid://bdkw4bxnpqp18" path="res://src/scripts/ui/menu/placeholder_page.gd" id="6_vf8kf"]
+[ext_resource type="Script" uid="uid://bdkw4bxnpqp18" path="res://src/scripts/ui/menu/quest_page.gd" id="6_vf8kf"]
 [ext_resource type="Script" uid="uid://bnirubw6e375b" path="res://src/scripts/ui/menu/system_page.gd" id="7_31151"]
 [ext_resource type="Script" uid="uid://bfas1l0ip7tsv" path="res://src/scripts/ui/menu/ability_page.gd" id="8_lyumt"]
 
@@ -38,15 +38,16 @@ grow_vertical = 2
 
 [node name="Tabs" type="TabContainer" parent="Panel"]
 layout_mode = 2
-current_tab = 1
+tab_alignment = 1
+current_tab = 0
 
 [node name="Inventory" type="HBoxContainer" parent="Panel/Tabs"]
-visible = false
 layout_mode = 2
 script = ExtResource("5_ibfrs")
 metadata/_tab_index = 0
 
 [node name="Character" type="HBoxContainer" parent="Panel/Tabs"]
+visible = false
 layout_mode = 2
 script = ExtResource("2_lyumt")
 metadata/_tab_index = 1

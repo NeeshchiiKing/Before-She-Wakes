@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://c1ofkv504vif5"]
+
+[ext_resource type="Texture2D" uid="uid://bc3txijwwy831" path="res://assets/art/world/items/base_items/mushroom.png" id="1_iobvc"]
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="2_a1mp3"]
+[ext_resource type="Texture2D" uid="uid://c7hxnmtw4p6fo" path="res://assets/art/world/items/world_items/mushroom.png" id="3_awl6j"]
+
+[resource]
+script = ExtResource("2_a1mp3")
+display_name = "Minervas Mushroom"
+short_name = "Mushroom"
+icon = ExtResource("1_iobvc")
+world_sprite = ExtResource("3_awl6j")
+base_type = "mushroom"
+heals = "intelligence"
+heal_amount = 5
+tier_cost = 2
+metadata/_custom_type_script = "uid://ds1wsjhavgit8"

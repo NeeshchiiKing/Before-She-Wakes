@@ -1,13 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://lhgf3ytrss4t"]
+[gd_scene load_steps=19 format=3 uid="uid://lhgf3ytrss4t"]
 
 [ext_resource type="PackedScene" uid="uid://jkqjbyugurqw" path="res://src/scenes/buildings/building.tscn" id="1_x8u0p"]
-[ext_resource type="Texture2D" uid="uid://d40bur67ljx3" path="res://assets/art/world/buildings/Pinetop_Inn/Inn_Floor.png" id="2_na6pu"]
+[ext_resource type="Texture2D" uid="uid://d40bur67ljx3" path="res://assets/art/world/buildings/pinetop/Inn_Floor.png" id="2_na6pu"]
 [ext_resource type="PackedScene" uid="uid://djusqmmufaykh" path="res://src/scenes/furniture/bed.tscn" id="3_6ip6c"]
-[ext_resource type="Texture2D" uid="uid://bmm3hffgqrxd1" path="res://assets/art/world/buildings/Pinetop_Inn/Pinetop_Inn.png" id="3_cjiu3"]
+[ext_resource type="Texture2D" uid="uid://bmm3hffgqrxd1" path="res://assets/art/world/buildings/pinetop/Pinetop_Inn.png" id="3_cjiu3"]
 [ext_resource type="PackedScene" uid="uid://c3472dwixuybl" path="res://src/scenes/furniture/toilet.tscn" id="4_20y3i"]
 [ext_resource type="PackedScene" uid="uid://fk0g1l1o6cwe" path="res://src/scenes/furniture/fire.tscn" id="5_md3dy"]
 [ext_resource type="PackedScene" uid="uid://b2eu1fg3gf7wi" path="res://src/scenes/furniture/chair.tscn" id="6_t2tcx"]
 [ext_resource type="PackedScene" uid="uid://c0iuoefyla1yn" path="res://src/scenes/furniture/bath.tscn" id="7_v5wjo"]
+[ext_resource type="PackedScene" uid="uid://hbt6l3dkgeo5" path="res://src/scenes/buildings/interior_wall.tscn" id="9_md3dy"]
+[ext_resource type="Texture2D" uid="uid://cft1p6ddebsg1" path="res://assets/art/world/buildings/wall_v/Beige.png" id="10_v5wjo"]
+[ext_resource type="Texture2D" uid="uid://07duyp4d7u6u" path="res://assets/art/world/buildings/wall_h/Beige.png" id="11_g32xi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5wjo"]
+size = Vector2(20, 216.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04j5v"]
+size = Vector2(32, 264)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g32xi"]
+size = Vector2(140, 1.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8l14"]
+size = Vector2(156, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt8xh"]
+size = Vector2(140, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jss3i"]
+size = Vector2(156, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkgok"]
+size = Vector2(32, 264)
 
 [node name="Building" instance=ExtResource("1_x8u0p")]
 position = Vector2(0, -38)
@@ -15,20 +39,22 @@ position = Vector2(0, -38)
 [node name="Floor" parent="." index="0"]
 texture = ExtResource("2_na6pu")
 
-[node name="RestStation" parent="Furniture" index="0" instance=ExtResource("3_6ip6c")]
+[node name="Bed" parent="Furniture" index="0" instance=ExtResource("3_6ip6c")]
+y_sort_enabled = true
 position = Vector2(34, 166)
 
-[node name="RestStation2" parent="Furniture" index="1" instance=ExtResource("4_20y3i")]
-position = Vector2(414, 168)
+[node name="Toilet" parent="Furniture" index="1" instance=ExtResource("4_20y3i")]
+position = Vector2(427, 158)
 
-[node name="RestStation3" parent="Furniture" index="2" instance=ExtResource("5_md3dy")]
-position = Vector2(55, 306)
+[node name="Fire" parent="Furniture" index="2" instance=ExtResource("5_md3dy")]
+position = Vector2(278, 154)
 
-[node name="RestStation4" parent="Furniture" index="3" instance=ExtResource("6_t2tcx")]
-position = Vector2(38, 338)
+[node name="Chair" parent="Furniture" index="3" instance=ExtResource("6_t2tcx")]
+position = Vector2(123, 163)
 
-[node name="RestStation5" parent="Furniture" index="4" instance=ExtResource("7_v5wjo")]
-position = Vector2(502, 177)
+[node name="Bath" parent="Furniture" index="4" instance=ExtResource("7_v5wjo")]
+y_sort_enabled = true
+position = Vector2(506, 177)
 
 [node name="Top" parent="." index="2"]
 texture = ExtResource("3_cjiu3")
@@ -50,3 +76,108 @@ position = Vector2(45, 172.5)
 
 [node name="CollisionShape2D" parent="InteriorArea" index="0"]
 position = Vector2(0, 65)
+
+[node name="InteriorWall" parent="." index="5" instance=ExtResource("9_md3dy")]
+position = Vector2(179, -121)
+faded_alpha = 0.35
+fade_time = 0.2
+fade_margin = 8
+vertical_texture = ExtResource("10_v5wjo")
+vertical = true
+length = 256
+thickness = 16
+
+[node name="Sprite2D" parent="InteriorWall" index="0"]
+position = Vector2(0, -256)
+texture = ExtResource("10_v5wjo")
+region_rect = Rect2(0, 0, 16, 256)
+
+[node name="CollisionShape2D" parent="InteriorWall" index="1"]
+position = Vector2(8, -132.25)
+shape = SubResource("RectangleShape2D_v5wjo")
+
+[node name="CollisionShape2D" parent="InteriorWall/FadeArea" index="0"]
+position = Vector2(8, -132)
+shape = SubResource("RectangleShape2D_04j5v")
+
+[node name="InteriorWall2" parent="." index="6" instance=ExtResource("9_md3dy")]
+position = Vector2(435, -121)
+faded_alpha = 0.35
+fade_time = 0.2
+fade_margin = 8
+horizontal_texture = ExtResource("11_g32xi")
+length = 140
+thickness = 96
+
+[node name="Sprite2D" parent="InteriorWall2" index="0"]
+position = Vector2(0, -96)
+texture = ExtResource("11_g32xi")
+region_rect = Rect2(0, 0, 140, 96)
+
+[node name="CollisionShape2D" parent="InteriorWall2" index="1"]
+position = Vector2(70, -25.375)
+shape = SubResource("RectangleShape2D_g32xi")
+
+[node name="CollisionShape2D" parent="InteriorWall2/FadeArea" index="0"]
+position = Vector2(70, -52)
+shape = SubResource("RectangleShape2D_w8l14")
+
+[node name="InteriorWall3" parent="." index="7" instance=ExtResource("9_md3dy")]
+position = Vector2(1, -121)
+faded_alpha = 0.35
+fade_time = 0.2
+fade_margin = 8
+horizontal_texture = ExtResource("11_g32xi")
+length = 140
+thickness = 96
+
+[node name="Sprite2D" parent="InteriorWall3" index="0"]
+position = Vector2(0, -96)
+texture = ExtResource("11_g32xi")
+region_rect = Rect2(0, 0, 140, 96)
+
+[node name="CollisionShape2D" parent="InteriorWall3" index="1"]
+position = Vector2(70, -25)
+shape = SubResource("RectangleShape2D_bt8xh")
+
+[node name="CollisionShape2D" parent="InteriorWall3/FadeArea" index="0"]
+position = Vector2(70, -52)
+shape = SubResource("RectangleShape2D_jss3i")
+
+[node name="InteriorWall4" parent="." index="8" instance=ExtResource("9_md3dy")]
+visible = false
+position = Vector2(225, -121)
+faded_alpha = 0.35
+fade_time = 0.2
+fade_margin = 8
+horizontal_texture = ExtResource("11_g32xi")
+length = 140
+thickness = 96
+
+[node name="InteriorWall5" parent="." index="9" instance=ExtResource("9_md3dy")]
+position = Vector2(381, -121)
+faded_alpha = 0.35
+fade_time = 0.2
+fade_margin = 8
+vertical_texture = ExtResource("10_v5wjo")
+vertical = true
+length = 256
+thickness = 16
+
+[node name="Sprite2D" parent="InteriorWall5" index="0"]
+position = Vector2(0, -256)
+texture = ExtResource("10_v5wjo")
+region_rect = Rect2(0, 0, 16, 256)
+
+[node name="CollisionShape2D" parent="InteriorWall5" index="1"]
+position = Vector2(8, -132.25)
+shape = SubResource("RectangleShape2D_v5wjo")
+
+[node name="CollisionShape2D" parent="InteriorWall5/FadeArea" index="0"]
+position = Vector2(8, -132)
+shape = SubResource("RectangleShape2D_qkgok")
+
+[editable path="InteriorWall"]
+[editable path="InteriorWall2"]
+[editable path="InteriorWall3"]
+[editable path="InteriorWall5"]

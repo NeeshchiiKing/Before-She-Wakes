@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://c7ta2yrs1skiv"]
+[gd_scene load_steps=48 format=4 uid="uid://c7ta2yrs1skiv"]
 
 [ext_resource type="Script" uid="uid://cxutdub26i0xk" path="res://src/scripts/gameplay/levels/pinetop_level.gd" id="1_4lyj1"]
 [ext_resource type="Texture2D" uid="uid://c6th1y07afllv" path="res://assets/art/world/background/Pinetop.png" id="1_5jvs3"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://o3wvqumhgbbg" path="res://assets/art/world/buildings/Witches_hut_2.png" id="11_rub47"]
 [ext_resource type="Texture2D" uid="uid://cpv70mlnjqexo" path="res://assets/art/world/environment/Well.png" id="13_ralhq"]
 [ext_resource type="Texture2D" uid="uid://c1uwvr4tya4ep" path="res://assets/art/world/buildings/Tent.png" id="14_jhq8u"]
+[ext_resource type="Texture2D" uid="uid://d02si5sp8f1e" path="res://assets/art/characters/npc/2. Witch.png" id="16_2eo4s"]
 [ext_resource type="PackedScene" uid="uid://xlnt288qv7ow" path="res://src/scenes/systems/player_camera.tscn" id="17_k837i"]
 [ext_resource type="PackedScene" uid="uid://daud4mdxxst8s" path="res://src/scenes/levels/player_spawn.tscn" id="18_1jrbf"]
 [ext_resource type="PackedScene" uid="uid://chgy8s6ntggq1" path="res://src/scenes/levels/level_transition.tscn" id="19_1jrbf"]
@@ -25,9 +26,11 @@
 [ext_resource type="PackedScene" uid="uid://lhgf3ytrss4t" path="res://src/scenes/buildings/inn.tscn" id="23_rub47"]
 [ext_resource type="Script" uid="uid://cifuctryor0h6" path="res://src/scripts/gameplay/npc/shop_entry.gd" id="24_2eo4s"]
 [ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="25_8barc"]
-[ext_resource type="Texture2D" uid="uid://c7xy03idq2vr" path="res://assets/art/world/buildings/Pinetop_Inn/Merchant_Tent.png" id="26_ralhq"]
+[ext_resource type="Texture2D" uid="uid://c7xy03idq2vr" path="res://assets/art/world/buildings/pinetop/Merchant_Tent.png" id="26_ralhq"]
 [ext_resource type="Resource" uid="uid://b5rbghxbvbmkw" path="res://src/data/equipment/bags/pouch.tres" id="26_uwfvn"]
 [ext_resource type="Resource" uid="uid://gdcp1vf02vou" path="res://src/data/equipment/throwing/rubber_ducky.tres" id="27_gm40i"]
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="28_3ff8m"]
+[ext_resource type="Resource" uid="uid://c1ofkv504vif5" path="res://src/data/items/base/mushroom/minervas_mushroom.tres" id="30_8barc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qq27"]
 texture = ExtResource("2_4lyj1")
@@ -1415,6 +1418,49 @@ currency = ExtResource("25_8barc")
 price = 50
 metadata/_custom_type_script = "uid://cifuctryor0h6"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8barc"]
+atlas = ExtResource("16_2eo4s")
+region = Rect2(0, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwfvn"]
+atlas = ExtResource("16_2eo4s")
+region = Rect2(40, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm40i"]
+atlas = ExtResource("16_2eo4s")
+region = Rect2(80, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8erc"]
+atlas = ExtResource("16_2eo4s")
+region = Rect2(120, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2tov"]
+atlas = ExtResource("16_2eo4s")
+region = Rect2(160, 0, 40, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ff8m"]
+animations = [{
+"frames": [{
+"duration": 120.0,
+"texture": SubResource("AtlasTexture_8barc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwfvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm40i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8erc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2tov")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Pinetop_Level" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_4lyj1")
@@ -1459,6 +1505,22 @@ tile_map_data = PackedByteArray("AAAZAA4AAAACAAMAAAAYAA4AAAAAAAMAAAAZAAwAAAAHAAM
 [node name="LevelObjects" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Puck" parent="LevelObjects" instance=ExtResource("23_r2vu5")]
+position = Vector2(361, 1155)
+collision_mask = 1
+stock = Array[ExtResource("24_2eo4s")]([SubResource("Resource_5pmsa"), SubResource("Resource_r8erc")])
+npc_name = "Puck "
+
+[node name="Minerva" parent="LevelObjects" instance=ExtResource("28_3ff8m")]
+position = Vector2(880, 490)
+
+[node name="AnimatedSprite2D" parent="LevelObjects/Minerva" index="0"]
+sprite_frames = SubResource("SpriteFrames_3ff8m")
+frame_progress = 0.0
+
+[node name="CollisionShape2D" parent="LevelObjects/Minerva" index="1"]
+position = Vector2(0, -5.5)
+
 [node name="WorldPickup2" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
 position = Vector2(336, 564)
 item = ExtResource("21_rub47")
@@ -1500,17 +1562,17 @@ position = Vector2(53, 516)
 [node name="Beehive" parent="LevelObjects" instance=ExtResource("22_gv0hn")]
 position = Vector2(371, 558)
 
-[node name="Puck" parent="LevelObjects" instance=ExtResource("23_r2vu5")]
-position = Vector2(361, 1155)
-collision_mask = 1
-stock = Array[ExtResource("24_2eo4s")]([SubResource("Resource_5pmsa"), SubResource("Resource_r8erc")])
-npc_name = "Puck "
-
 [node name="MerchantTent" type="Sprite2D" parent="LevelObjects"]
 position = Vector2(439, 1121)
 texture = ExtResource("26_ralhq")
+
+[node name="WorldPickup" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
+position = Vector2(1056, 476)
+item = ExtResource("30_8barc")
 
 [node name="Transitions" type="Node2D" parent="."]
 
 [node name="LevelTransition" parent="Transitions" instance=ExtResource("19_1jrbf")]
 destination_level_uid = "uid://c7ta2yrs1skiv"
+
+[editable path="LevelObjects/Minerva"]
