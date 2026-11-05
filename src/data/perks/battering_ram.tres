@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PerkDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/scripts/core/resources/orbs/perk_definition.gd" id="1_perk"]
+
+[resource]
+script = ExtResource("1_perk")
+id = &"battering_ram"
+display_name = "Battering Ram"
+branch = "mig"
+tier = 0
+description = "Dodge roll straight into a lunging shoulder charge that knocks enemies back."
+source = 0
+source_detail = "Blueprint, hidden in the world"
