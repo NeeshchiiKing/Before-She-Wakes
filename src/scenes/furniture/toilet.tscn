@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cag1q3e5miipa" path="res://assets/art/world/resource_furniture/Toilet.png" id="2_qn6rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnrcn"]
-size = Vector2(20, 28)
+size = Vector2(24, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7iqd"]
-size = Vector2(29, 39)
+size = Vector2(29, 26)
 
 [node name="RestStation" instance=ExtResource("1_mfw7b")]
 restores = "strength"
@@ -16,13 +16,12 @@ restores = "strength"
 texture = ExtResource("2_qn6rs")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 4)
+position = Vector2(2, -4)
 shape = SubResource("RectangleShape2D_dnrcn")
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-position = Vector2(-0.5, 2.5)
+position = Vector2(-2, 6)
 shape = SubResource("RectangleShape2D_g7iqd")
 
 [node name="PromptLabel" parent="." index="3"]
-offset_top = -40.0
-offset_bottom = -17.0
+offset_top = -29.0

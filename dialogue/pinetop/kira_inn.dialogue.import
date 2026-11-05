@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c1sxm00y33md8"
+path="res://.godot/imported/kira_inn.dialogue-ba8a4a983bc665a6a999ac55d59d1da3.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/kira_inn.dialogue"
+dest_files=["res://.godot/imported/kira_inn.dialogue-ba8a4a983bc665a6a999ac55d59d1da3.tres"]
+
+[params]
+
+defaults=true

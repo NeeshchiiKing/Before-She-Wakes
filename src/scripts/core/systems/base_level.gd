@@ -4,6 +4,19 @@ class_name BaseLevel extends Node2D
 
 signal signal_level_transition(scene_uid: String)
 
+@export_group("Lighting")
+@export var player_light_on     : bool = false ## Light around Coren (dark levels)
+@export var player_light_pulses : bool = false ## Nightmare-style dimming pulses
+
+@export_group("Story")
+@export var story_lockout : bool = false ## Slow walk only: no attacks, rolls, sneak, items, menu or HUD
+
+@export var grid_pos : Vector2i = Vector2i(-1, -1)
+
+@export var spawn_facing : Vector2 = Vector2.DOWN ## Direction the player faces when this level loads
+
+@export_enum("None", "Arm", "Leg") var player_bleed_spot : String = "None" ## Where Coren bleeds from
+
 #This sets up Ysort for player
 @onready var ysort_container: Node2D = $LevelObjects 
 
@@ -11,7 +24,19 @@ signal signal_level_transition(scene_uid: String)
 func _ready() -> void:
 	for transition in find_children("*", "LevelTransition", true, false):
 		transition.transition_requested.connect(_on_transition_requested)
+	WorldMap.visit(grid_pos)
 
+## Called by MainGame once the level has faded in. Override for intro lines/scenes.
+func on_level_entered(_player : Player) -> void:
+	pass
+	
+## Called by MainGame right after the level loads, while the screen is still black.
+## Use it to set up poses/positions the player shouldn't see happen.
+func on_level_loaded(_player : Player) -> void:
+	pass
+	
+	
+	
 func _on_transition_requested(scene_uid: String) -> void:
 	signal_level_transition.emit(scene_uid)
 

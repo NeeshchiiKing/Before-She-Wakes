@@ -14,6 +14,18 @@ class_name MainGame extends Node
 #Future (Main Menu): Loading test level for prototype
 const PINETOP_LEVEL    : String = "uid://c7ta2yrs1skiv" 
 const PLAYER_SCENE_UID : String = "uid://dnjkaew63j15w"
+const NIGHTMARE_LEVEL    : String = "uid://bjiexlgyuwi54" 
+
+@onready var fade_rect : ColorRect = $TransitionLayer/TransitionRoot/Fade
+
+const FADE_OUT_TIME : float = 0.8
+const FADE_IN_TIME  : float = 0.6
+
+@export_group("Debug")
+@export var debug_skip_intro : bool = false ## Editor only: start in Pinetop with the Inn tutorial already done
+
+var _transitioning : bool = false
+
 
 var player : Player = null
 
@@ -39,10 +51,26 @@ func _ready() -> void:
 	if player:
 		stats_hud.bind_stats(player.stats)
 		quick_bar_hud.bind_player(player)
-		
-	load_level(PINETOP_LEVEL)
+	hud_root.visible = false     # each level turns it on in _apply_level_rules
+	fade_rect.modulate.a = 1.0   # start on black, fade into the first level
+	# The fade covers the whole screen, so it must never catch mouse clicks
+	transition_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if debug_skip_intro and OS.is_debug_build():
+		_debug_finish_intro()
+		load_level(PINETOP_LEVEL)
+	else:
+		load_level(NIGHTMARE_LEVEL)
 	pause_menu.quit_requested.connect(quit_game)
 	
+
+## Pretends the opening already happened (nightmare + Inn tutorial)
+func _debug_finish_intro() -> void:
+	for resource in ["vitality", "intelligence", "charisma", "strength", "dexterity"]:
+		Story.set_flag(StringName("inn_used_" + resource))
+	Story.set_flag(&"inn_done")
+	
+		
 func _input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
@@ -57,10 +85,30 @@ func quit_game() -> void:
 	
 	
 ## Loads a level scene that must extend BaseLevel
+## Loads a level scene that must extend BaseLevel (fades out, loads, fades in)
 func load_level(level_scene : String) -> void:
 	# Make sure this is called during idle time
-	_perform_level_load.call_deferred(level_scene)
+	_transition_to.call_deferred(level_scene)
 
+func _transition_to(level_scene : String) -> void:
+	if _transitioning:
+		return
+	_transitioning = true
+	if player:
+		player.in_dialogue = true # freeze during the fade
+	await _fade(1.0, FADE_OUT_TIME)
+	await _perform_level_load(level_scene)
+	await _fade(0.0, FADE_IN_TIME)
+	if player:
+		player.in_dialogue = false
+	_transitioning = false
+	_current_level.on_level_entered(player)
+
+func _fade(to_alpha : float, time : float) -> void:
+	var tween := create_tween()
+	tween.tween_property(fade_rect, "modulate:a", to_alpha, time)
+	await tween.finished
+	
 func _detach_entity_root_from_level() -> void:
 	if entity_root.get_parent() != world:
 		entity_root.get_parent().remove_child(entity_root)
@@ -107,8 +155,27 @@ func _perform_level_load(level_scene_uid : String) -> void:
 	_attach_entity_root_to_level()  
 	_place_player_at_level_spawn()
 	_setup_level_camera()
-
-
+	_apply_level_lighting()
+	_apply_level_rules()
+	await _current_level.on_level_loaded(player)
+	
+## Turns the player's light on/off to match the level
+func _apply_level_lighting() -> void:
+	if player == null or _current_level == null:
+		return
+	player.set_dark_light(_current_level.player_light_on, _current_level.player_light_pulses)
+	
+## Story lockout: slow walk, no actions, no menu, HUD hidden
+func _apply_level_rules() -> void:
+	if player == null or _current_level == null:
+		return
+	player.set_story_locked(_current_level.story_lockout)
+	hud_root.visible = not _current_level.story_lockout
+	
+	player.set_bleeding(_current_level.player_bleed_spot)
+	player.face(_current_level.spawn_facing)
+	
+	
 ## Instantiates the player and adds it to the entity layer
 func _init_player() -> void:
 	var player_scene : PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
@@ -172,7 +239,11 @@ func _setup_level_camera() -> void:
 	# NOTE: target variable was added as part of the custom camera script used for the prototype
 	level_camera.set_player_target(player)
 
+
 func _unhandled_input(event: InputEvent) -> void:
+	if player and player.story_locked:
+		return
+
 	if event.is_action_pressed(&"menu"):
 		toggle_menu()
 		get_viewport().set_input_as_handled()

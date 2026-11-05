@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://i0mxi3gyyg4c"]
+
+[ext_resource type="Script" uid="uid://cbrcq5cxulfbt" path="res://src/scripts/gameplay/lighting/flicker_light.gd" id="1_us6s0"]
+[ext_resource type="Texture2D" uid="uid://cyggiiklq6v4s" path="res://assets/art/effects/environment/Fire_Effect.png" id="2_qjb1p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7qw8"]
+size = Vector2(20, 7)
+
+[sub_resource type="Gradient" id="Gradient_us6s0"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qjb1p"]
+gradient = SubResource("Gradient_us6s0")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+metadata/_snap_count = 6
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2ank2"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bycs6"]
+atlas = ExtResource("2_qjb1p")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbr00"]
+atlas = ExtResource("2_qjb1p")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux2ka"]
+atlas = ExtResource("2_qjb1p")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea5f0"]
+atlas = ExtResource("2_qjb1p")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m7dj"]
+atlas = ExtResource("2_qjb1p")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hihd0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bycs6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbr00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ux2ka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea5f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m7dj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BurningDebris" type="StaticBody2D"]
+scale = Vector2(2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_u7qw8")
+
+[node name="FireLight" type="PointLight2D" parent="."]
+color = Color(1, 0.46666667, 0, 1)
+texture = SubResource("GradientTexture2D_qjb1p")
+script = ExtResource("1_us6s0")
+flicker_amount = 0.2
+flicker_speed = 8.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_2ank2")
+sprite_frames = SubResource("SpriteFrames_hihd0")
+autoplay = "default"
+frame_progress = 0.5481468

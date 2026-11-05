@@ -4,8 +4,11 @@ const SPEED = 100.00
 const ROLL_SPEED = 125
 const SNEAK_SPEED = 20
 const DIGGING_SPEED = 40.0
+const CARRY_SPEED = 45.0
 
 const WORLD_PICKUP := preload("res://src/scenes/pickups/world_pickup.tscn")
+
+
 var _worn_durability : Dictionary = {} ## EquipmentDefinition -> durability left
 
 var _throw_cooldown : float = 0.0
@@ -13,6 +16,7 @@ var _spell_cooldown : float = 0.0
 
 var is_digging : bool = false ## True while the menu is open during combat
 var in_dialogue : bool = false ## True while talking to an NPC. Freezes movement and actions
+var story_locked : bool = false ## Nightmares/cutscenes: slow walk only
 
 var input_vector: = Vector2.ZERO
 var last_input_vector = Vector2.LEFT
@@ -21,18 +25,53 @@ var is_sneaking: bool:
 		return playback.get_current_node() == "SneakState"
 var _quiet_attack : bool = false ## True if the current swing started from sneak
 
+var wakes_in_bed : bool = false ## Set by the nightmare door. TEMP until we build story flags
+
 @onready var player_sprite_2d : Sprite2D = $PlayerSprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+
 @onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 @onready var hitbox: Hitbox = $Hitbox
 @onready var _fist_damage : int = hitbox.damage   # remembers the scene's bare-hand damage
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var blink_animation: AnimationPlayer = $BlinkAnimation
 
+@onready var dark_light : FlickerLight = $DarkLight
+
 # res://scenes/player/player.gd  (wherever your player script lives)
 @onready var weapon_pivot: Node2D = $WeaponPivot
 @onready var weapon_sprite: Sprite2D = $WeaponPivot/WeaponSprite
 @onready var hitbox_shape: CollisionShape2D = _find_hitbox_shape()
+
+@onready var blood_drip : CPUParticles2D = $BloodDrip
+
+@onready var blood_points : Node2D = $BloodPoints
+var _bleed_spot : String = "none"
+
+## "none", "arm", "leg"... matches the BloodPoints marker names
+func set_bleeding(spot : String) -> void:
+	_bleed_spot = spot.to_lower()
+	if blood_drip == null:
+		return
+	blood_drip.emitting = _bleed_spot != "none"
+	_update_blood_position(last_input_vector)
+
+func _update_blood_position(direction : Vector2) -> void:
+	if blood_drip == null or _bleed_spot == "none":
+		return
+	var key := ""
+	if abs(direction.x) > abs(direction.y):
+		key = "right" if direction.x > 0 else "left"
+	else:
+		key = "down" if direction.y > 0 else "up"
+	var marker := blood_points.get_node_or_null("%s_%s" % [_bleed_spot, key]) as Marker2D
+	if marker:
+		blood_drip.global_position = marker.global_position
+		blood_drip.emitting = true
+	else:
+		blood_drip.emitting = false # no marker for this direction = arm is hidden
+
 
 func _find_hitbox_shape() -> CollisionShape2D:
 	var found := hitbox.find_children("*", "CollisionShape2D", true, false)
@@ -96,8 +135,16 @@ func _physics_process(_delta: float) -> void:
 	_throw_cooldown = maxf(_throw_cooldown - _delta, 0.0)
 	_spell_cooldown = maxf(_spell_cooldown - _delta, 0.0)
 	if in_dialogue:
+		weapon_pivot.visible = false   # never show the sword while talking
+		player_sprite_2d.z_index = 0
 		velocity = Vector2.ZERO
-		move_and_slide()
+		return
+	if story_locked:
+		weapon_pivot.visible = false   # never show the sword while story-locked
+		player_sprite_2d.z_index = 0
+		if playback.get_current_node() != &"CarryState":
+			playback.start(&"CarryState") # snap back if anything pulled us out
+		carry_state(_delta)
 		return
 	var state = playback.get_current_node()
 	if state != "AttackState" and state != "SlashState":
@@ -111,8 +158,11 @@ func _physics_process(_delta: float) -> void:
 		"DefendState": pass
 		"RollState": roll_state(_delta)
 		"SneakState": sneak_state(_delta)
+		
 func _unhandled_input(event: InputEvent) -> void:
-	
+	if story_locked:
+		return
+		
 	for i in 4:
 		if event.is_action_pressed("quick_%d" % (i + 1)):
 			use_quick_slot(i)
@@ -130,6 +180,54 @@ func die() -> void:
 	remove_from_group("player")
 	process_mode = Node.PROCESS_MODE_DISABLED
 
+
+## Turned on by dark levels (nightmares, caves).
+## FUTURE (spells): Light/Sunlight can grow this instead of making a new light.
+func set_dark_light(on: bool, pulses: bool = false) -> void:
+	dark_light.enabled = on
+	dark_light.pulse_enabled = pulses
+	dark_light.set_process(on)
+
+func set_story_locked(locked: bool) -> void:
+	if locked == story_locked:
+		return
+	story_locked = locked
+	# start() jumps straight to the state, no transition arrows needed
+	playback.start(&"CarryState" if locked else &"MoveState")
+
+## Points the player (and every animation blend space) in a direction without moving
+func face(direction : Vector2) -> void:
+	if direction == Vector2.ZERO:
+		return
+	last_input_vector = direction
+	update_blend_positions(Vector2(direction.x, -direction.y))
+	_update_blood_position(direction)
+	animation_tree.advance(0) # apply the new state/direction right now, not next frame
+
+## Plays any animation (sleep, sit up...) through the AnimationTree's SceneState slot.
+## Looping animations return right away; one-shot animations can be awaited until they finish.
+## Plays a scene animation (laying_down, laying_up...).
+## The AnimationTree needs an Animation state with the SAME name as the animation.
+## Looping animations return right away; one-shot animations can be awaited until they finish.
+func play_scene_animation(anim_name : StringName) -> void:
+	var state_machine := animation_tree.tree_root.get_node(&"StateMachine") as AnimationNodeStateMachine
+	if not state_machine.has_node(anim_name):
+		push_warning("AnimationTree has no state named '%s' — add one" % anim_name)
+		return
+	playback.start(anim_name)
+	animation_tree.advance(0)
+	print("asked for: ", anim_name, "   tree is in: ", playback.get_current_node())
+	var anim := animation_player.get_animation(anim_name)
+	if anim.loop_mode != Animation.LOOP_NONE:
+		return
+	await get_tree().create_timer(anim.length).timeout
+
+## Leaves SceneState and goes back to normal (or carrying, in a nightmare)
+func end_scene_animation(facing : Vector2 = Vector2.DOWN) -> void:
+	playback.start(&"CarryState" if story_locked else &"MoveState")
+	face(facing)
+	print("back to: ", playback.get_current_node())
+	
 ######MoveState################################
 
 func move_state(_delta: float) -> void:
@@ -142,7 +240,7 @@ func move_state(_delta: float) -> void:
 		#directional_vector made to pass the animation tree flipping +1 and -1
 		var direction_vector: = Vector2(input_vector.x, -input_vector.y)
 		update_blend_positions(direction_vector)
-
+		
 	if Input.is_action_just_pressed("attack"):
 		_try_attack()
 		
@@ -191,6 +289,15 @@ func sneak_state(_delta: float) -> void:
 	velocity = input_vector * SNEAK_SPEED
 	move_and_slide()
 
+func carry_state(_delta: float) -> void:
+	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if input_vector != Vector2.ZERO:
+		last_input_vector = input_vector
+		update_blend_positions(Vector2(input_vector.x, -input_vector.y))
+		_update_blood_position(input_vector)
+	velocity = input_vector * CARRY_SPEED
+	move_and_slide()
+
 func _try_attack() -> void:
 	var current := playback.get_current_node()
 	if current == "SlashState" or current == "AttackState":
@@ -219,15 +326,6 @@ func _try_attack() -> void:
 		return
 
 	if stats.try_spend(&"strength", attack_cost):
-		hitbox.damage = _fist_damage
-		playback.travel("AttackState")
-
-	_quiet_attack = playback.get_current_node() == "SneakState"
-	if sword != null:
-		hitbox.damage = _weapon_damage(sword)
-		sword.spend_durability()   # one per swing, hit or miss
-		playback.travel("SlashState")
-	else:
 		hitbox.damage = _fist_damage
 		playback.travel("AttackState")
 
@@ -449,7 +547,8 @@ func update_blend_positions(direction_vector: Vector2) -> void:
 	animation_tree.set("parameters/StateMachine/SneakState/SneakState/blend_position", direction_vector)
 	animation_tree.set("parameters/StateMachine/SneakState/StandState/blend_position", direction_vector)
 	animation_tree.set("parameters/StateMachine/SlashState/blend_position", direction_vector)
-
+	animation_tree.set("parameters/StateMachine/CarryState/blend_position", direction_vector)
+	
 ## Attacks only face up, down, left or right. Picks whichever axis you're leaning on most.
 func _cardinal(v: Vector2) -> Vector2:
 	if absf(v.x) >= absf(v.y):

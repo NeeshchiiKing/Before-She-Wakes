@@ -28,7 +28,7 @@ script = ExtResource("1_ux8gm")
 position = Vector2(0, -384)
 centered = false
 
-[node name="Furniture" type="Node2D" parent="."]
+[node name="RestStations" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -384)
 
@@ -68,3 +68,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteriorArea"]
 position = Vector2(0, 79.5)
 shape = SubResource("RectangleShape2D_fy7ly")
+
+[node name="Furniture" type="Node2D" parent="."]

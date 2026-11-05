@@ -1,0 +1,13 @@
+~ intro
+Coren: Hang on, Kira... we're almost at the hospital.
+=> END
+
+~ wrong_way
+% Coren: No... the hospital's the other way.
+% Coren: There's nothing back here for us.
+% Coren: Stay with me, Kira. I need to go the other way!
+=> END
+
+~ exit
+Kira: Coren, Coren....
+=> END

@@ -40,6 +40,7 @@ dialogue = ExtResource("2_l2gqk")
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_0q0lx")
 animation = &"idle"
+autoplay = ""
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(-2.5, 9)
@@ -59,4 +60,4 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 16
-text = "    Merchant"
+text = "Puck"

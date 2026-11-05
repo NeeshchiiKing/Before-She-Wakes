@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d4f04dvyoavlc"]
+[gd_scene load_steps=11 format=3 uid="uid://d4f04dvyoavlc"]
 
 [ext_resource type="Script" uid="uid://b06h6qk5ivhch" path="res://src/scripts/ui/menu/pause_menu.gd" id="1_s2ryp"]
 [ext_resource type="Script" uid="uid://skfr74u6prin" path="res://src/scripts/ui/menu/character_page.gd" id="2_lyumt"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bdkw4bxnpqp18" path="res://src/scripts/ui/menu/quest_page.gd" id="6_vf8kf"]
 [ext_resource type="Script" uid="uid://bnirubw6e375b" path="res://src/scripts/ui/menu/system_page.gd" id="7_31151"]
 [ext_resource type="Script" uid="uid://bfas1l0ip7tsv" path="res://src/scripts/ui/menu/ability_page.gd" id="8_lyumt"]
+[ext_resource type="Script" uid="uid://b26c0c72oa58e" path="res://src/scripts/ui/menu/map_page.gd" id="8_p25y1"]
 
 [sub_resource type="Theme" id="Theme_wspta"]
 default_font_size = 8
@@ -87,7 +88,7 @@ metadata/_tab_index = 6
 [node name="Map" type="HBoxContainer" parent="Panel/Tabs"]
 visible = false
 layout_mode = 2
-script = ExtResource("6_vf8kf")
+script = ExtResource("8_p25y1")
 metadata/_tab_index = 7
 
 [node name="System" type="HBoxContainer" parent="Panel/Tabs"]

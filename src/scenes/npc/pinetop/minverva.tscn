@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://cffd3j0wwf3xp"]
+
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_454fe"]
+[ext_resource type="Texture2D" uid="uid://d02si5sp8f1e" path="res://assets/art/characters/npc/2. Witch.png" id="2_1yjxi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6kmy"]
+atlas = ExtResource("2_1yjxi")
+region = Rect2(0, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf2pg"]
+atlas = ExtResource("2_1yjxi")
+region = Rect2(40, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6qd4"]
+atlas = ExtResource("2_1yjxi")
+region = Rect2(80, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o38rh"]
+atlas = ExtResource("2_1yjxi")
+region = Rect2(120, 0, 40, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yo2m"]
+atlas = ExtResource("2_1yjxi")
+region = Rect2(160, 0, 40, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5khgs"]
+animations = [{
+"frames": [{
+"duration": 120.0,
+"texture": SubResource("AtlasTexture_r6kmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf2pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6qd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o38rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yo2m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn668"]
+size = Vector2(20, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0g2i"]
+radius = 29.0
+
+[node name="Minverva" instance=ExtResource("1_454fe")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_5khgs")
+autoplay = ""
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_rn668")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource("CircleShape2D_n0g2i")
+
+[node name="Prompt" parent="." index="3"]
+offset_left = -30.0
+offset_top = -43.0
+offset_right = 34.0
+offset_bottom = -20.0
+text = "Minerva"

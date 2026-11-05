@@ -134,3 +134,12 @@ func try_spend(resource: StringName, amount: int) -> bool:
 func fully_restore(resource: StringName) -> void:
 	set(resource, get("max_" + resource))
 	reset_status(resource)
+
+
+## Empties every Resource and sets every status to its worst tier (used by the game's opening).
+## Vitality stays at 1 so he doesn't die.
+func drain_all() -> void:
+	for resource in NAMES:
+		set(resource, 1)
+		set(String(resource) + "_tier", WORST_TIER)
+	emit_changed()

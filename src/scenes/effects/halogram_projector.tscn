@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw5idlebs2ujg"]
+
+[ext_resource type="Script" uid="uid://cgcyqc5ucek4d" path="res://src/scenes/effects/halogram_projectoir.gd" id="1_cd8rk"]
+[ext_resource type="Texture2D" uid="uid://c8ojprqlykqal" path="res://assets/art/world/environment/projector.png" id="1_m3xa0"]
+[ext_resource type="Texture2D" uid="uid://7hfusuip0rit" path="res://assets/art/world/environment/Bush.png" id="2_cd8rk"]
+
+[node name="HalogramProjector" type="Node2D"]
+script = ExtResource("1_cd8rk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -86)
+texture = ExtResource("1_m3xa0")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 32)
+color = Color(1, 1, 0.05490196, 1)
+energy = 1.37
+texture = ExtResource("2_cd8rk")
+height = 180.0

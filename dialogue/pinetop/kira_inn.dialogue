@@ -1,0 +1,30 @@
+~ wake_call
+Kira: Coren.... Coren?
+=> END
+
+~ wake
+Kira: Another nightmare... they're getting worse.
+Kira: You're in no shape to go out. Lie back down and rest first.
+=> END
+
+~ next
+if Story.is_set("inn_done")
+	Kira: There you are! Looking like yourself again.
+	Kira: Minerva came by earlier, I told her you would stop by, she's just next door so don't keep her waiting.
+elif not Story.is_set("inn_used_vitality")
+	Kira: Please Rest in the bed.
+elif not Story.is_set("inn_used_intelligence")
+	Kira: Sit in the chair for a moment, meditate and clear your mind.
+elif not Story.is_set("inn_used_strength")
+	Kira: Use the toilet, trust me. 
+elif not Story.is_set("inn_used_charisma")
+	Kira: Cleanse yourself in the bath, your already in there!
+elif not Story.is_set("inn_used_dexterity")
+	Kira: Warm yourself by the fire, the kids left food on the table for you!
+=> END
+
+~ inn_blocked
+% Kira: Where do you think you're going? You can barely stand.
+% Kira: No not yet, Coren. Take care of yourself first.
+% Kira: Your a grown man I shouldn't have to tell you more than once!
+=> END

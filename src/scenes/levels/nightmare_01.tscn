@@ -1,0 +1,256 @@
+[gd_scene load_steps=23 format=3 uid="uid://bjiexlgyuwi54"]
+
+[ext_resource type="Script" uid="uid://btml7cwdvbuej" path="res://src/scripts/gameplay/levels/nightmare_level.gd" id="1_m7c0y"]
+[ext_resource type="PackedScene" uid="uid://xlnt288qv7ow" path="res://src/scenes/systems/player_camera.tscn" id="2_3ev63"]
+[ext_resource type="PackedScene" uid="uid://daud4mdxxst8s" path="res://src/scenes/levels/player_spawn.tscn" id="3_rjcyd"]
+[ext_resource type="Script" uid="uid://cbrcq5cxulfbt" path="res://src/scripts/gameplay/lighting/flicker_light.gd" id="4_6k2e2"]
+[ext_resource type="PackedScene" uid="uid://i0mxi3gyyg4c" path="res://src/scenes/props/burning_debris.tscn" id="4_ktl86"]
+[ext_resource type="Texture2D" uid="uid://dl0yi7han41b" path="res://assets/art/world/background/Nightmare.png" id="6_6s51k"]
+[ext_resource type="Script" uid="uid://snbhuwjqoqwa" path="res://src/scripts/gameplay/levels/nightmare_exit.gd" id="7_rrfov"]
+[ext_resource type="Resource" uid="uid://h8hibn1rkeqn" path="res://dialogue/nightmare/nightmare_01.dialogue" id="8_p7xie"]
+[ext_resource type="Script" uid="uid://brhxoormf4k1a" path="res://src/scripts/gameplay/levels/story_line_trigger.gd" id="9_p7xie"]
+
+[sub_resource type="Gradient" id="Gradient_6s51k"]
+offsets = PackedFloat32Array(0, 0.9951456, 1)
+colors = PackedColorArray(0, 0.7607843, 1, 1, 0.35436893, 0.35436893, 0.35436893, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8wylj"]
+gradient = SubResource("Gradient_6s51k")
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_8wylj"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rrfov"]
+gradient = SubResource("Gradient_8wylj")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_rrfov"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p7xie"]
+gradient = SubResource("Gradient_rrfov")
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_p7xie"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s43jq"]
+gradient = SubResource("Gradient_p7xie")
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8wylj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6s51k"]
+size = Vector2(506, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wylj"]
+size = Vector2(49, 552)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s43jq"]
+size = Vector2(52, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrfov"]
+size = Vector2(237, 68)
+
+[node name="nightmare_level" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_m7c0y")
+intro_dialogue = ExtResource("8_p7xie")
+player_light_on = true
+player_light_pulses = true
+story_lockout = true
+spawn_facing = Vector2(0, -1)
+player_bleed_spot = "Arm"
+metadata/_edit_group_ = true
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="PlayerCamera" parent="Player" instance=ExtResource("2_3ev63")]
+enabled = true
+
+[node name="PlayerSpawn" parent="Player" instance=ExtResource("3_rjcyd")]
+position = Vector2(67, -382)
+
+[node name="LevelObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="BurningDebris" parent="LevelObjects" instance=ExtResource("4_ktl86")]
+position = Vector2(210, -557)
+
+[node name="FireLight" parent="LevelObjects/BurningDebris" index="1"]
+pulse_enabled = true
+
+[node name="BurningDebris2" parent="LevelObjects" instance=ExtResource("4_ktl86")]
+position = Vector2(162, -903)
+
+[node name="FireLight" parent="LevelObjects/BurningDebris2" index="1"]
+pulse_enabled = true
+
+[node name="BurningDebris3" parent="LevelObjects" instance=ExtResource("4_ktl86")]
+position = Vector2(366, -757)
+
+[node name="FireLight" parent="LevelObjects/BurningDebris3" index="1"]
+pulse_enabled = true
+
+[node name="BurningDebris4" parent="LevelObjects" instance=ExtResource("4_ktl86")]
+position = Vector2(-62, -450)
+
+[node name="FireLight" parent="LevelObjects/BurningDebris4" index="1"]
+pulse_enabled = true
+
+[node name="BurningDebris5" parent="LevelObjects" instance=ExtResource("4_ktl86")]
+position = Vector2(-358, -930)
+
+[node name="FireLight" parent="LevelObjects/BurningDebris5" index="1"]
+pulse_enabled = true
+
+[node name="BurningDebris6" parent="LevelObjects" instance=ExtResource("4_ktl86")]
+position = Vector2(322, -415)
+
+[node name="FireLight" parent="LevelObjects/BurningDebris6" index="1"]
+pulse_enabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="LevelObjects"]
+position = Vector2(-81.5, -808.5)
+scale = Vector2(0.734375, 2.3593748)
+texture = SubResource("GradientTexture2D_8wylj")
+script = ExtResource("4_6k2e2")
+
+[node name="PointLight2D2" type="PointLight2D" parent="LevelObjects"]
+position = Vector2(-105, -885.5)
+scale = Vector2(0.53125, 0.07812452)
+texture = SubResource("GradientTexture2D_rrfov")
+script = ExtResource("4_6k2e2")
+flicker_amount = 2.0
+flicker_speed = 2.0
+pulse_enabled = true
+pulse_interval = Vector2(0.1, 0.1)
+pulse_strength = 0.1
+
+[node name="PointLight2D3" type="PointLight2D" parent="LevelObjects"]
+position = Vector2(-104.00001, -970)
+scale = Vector2(4.21875, 1.2187502)
+texture = SubResource("GradientTexture2D_p7xie")
+script = ExtResource("4_6k2e2")
+
+[node name="PointLight2D4" type="PointLight2D" parent="LevelObjects"]
+position = Vector2(-169.5, -501)
+scale = Vector2(0.51562506, 0.46875024)
+texture = SubResource("GradientTexture2D_s43jq")
+script = ExtResource("4_6k2e2")
+flicker_amount = 2.0
+flicker_speed = 2.0
+pulse_enabled = true
+pulse_interval = Vector2(0.1, 0.1)
+pulse_strength = 0.1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.05882353, 0.047058824, 0.101960786, 1)
+
+[node name="DarkLight" type="PointLight2D" parent="."]
+color = Color(1, 0.40392157, 0, 1)
+script = ExtResource("4_6k2e2")
+flicker_amount = 0.2
+flicker_speed = 2.0
+pulse_enabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+material = SubResource("CanvasItemMaterial_8wylj")
+offset_left = -601.0
+offset_top = -1058.0
+offset_right = 679.0
+offset_bottom = 222.0
+texture = ExtResource("6_6s51k")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(46, -302)
+shape = SubResource("RectangleShape2D_6s51k")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-48, -456)
+shape = SubResource("RectangleShape2D_8wylj")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(188, -582)
+shape = SubResource("RectangleShape2D_8wylj")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(196, -816)
+shape = SubResource("RectangleShape2D_6s51k")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+position = Vector2(-358, -817)
+shape = SubResource("RectangleShape2D_6s51k")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+position = Vector2(-289, -723)
+shape = SubResource("RectangleShape2D_6s51k")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
+position = Vector2(-129, -649)
+shape = SubResource("RectangleShape2D_8wylj")
+
+[node name="Nightmare_Exit" type="Area2D" parent="."]
+position = Vector2(-83, -848)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("7_rrfov")
+dialogue = ExtResource("8_p7xie")
+dialogue_title = "exit"
+destination_level_uid = "uid://c7ta2yrs1skiv"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nightmare_Exit"]
+position = Vector2(2, -13)
+shape = SubResource("RectangleShape2D_s43jq")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D9"]
+position = Vector2(196, -849)
+shape = SubResource("RectangleShape2D_6s51k")
+
+[node name="WrongExit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("9_p7xie")
+dialogue = ExtResource("8_p7xie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WrongExit"]
+position = Vector2(72, -312)
+shape = SubResource("RectangleShape2D_rrfov")
+
+[editable path="LevelObjects/BurningDebris"]
+[editable path="LevelObjects/BurningDebris2"]
+[editable path="LevelObjects/BurningDebris3"]
+[editable path="LevelObjects/BurningDebris4"]
+[editable path="LevelObjects/BurningDebris5"]
+[editable path="LevelObjects/BurningDebris6"]

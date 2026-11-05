@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://h8hibn1rkeqn"
+path="res://.godot/imported/nightmare_01.dialogue-fb580858f725e04cb186039e2287b7c9.tres"
+
+[deps]
+
+source_file="res://dialogue/nightmare/nightmare_01.dialogue"
+dest_files=["res://.godot/imported/nightmare_01.dialogue-fb580858f725e04cb186039e2287b7c9.tres"]
+
+[params]
+
+defaults=true

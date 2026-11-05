@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://c7ta2yrs1skiv"]
+[gd_scene load_steps=55 format=4 uid="uid://c7ta2yrs1skiv"]
 
 [ext_resource type="Script" uid="uid://cxutdub26i0xk" path="res://src/scripts/gameplay/levels/pinetop_level.gd" id="1_4lyj1"]
 [ext_resource type="Texture2D" uid="uid://c6th1y07afllv" path="res://assets/art/world/background/Pinetop.png" id="1_5jvs3"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://o3wvqumhgbbg" path="res://assets/art/world/buildings/Witches_hut_2.png" id="11_rub47"]
 [ext_resource type="Texture2D" uid="uid://cpv70mlnjqexo" path="res://assets/art/world/environment/Well.png" id="13_ralhq"]
 [ext_resource type="Texture2D" uid="uid://c1uwvr4tya4ep" path="res://assets/art/world/buildings/Tent.png" id="14_jhq8u"]
-[ext_resource type="Texture2D" uid="uid://d02si5sp8f1e" path="res://assets/art/characters/npc/2. Witch.png" id="16_2eo4s"]
 [ext_resource type="PackedScene" uid="uid://xlnt288qv7ow" path="res://src/scenes/systems/player_camera.tscn" id="17_k837i"]
 [ext_resource type="PackedScene" uid="uid://daud4mdxxst8s" path="res://src/scenes/levels/player_spawn.tscn" id="18_1jrbf"]
 [ext_resource type="PackedScene" uid="uid://chgy8s6ntggq1" path="res://src/scenes/levels/level_transition.tscn" id="19_1jrbf"]
@@ -26,11 +25,17 @@
 [ext_resource type="PackedScene" uid="uid://lhgf3ytrss4t" path="res://src/scenes/buildings/inn.tscn" id="23_rub47"]
 [ext_resource type="Script" uid="uid://cifuctryor0h6" path="res://src/scripts/gameplay/npc/shop_entry.gd" id="24_2eo4s"]
 [ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="25_8barc"]
+[ext_resource type="Shader" uid="uid://c6wr54a0n60m8" path="res://src/scenes/npc/pinetop/hologram.gdshader" id="26_gm40i"]
+[ext_resource type="Resource" uid="uid://c1sxm00y33md8" path="res://dialogue/pinetop/kira_inn.dialogue" id="26_r8erc"]
 [ext_resource type="Texture2D" uid="uid://c7xy03idq2vr" path="res://assets/art/world/buildings/pinetop/Merchant_Tent.png" id="26_ralhq"]
 [ext_resource type="Resource" uid="uid://b5rbghxbvbmkw" path="res://src/data/equipment/bags/pouch.tres" id="26_uwfvn"]
 [ext_resource type="Resource" uid="uid://gdcp1vf02vou" path="res://src/data/equipment/throwing/rubber_ducky.tres" id="27_gm40i"]
-[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="28_3ff8m"]
+[ext_resource type="Script" uid="uid://brhxoormf4k1a" path="res://src/scripts/gameplay/levels/story_line_trigger.gd" id="28_edh41"]
 [ext_resource type="Resource" uid="uid://c1ofkv504vif5" path="res://src/data/items/base/mushroom/minervas_mushroom.tres" id="30_8barc"]
+[ext_resource type="PackedScene" uid="uid://cffd3j0wwf3xp" path="res://src/scenes/npc/pinetop/minverva.tscn" id="31_8barc"]
+[ext_resource type="Texture2D" uid="uid://bydw8pm6mp1tr" path="res://assets/art/world/environment/vending stock.png" id="31_uwfvn"]
+[ext_resource type="Texture2D" uid="uid://docvvixfhcc13" path="res://assets/art/world/environment/ball_machine.png" id="32_uwfvn"]
+[ext_resource type="Script" uid="uid://bcmryix4lsf7u" path="res://src/scripts/gameplay/levels/inn_tutorial.gd" id="36_hluoh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qq27"]
 texture = ExtResource("2_4lyj1")
@@ -1418,52 +1423,45 @@ currency = ExtResource("25_8barc")
 price = 50
 metadata/_custom_type_script = "uid://cifuctryor0h6"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8barc"]
-atlas = ExtResource("16_2eo4s")
-region = Rect2(0, 0, 40, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ij7kw"]
+size = Vector2(111, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwfvn"]
-atlas = ExtResource("16_2eo4s")
-region = Rect2(40, 0, 40, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edh41"]
+size = Vector2(32, 264)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gm40i"]
-atlas = ExtResource("16_2eo4s")
-region = Rect2(80, 0, 40, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hluoh"]
+size = Vector2(156, 104)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r8erc"]
-atlas = ExtResource("16_2eo4s")
-region = Rect2(120, 0, 40, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0myoh"]
+size = Vector2(124, 104)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2tov"]
-atlas = ExtResource("16_2eo4s")
-region = Rect2(160, 0, 40, 50)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x25ac"]
+size = Vector2(32, 264)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3ff8m"]
-animations = [{
-"frames": [{
-"duration": 120.0,
-"texture": SubResource("AtlasTexture_8barc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwfvn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gm40i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r8erc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d2tov")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rht05"]
+size = Vector2(32, 172)
 
-[node name="Pinetop_Level" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mr3o5"]
+resource_local_to_scene = true
+shader = ExtResource("26_gm40i")
+shader_parameter/holo_tint = Color(0.45, 0.9, 1, 1)
+shader_parameter/tint_strength = 0.55
+shader_parameter/base_alpha = 0.8
+shader_parameter/scanline_strength = 0.3
+shader_parameter/scanline_speed = 6.0
+shader_parameter/flicker_strength = 0.2
+shader_parameter/glitch_amount = 0.0
+shader_parameter/reveal = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mr3o5"]
+size = Vector2(128, 15)
+
+[node name="Pinetop_Level" type="Node2D" node_paths=PackedStringArray("inn_bed")]
 y_sort_enabled = true
+position = Vector2(2, 4)
 script = ExtResource("1_4lyj1")
+inn_bed = NodePath("LevelObjects/Inn/RestStations/Bed")
+kira_dialogue = ExtResource("26_r8erc")
 metadata/_edit_group_ = true
 
 [node name="Player" type="Node2D" parent="."]
@@ -1472,7 +1470,7 @@ metadata/_edit_group_ = true
 enabled = true
 
 [node name="PlayerSpawn" parent="Player" instance=ExtResource("18_1jrbf")]
-position = Vector2(674, 737)
+position = Vector2(127, 308)
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -1510,16 +1508,6 @@ position = Vector2(361, 1155)
 collision_mask = 1
 stock = Array[ExtResource("24_2eo4s")]([SubResource("Resource_5pmsa"), SubResource("Resource_r8erc")])
 npc_name = "Puck "
-
-[node name="Minerva" parent="LevelObjects" instance=ExtResource("28_3ff8m")]
-position = Vector2(880, 490)
-
-[node name="AnimatedSprite2D" parent="LevelObjects/Minerva" index="0"]
-sprite_frames = SubResource("SpriteFrames_3ff8m")
-frame_progress = 0.0
-
-[node name="CollisionShape2D" parent="LevelObjects/Minerva" index="1"]
-position = Vector2(0, -5.5)
 
 [node name="WorldPickup2" parent="LevelObjects" instance=ExtResource("20_gv0hn")]
 position = Vector2(336, 564)
@@ -1559,6 +1547,53 @@ position = Vector2(1127, 1054)
 [node name="Inn" parent="LevelObjects" instance=ExtResource("23_rub47")]
 position = Vector2(53, 516)
 
+[node name="Top" parent="LevelObjects/Inn" index="2"]
+visible = true
+
+[node name="Doorblocker" type="StaticBody2D" parent="LevelObjects/Inn/StaticBody2D" index="5"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelObjects/Inn/StaticBody2D/Doorblocker"]
+position = Vector2(-213.5, 158.5)
+shape = SubResource("RectangleShape2D_ij7kw")
+
+[node name="CollisionShape2D" parent="LevelObjects/Inn/SideWall_Guestroom/FadeArea" index="0"]
+shape = SubResource("RectangleShape2D_edh41")
+
+[node name="CollisionShape2D" parent="LevelObjects/Inn/FaceWall_Restroom/FadeArea" index="0"]
+shape = SubResource("RectangleShape2D_hluoh")
+
+[node name="CollisionShape2D" parent="LevelObjects/Inn/FaceWall_Guestroom/FadeArea" index="0"]
+shape = SubResource("RectangleShape2D_0myoh")
+
+[node name="CollisionShape2D" parent="LevelObjects/Inn/SideWall_Restroom/FadeArea" index="0"]
+shape = SubResource("RectangleShape2D_x25ac")
+
+[node name="CollisionShape2D" parent="LevelObjects/Inn/SideWall_Bedroom/FadeArea" index="0"]
+shape = SubResource("RectangleShape2D_rht05")
+
+[node name="HalogramProjector_Sleeping" parent="LevelObjects/Inn" index="17"]
+projector_id = &"Sleep"
+
+[node name="KiraHologram" parent="LevelObjects/Inn" index="18"]
+dialogue_resource = ExtResource("26_r8erc")
+dialogue_title = "next"
+
+[node name="AnimatedSprite2D" parent="LevelObjects/Inn/KiraHologram" index="0"]
+material = SubResource("ShaderMaterial_mr3o5")
+
+[node name="Doorwarning" type="Area2D" parent="LevelObjects/Inn"]
+position = Vector2(42, -27)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("28_edh41")
+dialogue = ExtResource("26_r8erc")
+dialogue_title = "inn_blocked"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelObjects/Inn/Doorwarning"]
+position = Vector2(39, -32.5)
+shape = SubResource("RectangleShape2D_mr3o5")
+
 [node name="Beehive" parent="LevelObjects" instance=ExtResource("22_gv0hn")]
 position = Vector2(371, 558)
 
@@ -1570,9 +1605,38 @@ texture = ExtResource("26_ralhq")
 position = Vector2(1056, 476)
 item = ExtResource("30_8barc")
 
+[node name="VendingStock" type="Sprite2D" parent="LevelObjects"]
+position = Vector2(288, 858)
+texture = ExtResource("31_uwfvn")
+
 [node name="Transitions" type="Node2D" parent="."]
 
 [node name="LevelTransition" parent="Transitions" instance=ExtResource("19_1jrbf")]
 destination_level_uid = "uid://c7ta2yrs1skiv"
 
-[editable path="LevelObjects/Minerva"]
+[node name="Minverva" parent="." instance=ExtResource("31_8barc")]
+position = Vector2(894, 437)
+
+[node name="BallMachine" type="Sprite2D" parent="."]
+position = Vector2(415, 858)
+texture = ExtResource("32_uwfvn")
+
+[node name="Inn_Tutorial" type="Node" parent="." node_paths=PackedStringArray("stations", "door_blocker", "door_warning")]
+script = ExtResource("36_hluoh")
+stations = [NodePath("../LevelObjects/Inn/RestStations/Bath"), NodePath("../LevelObjects/Inn/RestStations/Bed"), NodePath("../LevelObjects/Inn/RestStations/Chair"), NodePath("../LevelObjects/Inn/RestStations/Fire"), NodePath("../LevelObjects/Inn/RestStations/Toilet")]
+door_blocker = NodePath("../LevelObjects/Inn/StaticBody2D/Doorblocker")
+door_warning = NodePath("../LevelObjects/Inn/Doorwarning")
+kira_dialogue = ExtResource("26_r8erc")
+
+[editable path="LevelObjects/Pinetree"]
+[editable path="LevelObjects/Inn"]
+[editable path="LevelObjects/Inn/SideWall_Guestroom"]
+[editable path="LevelObjects/Inn/FaceWall_Restroom"]
+[editable path="LevelObjects/Inn/FaceWall_Guestroom"]
+[editable path="LevelObjects/Inn/SideWall_Restroom"]
+[editable path="LevelObjects/Inn/SideWall_Bedroom"]
+[editable path="LevelObjects/Inn/HalogramProjector_Counter"]
+[editable path="LevelObjects/Inn/HalogramProjector_Waiting"]
+[editable path="LevelObjects/Inn/HalogramProjector_Bedroom"]
+[editable path="LevelObjects/Inn/HalogramProjector_Sleeping"]
+[editable path="LevelObjects/Inn/KiraHologram"]

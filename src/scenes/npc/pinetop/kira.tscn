@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://bf7njwf8v6ppr"]
+
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_mtlh3"]
+[ext_resource type="Script" uid="uid://b75715rbw2jaa" path="res://src/scripts/gameplay/npc/kira_hologram.gd" id="2_17i0o"]
+[ext_resource type="Texture2D" uid="uid://btt0f6r3x5335" path="res://assets/art/characters/npc/Wife Character.png" id="2_wjmnx"]
+[ext_resource type="Shader" uid="uid://c6wr54a0n60m8" path="res://src/scenes/npc/pinetop/hologram.gdshader" id="3_17i0o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjmnx"]
+resource_local_to_scene = true
+shader = ExtResource("3_17i0o")
+shader_parameter/holo_tint = Color(0.45, 0.9, 1, 1)
+shader_parameter/tint_strength = 0.55
+shader_parameter/base_alpha = 0.8
+shader_parameter/scanline_strength = 0.3
+shader_parameter/scanline_speed = 6.0
+shader_parameter/flicker_strength = 0.2
+shader_parameter/glitch_amount = 0.0
+shader_parameter/reveal = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17i0o"]
+atlas = ExtResource("2_wjmnx")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3j7k"]
+atlas = ExtResource("2_wjmnx")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihq8r"]
+atlas = ExtResource("2_wjmnx")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n82tm"]
+atlas = ExtResource("2_wjmnx")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gikvd"]
+atlas = ExtResource("2_wjmnx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7whl1"]
+atlas = ExtResource("2_wjmnx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mtlh3"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_17i0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3j7k")
+}],
+"loop": true,
+"name": &"Leaning",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ihq8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n82tm")
+}],
+"loop": true,
+"name": &"Sitting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_gikvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7whl1")
+}],
+"loop": true,
+"name": &"Standing",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjmnx"]
+size = Vector2(20, 36)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_17i0o"]
+radius = 43.0
+
+[node name="KiraHologram" instance=ExtResource("1_mtlh3")]
+script = ExtResource("2_17i0o")
+start_projector_id = &"Counter"
+dialogue_resource = null
+dialogue_title = "start"
+follow_delay = 0.6
+transition_time = 0.35
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_wjmnx")
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_mtlh3")
+animation = &"Standing"
+autoplay = "Standing"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_wjmnx")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+shape = SubResource("CircleShape2D_17i0o")
+
+[node name="Prompt" parent="." index="3"]
+offset_left = -15.0
+offset_top = -45.0
+offset_right = 16.0
+offset_bottom = -22.0
+text = "Kira"

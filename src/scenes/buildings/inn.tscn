@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://lhgf3ytrss4t"]
+[gd_scene load_steps=29 format=3 uid="uid://lhgf3ytrss4t"]
 
 [ext_resource type="PackedScene" uid="uid://jkqjbyugurqw" path="res://src/scenes/buildings/building.tscn" id="1_x8u0p"]
 [ext_resource type="Texture2D" uid="uid://d40bur67ljx3" path="res://assets/art/world/buildings/pinetop/Inn_Floor.png" id="2_na6pu"]
@@ -11,27 +11,56 @@
 [ext_resource type="PackedScene" uid="uid://hbt6l3dkgeo5" path="res://src/scenes/buildings/interior_wall.tscn" id="9_md3dy"]
 [ext_resource type="Texture2D" uid="uid://cft1p6ddebsg1" path="res://assets/art/world/buildings/wall_v/Beige.png" id="10_v5wjo"]
 [ext_resource type="Texture2D" uid="uid://07duyp4d7u6u" path="res://assets/art/world/buildings/wall_h/Beige.png" id="11_g32xi"]
+[ext_resource type="Texture2D" uid="uid://cmxrjtkdmmyc" path="res://assets/art/world/Clean.png" id="12_g32xi"]
+[ext_resource type="Shader" uid="uid://c6wr54a0n60m8" path="res://src/scenes/npc/pinetop/hologram.gdshader" id="14_bt8xh"]
+[ext_resource type="Texture2D" uid="uid://gdg5cc2me6iy" path="res://assets/art/world/short_bar.png" id="14_jss3i"]
+[ext_resource type="PackedScene" uid="uid://dw5idlebs2ujg" path="res://src/scenes/effects/halogram_projector.tscn" id="14_w8l14"]
+[ext_resource type="PackedScene" uid="uid://bf7njwf8v6ppr" path="res://src/scenes/npc/pinetop/kira.tscn" id="15_jss3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5wjo"]
-size = Vector2(20, 216.5)
+size = Vector2(20, 141)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_04j5v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkgok"]
 size = Vector2(32, 264)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g32xi"]
 size = Vector2(140, 1.25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8l14"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lduto"]
 size = Vector2(156, 104)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bt8xh"]
-size = Vector2(140, 2)
+size = Vector2(109, 2)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jss3i"]
-size = Vector2(156, 104)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecw42"]
+size = Vector2(124, 104)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkgok"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_refjl"]
 size = Vector2(32, 264)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_us50r"]
+size = Vector2(32, 172)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_04j5v"]
+radius = 58.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qrnm"]
+size = Vector2(213, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82mrb"]
+size = Vector2(92, 96)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aw8px"]
+resource_local_to_scene = true
+shader = ExtResource("14_bt8xh")
+shader_parameter/holo_tint = Color(0.45, 0.9, 1, 1)
+shader_parameter/tint_strength = 0.55
+shader_parameter/base_alpha = 0.8
+shader_parameter/scanline_strength = 0.3
+shader_parameter/scanline_speed = 6.0
+shader_parameter/flicker_strength = 0.2
+shader_parameter/glitch_amount = 0.0
+shader_parameter/reveal = 1.0
 
 [node name="Building" instance=ExtResource("1_x8u0p")]
 position = Vector2(0, -38)
@@ -39,24 +68,23 @@ position = Vector2(0, -38)
 [node name="Floor" parent="." index="0"]
 texture = ExtResource("2_na6pu")
 
-[node name="Bed" parent="Furniture" index="0" instance=ExtResource("3_6ip6c")]
-y_sort_enabled = true
-position = Vector2(34, 166)
+[node name="Bath" parent="RestStations" index="0" instance=ExtResource("7_v5wjo")]
+position = Vector2(499, 167)
 
-[node name="Toilet" parent="Furniture" index="1" instance=ExtResource("4_20y3i")]
-position = Vector2(427, 158)
+[node name="Chair" parent="RestStations" index="1" instance=ExtResource("6_t2tcx")]
+position = Vector2(238, 175)
 
-[node name="Fire" parent="Furniture" index="2" instance=ExtResource("5_md3dy")]
-position = Vector2(278, 154)
+[node name="Fire" parent="RestStations" index="2" instance=ExtResource("5_md3dy")]
+position = Vector2(288, 157)
 
-[node name="Chair" parent="Furniture" index="3" instance=ExtResource("6_t2tcx")]
-position = Vector2(123, 163)
+[node name="Toilet" parent="RestStations" index="3" instance=ExtResource("4_20y3i")]
+position = Vector2(414, 160)
 
-[node name="Bath" parent="Furniture" index="4" instance=ExtResource("7_v5wjo")]
-y_sort_enabled = true
-position = Vector2(506, 177)
+[node name="Bed" parent="RestStations" index="4" instance=ExtResource("3_6ip6c")]
+position = Vector2(42, 177)
 
 [node name="Top" parent="." index="2"]
+visible = false
 texture = ExtResource("3_cjiu3")
 
 [node name="back wall" parent="StaticBody2D" index="0"]
@@ -77,8 +105,8 @@ position = Vector2(45, 172.5)
 [node name="CollisionShape2D" parent="InteriorArea" index="0"]
 position = Vector2(0, 65)
 
-[node name="InteriorWall" parent="." index="5" instance=ExtResource("9_md3dy")]
-position = Vector2(179, -121)
+[node name="SideWall_Guestroom" parent="." index="5" instance=ExtResource("9_md3dy")]
+position = Vector2(153, -121)
 faded_alpha = 0.35
 fade_time = 0.2
 fade_margin = 8
@@ -87,21 +115,22 @@ vertical = true
 length = 256
 thickness = 16
 
-[node name="Sprite2D" parent="InteriorWall" index="0"]
+[node name="Sprite2D" parent="SideWall_Guestroom" index="0"]
 position = Vector2(0, -256)
 texture = ExtResource("10_v5wjo")
 region_rect = Rect2(0, 0, 16, 256)
 
-[node name="CollisionShape2D" parent="InteriorWall" index="1"]
-position = Vector2(8, -132.25)
+[node name="CollisionShape2D" parent="SideWall_Guestroom" index="1"]
+position = Vector2(8, -101)
 shape = SubResource("RectangleShape2D_v5wjo")
 
-[node name="CollisionShape2D" parent="InteriorWall/FadeArea" index="0"]
+[node name="CollisionShape2D" parent="SideWall_Guestroom/FadeArea" index="0"]
 position = Vector2(8, -132)
-shape = SubResource("RectangleShape2D_04j5v")
+shape = SubResource("RectangleShape2D_qkgok")
 
-[node name="InteriorWall2" parent="." index="6" instance=ExtResource("9_md3dy")]
-position = Vector2(435, -121)
+[node name="FaceWall_Restroom" parent="." index="6" instance=ExtResource("9_md3dy")]
+y_sort_enabled = true
+position = Vector2(435, -106)
 faded_alpha = 0.35
 fade_time = 0.2
 fade_margin = 8
@@ -109,52 +138,42 @@ horizontal_texture = ExtResource("11_g32xi")
 length = 140
 thickness = 96
 
-[node name="Sprite2D" parent="InteriorWall2" index="0"]
+[node name="Sprite2D" parent="FaceWall_Restroom" index="0"]
 position = Vector2(0, -96)
 texture = ExtResource("11_g32xi")
 region_rect = Rect2(0, 0, 140, 96)
 
-[node name="CollisionShape2D" parent="InteriorWall2" index="1"]
+[node name="CollisionShape2D" parent="FaceWall_Restroom" index="1"]
 position = Vector2(70, -25.375)
 shape = SubResource("RectangleShape2D_g32xi")
 
-[node name="CollisionShape2D" parent="InteriorWall2/FadeArea" index="0"]
+[node name="CollisionShape2D" parent="FaceWall_Restroom/FadeArea" index="0"]
 position = Vector2(70, -52)
-shape = SubResource("RectangleShape2D_w8l14")
+shape = SubResource("RectangleShape2D_lduto")
 
-[node name="InteriorWall3" parent="." index="7" instance=ExtResource("9_md3dy")]
+[node name="FaceWall_Guestroom" parent="." index="7" instance=ExtResource("9_md3dy")]
 position = Vector2(1, -121)
 faded_alpha = 0.35
 fade_time = 0.2
 fade_margin = 8
 horizontal_texture = ExtResource("11_g32xi")
-length = 140
+length = 108
 thickness = 96
 
-[node name="Sprite2D" parent="InteriorWall3" index="0"]
+[node name="Sprite2D" parent="FaceWall_Guestroom" index="0"]
 position = Vector2(0, -96)
 texture = ExtResource("11_g32xi")
-region_rect = Rect2(0, 0, 140, 96)
+region_rect = Rect2(0, 0, 108, 96)
 
-[node name="CollisionShape2D" parent="InteriorWall3" index="1"]
-position = Vector2(70, -25)
+[node name="CollisionShape2D" parent="FaceWall_Guestroom" index="1"]
+position = Vector2(54.5, -25)
 shape = SubResource("RectangleShape2D_bt8xh")
 
-[node name="CollisionShape2D" parent="InteriorWall3/FadeArea" index="0"]
-position = Vector2(70, -52)
-shape = SubResource("RectangleShape2D_jss3i")
+[node name="CollisionShape2D" parent="FaceWall_Guestroom/FadeArea" index="0"]
+position = Vector2(54, -52)
+shape = SubResource("RectangleShape2D_ecw42")
 
-[node name="InteriorWall4" parent="." index="8" instance=ExtResource("9_md3dy")]
-visible = false
-position = Vector2(225, -121)
-faded_alpha = 0.35
-fade_time = 0.2
-fade_margin = 8
-horizontal_texture = ExtResource("11_g32xi")
-length = 140
-thickness = 96
-
-[node name="InteriorWall5" parent="." index="9" instance=ExtResource("9_md3dy")]
+[node name="SideWall_Restroom" parent="." index="8" instance=ExtResource("9_md3dy")]
 position = Vector2(381, -121)
 faded_alpha = 0.35
 fade_time = 0.2
@@ -164,20 +183,165 @@ vertical = true
 length = 256
 thickness = 16
 
-[node name="Sprite2D" parent="InteriorWall5" index="0"]
+[node name="Sprite2D" parent="SideWall_Restroom" index="0"]
 position = Vector2(0, -256)
 texture = ExtResource("10_v5wjo")
 region_rect = Rect2(0, 0, 16, 256)
 
-[node name="CollisionShape2D" parent="InteriorWall5" index="1"]
-position = Vector2(8, -132.25)
+[node name="CollisionShape2D" parent="SideWall_Restroom" index="1"]
+position = Vector2(8, -101)
 shape = SubResource("RectangleShape2D_v5wjo")
 
-[node name="CollisionShape2D" parent="InteriorWall5/FadeArea" index="0"]
+[node name="CollisionShape2D" parent="SideWall_Restroom/FadeArea" index="0"]
 position = Vector2(8, -132)
-shape = SubResource("RectangleShape2D_qkgok")
+shape = SubResource("RectangleShape2D_refjl")
 
-[editable path="InteriorWall"]
-[editable path="InteriorWall2"]
-[editable path="InteriorWall3"]
-[editable path="InteriorWall5"]
+[node name="SideWall_Bedroom" parent="." index="9" instance=ExtResource("9_md3dy")]
+position = Vector2(435, -22)
+faded_alpha = 0.35
+fade_time = 0.2
+fade_margin = 8
+vertical_texture = ExtResource("10_v5wjo")
+vertical = true
+length = 164
+thickness = 16
+
+[node name="Sprite2D" parent="SideWall_Bedroom" index="0"]
+position = Vector2(0, -164)
+texture = ExtResource("10_v5wjo")
+region_rect = Rect2(0, 0, 16, 164)
+
+[node name="CollisionShape2D" parent="SideWall_Bedroom" index="1"]
+position = Vector2(6, -86)
+shape = SubResource("RectangleShape2D_v5wjo")
+
+[node name="CollisionShape2D" parent="SideWall_Bedroom/FadeArea" index="0"]
+position = Vector2(8, -86)
+shape = SubResource("RectangleShape2D_us50r")
+
+[node name="Counter_Area2D" type="Area2D" parent="." index="10"]
+position = Vector2(60, -89)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Counter_Area2D" index="0"]
+position = Vector2(11, 18)
+shape = SubResource("CircleShape2D_04j5v")
+
+[node name="WaitingRoom_Area2D" type="Area2D" parent="." index="11"]
+position = Vector2(275, -169)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaitingRoom_Area2D" index="0"]
+position = Vector2(-6.5, -2.5)
+shape = SubResource("RectangleShape2D_6qrnm")
+
+[node name="Bedroom_Area2D" type="Area2D" parent="." index="12"]
+position = Vector2(510, -79)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom_Area2D" index="0"]
+position = Vector2(-5, 13.5)
+shape = SubResource("RectangleShape2D_82mrb")
+
+[node name="Sleeping_Area2D" type="Area2D" parent="." index="13"]
+position = Vector2(93, -193)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sleeping_Area2D" index="0"]
+position = Vector2(14, 24)
+shape = SubResource("RectangleShape2D_82mrb")
+
+[node name="HalogramProjector_Counter" parent="." index="14" node_paths=PackedStringArray("room_area") instance=ExtResource("14_w8l14")]
+position = Vector2(60, -110)
+projector_id = &"Counter"
+room_area = NodePath("../Counter_Area2D")
+
+[node name="SpawnPoint" parent="HalogramProjector_Counter" index="1"]
+position = Vector2(2, -14)
+
+[node name="PointLight2D" parent="HalogramProjector_Counter" index="2"]
+visible = false
+position = Vector2(2, 18)
+
+[node name="HalogramProjector_Waiting" parent="." index="15" node_paths=PackedStringArray("room_area") instance=ExtResource("14_w8l14")]
+position = Vector2(200, -249)
+projector_id = &"Waiting"
+room_area = NodePath("../WaitingRoom_Area2D")
+
+[node name="SpawnPoint" parent="HalogramProjector_Waiting" index="1"]
+position = Vector2(0, 6)
+
+[node name="PointLight2D" parent="HalogramProjector_Waiting" index="2"]
+visible = false
+position = Vector2(0, 38)
+
+[node name="HalogramProjector_Bedroom" parent="." index="16" node_paths=PackedStringArray("room_area") instance=ExtResource("14_w8l14")]
+position = Vector2(546, -100)
+projector_id = &"Bedroom"
+room_area = NodePath("../Bedroom_Area2D")
+kira_animation = &"Leaning"
+
+[node name="Sprite2D" parent="HalogramProjector_Bedroom" index="0"]
+position = Vector2(5, -101)
+
+[node name="SpawnPoint" parent="HalogramProjector_Bedroom" index="1"]
+position = Vector2(7, -50)
+
+[node name="PointLight2D" parent="HalogramProjector_Bedroom" index="2"]
+visible = false
+position = Vector2(0, -12)
+
+[node name="HalogramProjector_Sleeping" parent="." index="17" node_paths=PackedStringArray("room_area") instance=ExtResource("14_w8l14")]
+position = Vector2(128, -190)
+projector_id = &"sleep"
+room_area = NodePath("../Sleeping_Area2D")
+kira_animation = &"Leaning"
+
+[node name="Sprite2D" parent="HalogramProjector_Sleeping" index="0"]
+position = Vector2(5, -101)
+
+[node name="SpawnPoint" parent="HalogramProjector_Sleeping" index="1"]
+position = Vector2(7, -50)
+
+[node name="PointLight2D" parent="HalogramProjector_Sleeping" index="2"]
+visible = false
+position = Vector2(0, -12)
+
+[node name="KiraHologram" parent="." index="18" instance=ExtResource("15_jss3i")]
+y_sort_enabled = true
+position = Vector2(525, -331)
+
+[node name="AnimatedSprite2D" parent="KiraHologram" index="0"]
+material = SubResource("ShaderMaterial_aw8px")
+
+[node name="Prompt" parent="KiraHologram" index="3"]
+offset_top = -47.0
+offset_bottom = -24.0
+
+[node name="Furniture" parent="." index="19"]
+y_sort_enabled = true
+
+[node name="Clean" type="Sprite2D" parent="Furniture" index="0"]
+y_sort_enabled = true
+position = Vector2(278, -150)
+texture = ExtResource("12_g32xi")
+
+[node name="ShortBar" type="Sprite2D" parent="Furniture" index="1"]
+y_sort_enabled = true
+position = Vector2(62, -87)
+texture = ExtResource("14_jss3i")
+
+[editable path="SideWall_Guestroom"]
+[editable path="FaceWall_Restroom"]
+[editable path="FaceWall_Guestroom"]
+[editable path="SideWall_Restroom"]
+[editable path="SideWall_Bedroom"]
+[editable path="HalogramProjector_Counter"]
+[editable path="HalogramProjector_Waiting"]
+[editable path="HalogramProjector_Bedroom"]
+[editable path="HalogramProjector_Sleeping"]
+[editable path="KiraHologram"]

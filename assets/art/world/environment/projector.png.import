@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmxrjtkdmmyc"
-path="res://.godot/imported/Clean.png-72e30115b7c1ba12301d7da518c4ffca.ctex"
+uid="uid://c8ojprqlykqal"
+path="res://.godot/imported/projector.png-a69c42fb176b7d2b083619ccd4f02f3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/items/Clean.png"
-dest_files=["res://.godot/imported/Clean.png-72e30115b7c1ba12301d7da518c4ffca.ctex"]
+source_file="res://assets/art/world/environment/projector.png"
+dest_files=["res://.godot/imported/projector.png-a69c42fb176b7d2b083619ccd4f02f3a.ctex"]
 
 [params]
 
