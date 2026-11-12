@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://e5pa7scv6ek2"]
+
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_w8jug"]
+[ext_resource type="Texture2D" uid="uid://b4vcmbq8fn7ha" path="res://assets/art/characters/npc/Saberhagen.png" id="2_7y5uj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhbxw"]
+atlas = ExtResource("2_7y5uj")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5oqm"]
+atlas = ExtResource("2_7y5uj")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4lgm"]
+atlas = ExtResource("2_7y5uj")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er38j"]
+atlas = ExtResource("2_7y5uj")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_puhmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhbxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5oqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4lgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er38j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8jug"]
+
+[node name="Npc Base" instance=ExtResource("1_w8jug")]
+npc_name = "Saberhagen"
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_puhmg")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_w8jug")
+
+[node name="Prompt" parent="." index="3"]
+offset_left = -41.0
+offset_top = -36.0
+offset_right = 51.0
+offset_bottom = 13.0
+text = "Saberhagen
+"

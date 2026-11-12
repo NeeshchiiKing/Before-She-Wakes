@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cffd3j0wwf3xp"]
 
 [ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_454fe"]
-[ext_resource type="Texture2D" uid="uid://d02si5sp8f1e" path="res://assets/art/characters/npc/2. Witch.png" id="2_1yjxi"]
+[ext_resource type="Texture2D" uid="uid://d02si5sp8f1e" path="res://assets/art/characters/npc/Minerva.png" id="2_1yjxi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6kmy"]
 atlas = ExtResource("2_1yjxi")

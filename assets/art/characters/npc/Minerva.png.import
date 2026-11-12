@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfaj8bdhms6et"
-path="res://.godot/imported/R.png-beab5df293321a497824692921b0045e.ctex"
+uid="uid://d02si5sp8f1e"
+path="res://.godot/imported/Minerva.png-829af9f48e43c9b60f316f115bf4d9ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/characters/npc/R.png"
-dest_files=["res://.godot/imported/R.png-beab5df293321a497824692921b0045e.ctex"]
+source_file="res://assets/art/characters/npc/Minerva.png"
+dest_files=["res://.godot/imported/Minerva.png-829af9f48e43c9b60f316f115bf4d9ba.ctex"]
 
 [params]
 

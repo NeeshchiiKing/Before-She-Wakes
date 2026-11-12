@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_mtlh3"]
 [ext_resource type="Script" uid="uid://b75715rbw2jaa" path="res://src/scripts/gameplay/npc/kira_hologram.gd" id="2_17i0o"]
-[ext_resource type="Texture2D" uid="uid://btt0f6r3x5335" path="res://assets/art/characters/npc/Wife Character.png" id="2_wjmnx"]
+[ext_resource type="Texture2D" uid="uid://btt0f6r3x5335" path="res://assets/art/characters/npc/Kira.png" id="2_wjmnx"]
 [ext_resource type="Shader" uid="uid://c6wr54a0n60m8" path="res://src/scenes/npc/pinetop/hologram.gdshader" id="3_17i0o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjmnx"]

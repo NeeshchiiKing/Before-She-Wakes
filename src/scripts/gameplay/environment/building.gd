@@ -3,7 +3,7 @@ class_name Building extends Node2D
 ## On start, it fixes Y-sort so the player goes behind the building from the north and in front from the south.
 
 @export var fade_nodes : Array[CanvasItem] = [] ## What fades. Leave empty to fade the "Top" child.
-@export_range(0.0, 1.0) var inside_alpha : float = 0.0 ## 0 = fully see-through, 0.3 = ghostly walls
+@export_range(0.0, 1.0) var inside_alpha : float = 0.1 ## 0 = fully see-through, 0.3 = ghostly walls
 @export var fade_time : float = 0.3 ## Seconds to fade in or out
 ## Moves the sort line up from the bottom of the Top art, for art with ground or shadow below the wall
 @export var front_sort_offset : float = 0.0

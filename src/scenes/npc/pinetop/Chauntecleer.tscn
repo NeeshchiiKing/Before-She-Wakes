@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4fko8xn6n1oo"]
+
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_j3tbq"]
+[ext_resource type="Texture2D" uid="uid://dfaj8bdhms6et" path="res://assets/art/characters/npc/Chauntecleer.png" id="2_0lj4x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi75v"]
+atlas = ExtResource("2_0lj4x")
+region = Rect2(0, 0, 36, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7lnb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi75v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_en55t"]
+size = Vector2(26, 28)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3tbq"]
+radius = 20.22375
+
+[node name="Npc Base" instance=ExtResource("1_j3tbq")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_e7lnb")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_en55t")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(3, 21)
+shape = SubResource("CircleShape2D_j3tbq")
+
+[node name="Prompt" parent="." index="3"]
+offset_left = -46.0
+offset_right = 58.0
+text = "Chauntecleer"

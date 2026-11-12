@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ddluwa4wq04g1"
+path="res://.godot/imported/saberhagen.dialogue-84f40ae68e1eebdc3469c614f829a406.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/saberhagen.dialogue"
+dest_files=["res://.godot/imported/saberhagen.dialogue-84f40ae68e1eebdc3469c614f829a406.tres"]
+
+[params]
+
+defaults=true

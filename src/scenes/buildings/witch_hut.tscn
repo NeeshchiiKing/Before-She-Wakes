@@ -1,0 +1,97 @@
+[gd_scene load_steps=16 format=3 uid="uid://borm47q6xef5t"]
+
+[ext_resource type="PackedScene" uid="uid://jkqjbyugurqw" path="res://src/scenes/buildings/building.tscn" id="1_ptidi"]
+[ext_resource type="Texture2D" uid="uid://bvte4xgy34vhj" path="res://assets/art/world/buildings/Witches_hut_interior.png" id="2_kffsg"]
+[ext_resource type="Texture2D" uid="uid://o3wvqumhgbbg" path="res://assets/art/world/buildings/Witches_hut_2.png" id="3_3bsol"]
+[ext_resource type="PackedScene" uid="uid://cffd3j0wwf3xp" path="res://src/scenes/npc/pinetop/minverva.tscn" id="4_kffsg"]
+[ext_resource type="Script" uid="uid://wk3lftpas2s4" path="res://src/scripts/gameplay/world/draw_above_area.gd" id="5_3bsol"]
+[ext_resource type="Resource" uid="uid://raruqudwf4no" path="res://src/data/quests/minervas_mushroom.tres" id="5_ewbig"]
+[ext_resource type="Resource" uid="uid://d1i4chdedsov4" path="res://dialogue/pinetop/minerva.dialogue" id="6_iu30f"]
+[ext_resource type="PackedScene" uid="uid://e5pa7scv6ek2" path="res://src/scenes/npc/pinetop/Saberhagen.tscn" id="8_iu30f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptidi"]
+size = Vector2(315, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kffsg"]
+size = Vector2(19, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bsol"]
+size = Vector2(17.75, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc12w"]
+size = Vector2(44, 4.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewbig"]
+size = Vector2(212, 5.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu30f"]
+size = Vector2(303, 168.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ln6mx"]
+size = Vector2(318, 44)
+
+[node name="Building" instance=ExtResource("1_ptidi")]
+
+[node name="Floor" parent="." index="0"]
+position = Vector2(0, -383)
+texture = ExtResource("2_kffsg")
+
+[node name="RestStations" parent="." index="1"]
+position = Vector2(0, -383)
+
+[node name="Top" parent="." index="2"]
+position = Vector2(0, -383)
+texture = ExtResource("3_3bsol")
+
+[node name="StaticBody2D" parent="." index="3"]
+position = Vector2(288, -191)
+
+[node name="back wall" parent="StaticBody2D" index="0"]
+position = Vector2(-131.5, -110)
+shape = SubResource("RectangleShape2D_ptidi")
+
+[node name="left wall" parent="StaticBody2D" index="1"]
+position = Vector2(-278, 61.125)
+shape = SubResource("RectangleShape2D_kffsg")
+
+[node name="right wall" parent="StaticBody2D" index="2"]
+position = Vector2(16, 61)
+shape = SubResource("RectangleShape2D_3bsol")
+
+[node name="front wall, left of door" parent="StaticBody2D" index="3"]
+position = Vector2(-247, 145)
+shape = SubResource("RectangleShape2D_yc12w")
+
+[node name="front wall, right of door" parent="StaticBody2D" index="4"]
+position = Vector2(-80, 145.75)
+shape = SubResource("RectangleShape2D_ewbig")
+
+[node name="InteriorArea" parent="." index="4"]
+position = Vector2(288, -191)
+
+[node name="CollisionShape2D" parent="InteriorArea" index="0"]
+position = Vector2(-130.5, 41.625)
+shape = SubResource("RectangleShape2D_iu30f")
+
+[node name="Minverva" parent="." index="5" instance=ExtResource("4_kffsg")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(39, -49)
+quest = ExtResource("5_ewbig")
+dialogue = ExtResource("6_iu30f")
+
+[node name="Furniture" parent="." index="6"]
+position = Vector2(0, 1)
+
+[node name="StairsArea" type="Area2D" parent="." index="7"]
+position = Vector2(-1, 25)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_3bsol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StairsArea" index="0"]
+position = Vector2(159, -45)
+shape = SubResource("RectangleShape2D_ln6mx")
+
+[node name="Npc Base" parent="." index="8" instance=ExtResource("8_iu30f")]
+position = Vector2(21, -201)

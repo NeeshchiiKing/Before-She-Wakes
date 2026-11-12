@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://buicryfh5je1s"
+path="res://.godot/imported/chauntecleer.dialogue-b2cd70c5c730616da7638d9954894639.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/chauntecleer.dialogue"
+dest_files=["res://.godot/imported/chauntecleer.dialogue-b2cd70c5c730616da7638d9954894639.tres"]
+
+[params]
+
+defaults=true

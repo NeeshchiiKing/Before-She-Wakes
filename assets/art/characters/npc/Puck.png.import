@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btt0f6r3x5335"
-path="res://.godot/imported/Wife Character.png-63d1e40977280a25452df26a50b91fa7.ctex"
+uid="uid://cybuuxqou48av"
+path="res://.godot/imported/Puck.png-a7acc239229b94af4f7c2717eb3f967d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/characters/npc/Wife Character.png"
-dest_files=["res://.godot/imported/Wife Character.png-63d1e40977280a25452df26a50b91fa7.ctex"]
+source_file="res://assets/art/characters/npc/Puck.png"
+dest_files=["res://.godot/imported/Puck.png-a7acc239229b94af4f7c2717eb3f967d.ctex"]
 
 [params]
 

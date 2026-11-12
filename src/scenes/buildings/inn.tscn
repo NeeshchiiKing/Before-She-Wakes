@@ -84,7 +84,6 @@ position = Vector2(414, 160)
 position = Vector2(42, 177)
 
 [node name="Top" parent="." index="2"]
-visible = false
 texture = ExtResource("3_cjiu3")
 
 [node name="back wall" parent="StaticBody2D" index="0"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d02si5sp8f1e"
-path="res://.godot/imported/2. Witch.png-737e2a8c377088a7bde7d0669066efe5.ctex"
+uid="uid://b4vcmbq8fn7ha"
+path="res://.godot/imported/Saberhagen.png-55441bfae2d48b948c8b05abaa606c24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/characters/npc/2. Witch.png"
-dest_files=["res://.godot/imported/2. Witch.png-737e2a8c377088a7bde7d0669066efe5.ctex"]
+source_file="res://assets/art/characters/npc/Saberhagen.png"
+dest_files=["res://.godot/imported/Saberhagen.png-55441bfae2d48b948c8b05abaa606c24.ctex"]
 
 [params]
 

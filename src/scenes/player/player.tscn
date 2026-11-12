@@ -1,4 +1,4 @@
-[gd_scene load_steps=155 format=3 uid="uid://dnjkaew63j15w"]
+[gd_scene load_steps=159 format=3 uid="uid://dnjkaew63j15w"]
 
 [ext_resource type="Texture2D" uid="uid://xrp1nhbl6fxt" path="res://assets/art/characters/player/64_Player_Game.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bmeiguh5ibq4l" path="res://src/scripts/gameplay/player/player.gd" id="1_dovo2"]
@@ -9,8 +9,11 @@
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="5_6gf5d"]
 [ext_resource type="Script" uid="uid://dg3qgwnlnhlo4" path="res://src/scripts/core/resources/orbs/orb_grid.gd" id="5_l84wi"]
 [ext_resource type="Script" uid="uid://bs7a3w4m8jdm2" path="res://src/scripts/core/resources/abilities/ability_definition.gd" id="6_7vxwc"]
+[ext_resource type="Script" uid="uid://busq2km3b5tdn" path="res://src/scripts/core/resources/orbs/perk_definition.gd" id="6_fkpjo"]
 [ext_resource type="Script" uid="uid://71gqms0btw5g" path="res://src/scripts/core/resources/abilities/ability_book.gd" id="7_8tvdu"]
+[ext_resource type="Resource" path="res://src/data/perks/breathwork.tres" id="7_31ek5"]
 [ext_resource type="Resource" uid="uid://d2jv4s6dv4pk8" path="res://src/data/abilities/torch.tres" id="8_l84wi"]
+[ext_resource type="Resource" path="res://src/data/perks/battering_ram.tres" id="8_q6e5w"]
 [ext_resource type="Resource" uid="uid://bjfxfsr7g6gly" path="res://src/data/spells/light.tres" id="9_sm61a"]
 [ext_resource type="Resource" uid="uid://c5xjpkt1737oa" path="res://src/data/spells/fireball.tres" id="10_0il57"]
 [ext_resource type="Script" uid="uid://b4ii6p5ma3fmr" path="res://src/scripts/core/resources/items/inventory.gd" id="10_ashbf"]
@@ -19,6 +22,7 @@
 [ext_resource type="Script" uid="uid://dhliqoj7aigd6" path="res://src/scripts/core/resources/currency/wallet.gd" id="14_xgv0w"]
 [ext_resource type="Resource" uid="uid://gujxrlarfan3" path="res://src/data/equipment/white_tank_top.tres" id="15_0il57"]
 [ext_resource type="Resource" uid="uid://benk046in5elt" path="res://src/data/equipment/bags/pockets.tres" id="15_xuyuq"]
+[ext_resource type="Resource" uid="uid://dxwxk1y67klh8" path="res://src/data/weapons/gear/skull_sword.tres" id="16_31ek5"]
 [ext_resource type="Resource" uid="uid://ueqyjicu522c" path="res://src/data/equipment/blue_shorts.tres" id="17_xuyuq"]
 [ext_resource type="Script" uid="uid://cvw1ixxjquwl8" path="res://src/scripts/core/resources/equipment/equipment.gd" id="18_pyeyo"]
 [ext_resource type="Resource" uid="uid://utab68n0kiet" path="res://src/data/equipment/tattered_shoes.tres" id="19_87sxd"]
@@ -55,6 +59,8 @@ metadata/_custom_type_script = "uid://dibecyaa458ah"
 [sub_resource type="Resource" id="Resource_ashbf"]
 script = ExtResource("5_l84wi")
 orbs = 5
+cores = 3
+starting_perks = Array[ExtResource("6_fkpjo")]([ExtResource("7_31ek5"), ExtResource("8_q6e5w")])
 metadata/_custom_type_script = "uid://dg3qgwnlnhlo4"
 
 [sub_resource type="Resource" id="Resource_l84wi"]
@@ -71,7 +77,8 @@ metadata/_custom_type_script = "uid://71gqms0btw5g"
 script = ExtResource("10_ashbf")
 bag_name = "Pockets"
 bag_capacity = 4
-starting_items = Array[ExtResource("11_ld08d")]([null])
+starting_items = Array[ExtResource("11_ld08d")]([null, null])
+starting_gear = Array[ExtResource("11_6ofwp")]([ExtResource("16_31ek5")])
 metadata/_custom_type_script = "uid://b4ii6p5ma3fmr"
 
 [sub_resource type="Resource" id="Resource_auaqc"]

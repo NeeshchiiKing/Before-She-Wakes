@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://c5q4l3fw53y6i"]
+
+[ext_resource type="Script" uid="uid://ksele114qyee" path="res://src/scripts/gameplay/combat/attack_step.gd" id="1_1a8q1"]
+[ext_resource type="Script" uid="uid://j2nm2pdnv7gt" path="res://src/scripts/core/resources/items/WeaponData.gd" id="2_25iej"]
+[ext_resource type="Texture2D" uid="uid://eraytsl2bdgi" path="res://assets/art/world/items/sword/Skull_Sword.png" id="3_25iej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3mhc"]
+
+[resource]
+script = ExtResource("2_25iej")
+base_name = "skull_sword"
+texture = ExtResource("3_25iej")
+hitbox_shape = SubResource("RectangleShape2D_o3mhc")
+use_cost_amount = 1.0
+metadata/_custom_type_script = "uid://j2nm2pdnv7gt"
