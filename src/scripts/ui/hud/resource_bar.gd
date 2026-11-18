@@ -25,4 +25,8 @@ func update_from(stats: Stats) -> void:
 	var maximum : int = stats.get("max_" + stat_name)
 	bar.max_value = maximum # set max before value so it doesn't clamp wrong
 	bar.value = current
-	value_label.text = "%d/%d %s" % [current, maximum, stats.status_name(stat_name)]
+	var text := "%d/%d %s" % [current, maximum, stats.status_name(stat_name)]
+	var tolerance := stats.get_tolerance_max(stat_name)
+	if tolerance > 0:
+		text += "  Tol %d/%d" % [stats.get_tolerance_left(stat_name), tolerance]
+	value_label.text = text

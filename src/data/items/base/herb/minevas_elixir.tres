@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://db76hjikbd6kc"]
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=5 format=3 uid="uid://db76hjikbd6kc"]
 
 [ext_resource type="Texture2D" uid="uid://d0xottjccckb4" path="res://assets/art/world/items/base_items/green_liquid.png" id="1_cjwfw"]
+[ext_resource type="Resource" uid="uid://fbupvg8y0ytj" path="res://src/data/items/base/water/empty_bottle.tres" id="2_2u4ym"]
 [ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="2_pj8c3"]
 [ext_resource type="Texture2D" uid="uid://jofrbpa6fiik" path="res://assets/art/world/items/world_items/green_liquid.png" id="3_2u4ym"]
 
@@ -14,4 +15,5 @@ base_type = "herb"
 heals = "intelligence"
 heal_amount = 25
 tier_cost = 3
+leaves_behind = ExtResource("2_2u4ym")
 metadata/_custom_type_script = "uid://ds1wsjhavgit8"

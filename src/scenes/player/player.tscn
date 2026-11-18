@@ -61,6 +61,32 @@ script = ExtResource("5_l84wi")
 orbs = 5
 cores = 3
 starting_perks = Array[ExtResource("6_fkpjo")]([ExtResource("7_31ek5"), ExtResource("8_q6e5w")])
+layout = "
+.      .      .      .      .      .      .      .      .      .      P3:mig .      .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      .      cdm+4  atk%10! poi+4  .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      .      atk+4  .      poi+4  .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      P2:mig cdm+4  str+15 poi+4  P2:mig .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      .      .      S:mig  .      .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      .      atk+2  cft+1! poi+2  .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      .      cdm+2  .      poi+2  .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      .      P1:mig atk+2  str+10 poi+2  P1:mig .      .      .      .      .      .      .      .
+.      .      .      P2:con .      .      .      P1:con .      .      str+5  .      .      P1:sur .      .      .      P2:sur .      .      .
+.      dod+4  dod+4  dod+4  .      dod+2  dod+2  dod+2  .      .      str+5  .      .      def+2  def+2  def+2  .      def+4  def+4  def+4  .
+P3:con cri%10! .      dex+15 S:con  cft+1! .      dex+10 dex+5  dex+5  @      vit+5  vit+5  vit+10 .      cft+1! S:sur  vit+15 .      def%10! P3:sur
+.      rng+4  cri+4  rng+4  .      cri+2  rng+2  cri+2  .      .      cha+5  .      .      mov+2  mov+2  mov+2  .      mov+4  mov+4  mov+4  .
+.      .      .      P2:con .      .      .      P1:con .      .      tin+1  .      .      P1:sur .      .      .      P2:sur .      .      .
+.      .      .      .      .      .      .      .      .      .      cha+5  .      .      .      .      .      .      .      .      .      .
+.      .      .      .      .      .      .      cha+5  cha+5  cha+5  int+5  int+5  int+5  int+5  .      .      .      .      .      .      .
+.      .      .      .      .      .      .      cha+5  .      .      .      .      .      int+5  .      .      .      .      .      .      .
+.      .      .      .      .      P1:tri spd+2  cha+10 eva+2  P1:tri .      P1:arc mdf+2  int+10 mag+2  P1:arc .      .      .      .      .
+.      .      .      .      .      .      mel+2  .      app+2  .      .      .      res+2  .      mac+2  .      .      .      .      .      .
+.      .      .      .      .      .      spd+2  cft+1! eva+2  .      .      .      mdf+2  cft+1! mag+2  .      .      .      .      .      .
+.      .      .      .      .      .      .      S:tri  .      .      .      .      .      S:arc  .      .      .      .      .      .      .
+.      .      .      .      .      P2:tri mel+4  cha+15 app+4  P2:tri .      P2:arc tin+1  int+15 mac+4  P2:arc .      .      .      .      .
+.      .      .      .      .      .      spd+4  .      eva+4  .      .      .      mdf+4  .      mag+4  .      .      .      .      .      .
+.      .      .      .      .      .      mel+4  eva%10! app+4  .      .      .      res+4  mag%10! mac+4  .      .      .      .      .      .
+.      .      .      .      .      .      .      P3:tri .      .      .      .      .      P3:arc .      .      .      .      .      .      .
+"
 metadata/_custom_type_script = "uid://dg3qgwnlnhlo4"
 
 [sub_resource type="Resource" id="Resource_l84wi"]

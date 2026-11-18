@@ -12,6 +12,10 @@ const STAT_KEYS : Dictionary = {
 	"mov": &"move_speed", "dod": &"dodge_recovery", "spd": &"attack_speed", "mel": &"melee_precision",
 }
 const CRAFT_KEY : String = "cft" ## Lowers crafting status-tier cost
+
+## Tolerance nodes: "tin+1" = +1 Intelligence Tolerance
+const TOLERANCE_KEYS : Dictionary = {"tvi": "vitality", "tin": "intelligence", "tch": "charisma", "tst": "strength", "tdx": "dexterity"}
+
 const DIRECTIONS : Array[Vector2i] = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 
 const BRANCH_NAMES : Dictionary = {"mig": "Might", "sur": "Survival", "arc": "Arcana", "tri": "Trickery", "con": "Conditioning"}
@@ -22,6 +26,7 @@ const BRANCH_SEALS : Dictionary = {
 }
 ## Which branch each bonus key belongs to. Only used for colours. cft has none.
 const KEY_BRANCH : Dictionary = {
+	"tst": "mig", "tvi": "sur", "tin": "arc", "tch": "tri", "tdx": "con",
 	"str": "mig", "atk": "mig", "cdm": "mig", "poi": "mig",
 	"vit": "sur", "def": "sur", "mov": "sur",
 	"int": "arc", "mag": "arc", "mac": "arc", "mdf": "arc", "res": "arc",
@@ -171,8 +176,8 @@ func _parse_special(token: String, node: OrbNode) -> OrbNode:
 	return node
 
 func is_known_key(key: String) -> bool:
-	return key in RESOURCE_KEYS or key in STAT_KEYS or key == CRAFT_KEY
-
+	return key in RESOURCE_KEYS or key in STAT_KEYS or key in TOLERANCE_KEYS or key == CRAFT_KEY
+	
 func get_size() -> Vector2i:
 	_ensure_set_up()
 	return Vector2i(_width, _height)
@@ -251,6 +256,8 @@ func activate(cell: Vector2i, stats: Stats, attributes: Attributes) -> bool:
 	active[cell] = true
 	if node.key in RESOURCE_KEYS:
 		_apply_resource(node, stats)
+		if node.key in TOLERANCE_KEYS:
+			stats.add_tolerance(StringName(TOLERANCE_KEYS[node.key]), node.amount)
 	emit_changed()
 	return true
 
@@ -395,6 +402,8 @@ func describe(node: OrbNode) -> String:
 	var amount_text := ("+%d%%" if node.is_percent else "+%d") % node.amount
 	if node.key in RESOURCE_KEYS:
 		return "%s Max %s" % [amount_text, String(RESOURCE_KEYS[node.key]).capitalize()]
+	if node.key in TOLERANCE_KEYS:
+		return "+%d %s Tolerance (soaks item tier costs)" % [node.amount, String(TOLERANCE_KEYS[node.key]).capitalize()]
 	if node.key == CRAFT_KEY:
 		return "Crafting costs %d fewer status tier" % node.amount
 	return "%s %s" % [amount_text, String(STAT_KEYS[node.key]).capitalize()]

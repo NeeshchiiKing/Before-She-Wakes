@@ -29,6 +29,11 @@ const WORST_TIER : int = 4
 
 @export var unspent_points : int = 0
 
+## Orb grid Tolerance: free tiers that soak up item tier costs before the status drops.
+## The orb grid raises the max. The Resource's rest station refills it.
+@export var tolerance_max : Dictionary = {} ## "intelligence" -> 2
+var tolerance_left : Dictionary = {}         ## How much buffer is left right now
+
 @export var vitality: = 1 :
 	set(value):
 		var was_alive := vitality > 0
@@ -101,6 +106,22 @@ func raise(resource: StringName) -> bool:
 	return true
 
 
+func get_tolerance_max(resource: StringName) -> int:
+	return tolerance_max.get(String(resource), 0)
+
+## Unset means full, so a max typed in the Inspector for testing starts filled
+func get_tolerance_left(resource: StringName) -> int:
+	return tolerance_left.get(String(resource), get_tolerance_max(resource))
+
+## The orb grid calls this. New Tolerance comes filled, like new Resource max.
+func add_tolerance(resource: StringName, amount: int) -> void:
+	var key := String(resource)
+	var left := get_tolerance_left(resource)
+	tolerance_max[key] = get_tolerance_max(resource) + amount
+	tolerance_left[key] = left + amount
+	emit_changed()
+	
+
 func status_tier(resource: StringName) -> int:
 	return get(String(resource) + "_tier")
 
@@ -110,14 +131,20 @@ func status_name(resource: StringName) -> String:
 func is_worst_status(resource: StringName) -> bool:
 	return status_tier(resource) >= WORST_TIER
 
-## Used by healing items: each item says how many tiers it costs
+## Used by healing items: each item says how many tiers it costs.
+## Tolerance pays first; only what's left over drops the status.
 func worsen_status(resource: StringName, tiers: int) -> void:
+	var soaked := mini(tiers, get_tolerance_left(resource))
+	if soaked > 0:
+		tolerance_left[String(resource)] = get_tolerance_left(resource) - soaked
+		tiers -= soaked
 	set(String(resource) + "_tier", mini(status_tier(resource) + tiers, WORST_TIER))
 	emit_changed()
 
-## Used by town facilities (Rest, Meditate, Cleanse, Discharge, Sweat)
+## Used by town facilities (Rest, Meditate, Cleanse, Discharge, Sweat). Also refills Tolerance.
 func reset_status(resource: StringName) -> void:
 	set(String(resource) + "_tier", 0)
+	tolerance_left[String(resource)] = get_tolerance_max(resource)
 	emit_changed()
 
 ## Pays a Resource cost. Returns false (and spends nothing) if there isn't enough.
@@ -135,11 +162,12 @@ func fully_restore(resource: StringName) -> void:
 	set(resource, get("max_" + resource))
 	reset_status(resource)
 
-
+	
 ## Empties every Resource and sets every status to its worst tier (used by the game's opening).
 ## Vitality stays at 1 so he doesn't die.
 func drain_all() -> void:
 	for resource in NAMES:
 		set(resource, 1)
+		tolerance_left[String(resource)] = 0
 		set(String(resource) + "_tier", WORST_TIER)
 	emit_changed()
