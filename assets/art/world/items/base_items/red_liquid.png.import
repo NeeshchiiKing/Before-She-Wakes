@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bimnmuculj2uk"
-path="res://.godot/imported/Sink.png-3777c7be0669422cf24f7b2a48e1461e.ctex"
+uid="uid://ceb4idxyynlsu"
+path="res://.godot/imported/red_liquid.png-0fc333d24771c12ed03bc56912a62a65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/crafting/Sink.png"
-dest_files=["res://.godot/imported/Sink.png-3777c7be0669422cf24f7b2a48e1461e.ctex"]
+source_file="res://assets/art/world/items/base_items/red_liquid.png"
+dest_files=["res://.godot/imported/red_liquid.png-0fc333d24771c12ed03bc56912a62a65.ctex"]
 
 [params]
 

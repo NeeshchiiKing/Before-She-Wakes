@@ -26,7 +26,7 @@ region = Rect2(160, 0, 40, 50)
 [sub_resource type="SpriteFrames" id="SpriteFrames_5khgs"]
 animations = [{
 "frames": [{
-"duration": 120.0,
+"duration": 30.0,
 "texture": SubResource("AtlasTexture_r6kmy")
 }, {
 "duration": 1.0,
@@ -56,7 +56,7 @@ radius = 29.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5khgs")
-autoplay = ""
+frame_progress = 0.34628057
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -3)

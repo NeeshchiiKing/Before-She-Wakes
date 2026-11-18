@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://dub78gf3ih5a4"]
+
+[ext_resource type="Texture2D" uid="uid://ximmgy11g53b" path="res://assets/art/world/items/base_items/caffeine.png" id="1_lp08r"]
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_mxsrq"]
+[ext_resource type="Texture2D" uid="uid://dy1xxiirswoqn" path="res://assets/art/world/items/world_items/caffeine.png" id="3_vrs60"]
+
+[resource]
+script = ExtResource("1_mxsrq")
+display_name = "Canned Coffee"
+icon = ExtResource("1_lp08r")
+world_sprite = ExtResource("3_vrs60")
+base_type = "caffeine"
+heals = "intelligence"
+heal_amount = 10
+tier_cost = 2
+metadata/_custom_type_script = "uid://ds1wsjhavgit8"

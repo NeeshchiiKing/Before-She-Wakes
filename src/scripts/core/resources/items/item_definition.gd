@@ -13,3 +13,9 @@ class_name ItemDefinition extends Resource
 @export_enum("vitality", "intelligence", "charisma", "strength", "dexterity") var heals : String = "vitality"
 @export var heal_amount : int = 1
 @export_range(0, 3) var tier_cost : int = 1 ## Base alone 1, processed + base 2, with boost slot 3
+
+@export_group("Container")
+## False for things you can't eat or drink on their own (an Empty Bottle)
+@export var usable : bool = true
+## What's left after using this (a Bottle of Water leaves an Empty Bottle)
+@export var leaves_behind : ItemDefinition

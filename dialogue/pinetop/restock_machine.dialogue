@@ -1,0 +1,63 @@
+~ start
+The old machine hums awake.[wait=0.3] The glass is cracked, but the lights still blink.
+=> shop
+
+~ shop
+SELECT AN ITEM.
+- {{get_listing(0)}} [if not is_sold_out(0)]
+	=> buy_0
+- {{get_listing(1)}} [if not is_sold_out(1)]
+	=> buy_1
+- {{get_listing(2)}} [if not is_sold_out(2)]
+	=> buy_2
+- {{get_listing(3)}} [if not is_sold_out(3)]
+	=> buy_3
+- {{get_listing(4)}} [if not is_sold_out(4)]
+	=> buy_4
+- Walk away.
+	=> END
+
+~ buy_0
+if buy(0)
+	Clunk.[wait=0.3] Something drops into the tray.
+elif not can_fit(0)
+	The tray is jammed.[wait=0.3] (Your bag is full.)
+else
+	INSUFFICIENT FUNDS.
+=> shop
+
+~ buy_1
+if buy(1)
+	Clunk.[wait=0.3] Something drops into the tray.
+elif not can_fit(1)
+	The tray is jammed.[wait=0.3] (Your bag is full.)
+else
+	INSUFFICIENT FUNDS.
+=> shop
+
+~ buy_2
+if buy(2)
+	Clunk.[wait=0.3] Something drops into the tray.
+elif not can_fit(2)
+	The tray is jammed.[wait=0.3] (Your bag is full.)
+else
+	INSUFFICIENT FUNDS.
+=> shop
+
+~ buy_3
+if buy(3)
+	Clunk.[wait=0.3] Something drops into the tray.
+elif not can_fit(3)
+	The tray is jammed.[wait=0.3] (Your bag is full.)
+else
+	INSUFFICIENT FUNDS.
+=> shop
+
+~ buy_4
+if buy(4)
+	Clunk.[wait=0.3] Something drops into the tray.
+elif not can_fit(4)
+	The tray is jammed.[wait=0.3] (Your bag is full.)
+else
+	INSUFFICIENT FUNDS.
+=> shop

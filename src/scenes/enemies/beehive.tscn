@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pbksptupapjd" path="res://src/scripts/gameplay/enemies/beehive.gd" id="1_bedvc"]
 [ext_resource type="Script" uid="uid://mp3eiwlfsv0y" path="res://src/scripts/core/resources/stats/stats.gd" id="2_k1kb0"]
-[ext_resource type="Texture2D" uid="uid://b0is7kh5ne0gx" path="res://assets/art/world/items/environment/beehive.png" id="2_vobln"]
+[ext_resource type="Texture2D" uid="uid://b0is7kh5ne0gx" path="res://assets/art/world/items/environment/outdoor/beehive.png" id="2_vobln"]
 [ext_resource type="Script" uid="uid://q3r7iiumy8l8" path="res://src/scripts/gameplay/damage_boxes/hurtbox.gd" id="3_k1kb0"]
 [ext_resource type="PackedScene" uid="uid://dqw5qumanlqmg" path="res://src/scenes/enemies/bees.tscn" id="4_i2yf3"]
 [ext_resource type="Resource" uid="uid://dhykleb81ldxx" path="res://src/data/enemy_drop_loot/beehive.tres" id="4_y6as3"]

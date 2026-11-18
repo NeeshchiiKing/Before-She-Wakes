@@ -9,9 +9,11 @@ func quest_started() -> bool:
 func quest_complete() -> bool:
 	return QuestLog.is_complete(quest)
 
-func start_quest() -> void:
+## Returns true so dialogue can start the quest without a `do` line: if start_quest()
+func start_quest() -> bool:
 	QuestLog.start(quest)
-
+	return true
+	
 func items_held() -> int:
 	var player := get_tree().get_first_node_in_group("player")
 	return player.inventory.count_of(quest.item) if player else 0

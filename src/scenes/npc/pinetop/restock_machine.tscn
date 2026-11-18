@@ -1,0 +1,81 @@
+[gd_scene load_steps=21 format=3 uid="uid://kplf50km5o6v"]
+
+[ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_0euif"]
+[ext_resource type="Script" uid="uid://dccg6kqckfwv4" path="res://src/scripts/gameplay/npc/merchant_npc.gd" id="2_ck2cv"]
+[ext_resource type="Script" uid="uid://cifuctryor0h6" path="res://src/scripts/gameplay/npc/shop_entry.gd" id="3_583w2"]
+[ext_resource type="Resource" uid="uid://b505vph8srrjv" path="res://src/data/currency/paper.tres" id="4_whlod"]
+[ext_resource type="Resource" uid="uid://gv0d6k5a0m32" path="res://src/data/items/base/fiber/bandage_strip.tres" id="5_np81l"]
+[ext_resource type="Resource" uid="uid://dub78gf3ih5a4" path="res://src/data/items/base/caffeine/canned_coffee.tres" id="6_wa1da"]
+[ext_resource type="Resource" uid="uid://y7v21kfps45x" path="res://src/data/items/base/condiments/hot_sauce_packet.tres" id="7_asetv"]
+[ext_resource type="Resource" uid="uid://bny8jw3tnrnmd" path="res://src/data/items/base/breads/wrapped_bread.tres" id="8_gqgjk"]
+[ext_resource type="Resource" uid="uid://bvw3j3oa084b6" path="res://src/data/items/base/water/bottle_of_water.tres" id="9_oi8pq"]
+[ext_resource type="Resource" uid="uid://b6ag7jr7igjmo" path="res://dialogue/pinetop/restock_machine.dialogue" id="10_3d3fo"]
+[ext_resource type="Texture2D" uid="uid://bydw8pm6mp1tr" path="res://assets/art/world/structures/vending stock.png" id="11_qs2sb"]
+
+[sub_resource type="Resource" id="Resource_v05kk"]
+script = ExtResource("3_583w2")
+item = ExtResource("5_np81l")
+currency = ExtResource("4_whlod")
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="Resource" id="Resource_g548n"]
+script = ExtResource("3_583w2")
+item = ExtResource("6_wa1da")
+currency = ExtResource("4_whlod")
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="Resource" id="Resource_avmt6"]
+script = ExtResource("3_583w2")
+item = ExtResource("7_asetv")
+currency = ExtResource("4_whlod")
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="Resource" id="Resource_is6yk"]
+script = ExtResource("3_583w2")
+item = ExtResource("8_gqgjk")
+currency = ExtResource("4_whlod")
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="Resource" id="Resource_a74b6"]
+script = ExtResource("3_583w2")
+item = ExtResource("9_oi8pq")
+currency = ExtResource("4_whlod")
+metadata/_custom_type_script = "uid://cifuctryor0h6"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0m5n"]
+atlas = ExtResource("11_qs2sb")
+region = Rect2(0, 0, 48, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8gmvo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0m5n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqvbm"]
+size = Vector2(46, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8hr1"]
+radius = 24.0
+
+[node name="Restock_Machine" instance=ExtResource("1_0euif")]
+script = ExtResource("2_ck2cv")
+stock = Array[ExtResource("3_583w2")]([SubResource("Resource_v05kk"), SubResource("Resource_g548n"), SubResource("Resource_avmt6"), SubResource("Resource_is6yk"), SubResource("Resource_a74b6")])
+npc_name = "Restock Machine"
+dialogue = ExtResource("10_3d3fo")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_8gmvo")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(4, 4.5)
+shape = SubResource("RectangleShape2D_mqvbm")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(4, 32)
+shape = SubResource("CircleShape2D_u8hr1")

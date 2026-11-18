@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://e5pa7scv6ek2"]
+[gd_scene load_steps=10 format=3 uid="uid://e5pa7scv6ek2"]
 
 [ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_w8jug"]
 [ext_resource type="Texture2D" uid="uid://b4vcmbq8fn7ha" path="res://assets/art/characters/npc/Saberhagen.png" id="2_7y5uj"]
@@ -41,6 +41,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w8jug"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7y5uj"]
+radius = 18.0
+
 [node name="Npc Base" instance=ExtResource("1_w8jug")]
 npc_name = "Saberhagen"
 
@@ -51,6 +54,10 @@ sprite_frames = SubResource("SpriteFrames_puhmg")
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_w8jug")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(-1, 5)
+shape = SubResource("CircleShape2D_7y5uj")
 
 [node name="Prompt" parent="." index="3"]
 offset_left = -41.0

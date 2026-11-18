@@ -1,11 +1,37 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Nathan: For more information see the online documentation.
+if Story.is_set("met_chant_trembling")
+	=> after_chant
+else
+	# Before talking to Chauntecleer: Saberhagen only sings his jingle.
+	# Type the jingle line in place of the placeholder below.
+	Saberhagen: Meow meow meow meow, meow meow meow meow. (CAT JINGLE)
+	=> END
+
+~ after_chant
+Saberhagen The Warlock: Meow.
+- Tricks are for kids.
+	=> riddle
+- Leave.
+	=> END
+~ riddle
+Saberhagen The Warlock: Dogs guard. Cats watch... and judge. (Saberhagen snickers)
+- Dogs
+	Saberhagen The Warlock: Minerva keeps me on a tight leash, but for how long?
+	Saberhagen The Warlock: You should kill me, warrior, while you have the chance.
+	=> riddle
+- Cats
+	Saberhagen The Warlock: Sometimes, warrior, I feel you have forgotten me. Here I wait until I am freed of my curse.
+	Saberhagen The Warlock: Do not worry. I will not forget the kindness you have shown me.
+	Saberhagen The Warlock: I also will not kill you. I will keep you as my pet.
+	=> riddle
+- Judge
+	Saberhagen The Warlock: I sit on Minervas windowsill all day and judge every soul that passes.
+	Saberhagen The Warlock: The tracker who is brave only when the sun is up. The wild one who pines for an old woman. The light that I will capture.
+	Saberhagen The Warlock: How is your wife, Warrior?
+	Saberhagen The Warlock: Still flickering in that box, waiting for a savior?
+	Saberhagen The Warlock: I could help you. I raised her body once. Kept it... very well preserved. (He purrs.)
+	Saberhagen The Warlock: I am sure she would...[wait=0.8] [shake rate=25 level=10][color=#E98B83]DIE FOR A BODY!![/color][/shake]
+	=> END
+- Leave.
+	=> END
 => END

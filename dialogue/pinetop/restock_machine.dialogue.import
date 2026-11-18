@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b6ag7jr7igjmo"
+path="res://.godot/imported/restock_machine.dialogue-4b72f12e4fb7df5efc7e9c8c1cc01340.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/restock_machine.dialogue"
+dest_files=["res://.godot/imported/restock_machine.dialogue-4b72f12e4fb7df5efc7e9c8c1cc01340.tres"]
+
+[params]
+
+defaults=true

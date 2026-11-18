@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dl6d8lphmwogk" path="res://src/scenes/projectiles/throwing_rock.tscn" id="1_mmbkk"]
 [ext_resource type="Texture2D" uid="uid://jn2ua2011ocl" path="res://assets/art/world/items/throwing/ducky.png" id="2_jrtxe"]
 
-[node name="rubbertducky" instance=ExtResource("1_mmbkk")]
+[node name="rubberducky" instance=ExtResource("1_mmbkk")]
 damage = 2
 knockback_amount = 100
 

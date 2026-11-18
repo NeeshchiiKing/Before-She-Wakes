@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://rcpengr3pwdc"]
+[gd_scene load_steps=13 format=3 uid="uid://rcpengr3pwdc"]
 
 [ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_ylfrb"]
 [ext_resource type="Resource" uid="uid://dy3kufjjdyrer" path="res://dialogue/pinetop/puck.dialogue" id="2_l2gqk"]
@@ -31,9 +31,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07u2t"]
+size = Vector2(41, 33)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u5vep"]
+radius = 25.179358
+
 [node name="Puck" instance=ExtResource("1_ylfrb")]
 script = ExtResource("2_u5gg8")
-stock = Array[ExtResource("3_0q0lx")]([SubResource("Resource_5pmsa")])
+stock = Array[ExtResource("3_0q0lx")]([SubResource("Resource_5pmsa"), null])
 npc_name = "Puck"
 dialogue = ExtResource("2_l2gqk")
 
@@ -43,17 +49,20 @@ animation = &"idle"
 autoplay = ""
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(-2.5, 9)
+position = Vector2(0.5, -4.5)
+shape = SubResource("RectangleShape2D_07u2t")
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-position = Vector2(-4, 22)
+position = Vector2(1, 27)
+shape = SubResource("CircleShape2D_u5vep")
 
 [node name="Prompt" parent="." index="3"]
 z_index = 10
 z_as_relative = false
-offset_left = -56.0
-offset_top = -53.0
-offset_bottom = -4.0
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 54.0
+offset_bottom = -7.0
 theme_override_constants/line_spacing = -8
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1

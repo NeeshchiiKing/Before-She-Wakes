@@ -1,0 +1,113 @@
+[gd_scene load_steps=19 format=3 uid="uid://ckkucp20i4kwp"]
+
+[ext_resource type="PackedScene" uid="uid://dyeqsmsgfk2gl" path="res://src/scenes/furniture/rest_station.tscn" id="1_ya361"]
+[ext_resource type="Script" uid="uid://ck2s70jh5xqvy" path="res://src/scripts/gameplay/environment/fill_station.gd" id="2_2k3ke"]
+[ext_resource type="Resource" uid="uid://fbupvg8y0ytj" path="res://src/data/items/base/water/empty_bottle.tres" id="3_q13th"]
+[ext_resource type="Resource" uid="uid://db76hjikbd6kc" path="res://src/data/items/base/herb/minevas_elixir.tres" id="4_ya361"]
+[ext_resource type="Resource" uid="uid://xjgibvkbwybn" path="res://dialogue/pinetop/cauldron.dialogue" id="5_ya361"]
+[ext_resource type="Texture2D" uid="uid://doqqg44pjusym" path="res://assets/art/world/items/environment/indoor/Culdron.png" id="6_ya361"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2k3ke"]
+size = Vector2(27, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q13th"]
+size = Vector2(24, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t3xmf"]
+radius = 22.090721
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya361"]
+atlas = ExtResource("6_ya361")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k3ke"]
+atlas = ExtResource("6_ya361")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q13th"]
+atlas = ExtResource("6_ya361")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3xmf"]
+atlas = ExtResource("6_ya361")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_box32"]
+atlas = ExtResource("6_ya361")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr1qo"]
+atlas = ExtResource("6_ya361")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr70j"]
+atlas = ExtResource("6_ya361")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfnnv"]
+atlas = ExtResource("6_ya361")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yciwr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya361")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2k3ke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q13th")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3xmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_box32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr1qo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr70j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfnnv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Minervas_Cauldron" instance=ExtResource("1_ya361")]
+script = ExtResource("2_2k3ke")
+empty_item = ExtResource("3_q13th")
+filled_item = ExtResource("4_ya361")
+action_name = "Fill Bottles"
+fill_all = true
+first_use_flag = &"learned_elixir_filling"
+first_use_dialogue = ExtResource("5_ya361")
+first_use_title = "cauldron_first"
+
+[node name="Sprite2D" parent="." index="0"]
+visible = false
+texture = ExtResource("6_ya361")
+hframes = 8
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_2k3ke")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(1, 2.5)
+shape = SubResource("RectangleShape2D_q13th")
+
+[node name="CollisionShape2D" parent="InteractArea" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_t3xmf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="5"]
+sprite_frames = SubResource("SpriteFrames_yciwr")
+autoplay = "default"
+frame_progress = 0.6740447

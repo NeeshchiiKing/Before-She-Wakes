@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://borm47q6xef5t"]
+[gd_scene load_steps=18 format=3 uid="uid://borm47q6xef5t"]
 
 [ext_resource type="PackedScene" uid="uid://jkqjbyugurqw" path="res://src/scenes/buildings/building.tscn" id="1_ptidi"]
 [ext_resource type="Texture2D" uid="uid://bvte4xgy34vhj" path="res://assets/art/world/buildings/Witches_hut_interior.png" id="2_kffsg"]
 [ext_resource type="Texture2D" uid="uid://o3wvqumhgbbg" path="res://assets/art/world/buildings/Witches_hut_2.png" id="3_3bsol"]
+[ext_resource type="PackedScene" uid="uid://ckkucp20i4kwp" path="res://src/scenes/environment/minervas_cauldron.tscn" id="3_88yg6"]
 [ext_resource type="PackedScene" uid="uid://cffd3j0wwf3xp" path="res://src/scenes/npc/pinetop/minverva.tscn" id="4_kffsg"]
 [ext_resource type="Script" uid="uid://wk3lftpas2s4" path="res://src/scripts/gameplay/world/draw_above_area.gd" id="5_3bsol"]
 [ext_resource type="Resource" uid="uid://raruqudwf4no" path="res://src/data/quests/minervas_mushroom.tres" id="5_ewbig"]
 [ext_resource type="Resource" uid="uid://d1i4chdedsov4" path="res://dialogue/pinetop/minerva.dialogue" id="6_iu30f"]
 [ext_resource type="PackedScene" uid="uid://e5pa7scv6ek2" path="res://src/scenes/npc/pinetop/Saberhagen.tscn" id="8_iu30f"]
+[ext_resource type="Resource" uid="uid://ddluwa4wq04g1" path="res://dialogue/pinetop/saberhagen.dialogue" id="9_ln6mx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptidi"]
 size = Vector2(315, 125)
@@ -38,6 +40,9 @@ texture = ExtResource("2_kffsg")
 
 [node name="RestStations" parent="." index="1"]
 position = Vector2(0, -383)
+
+[node name="Minervas_Cauldron" parent="RestStations" index="0" instance=ExtResource("3_88yg6")]
+position = Vector2(237, 193)
 
 [node name="Top" parent="." index="2"]
 position = Vector2(0, -383)
@@ -95,3 +100,4 @@ shape = SubResource("RectangleShape2D_ln6mx")
 
 [node name="Npc Base" parent="." index="8" instance=ExtResource("8_iu30f")]
 position = Vector2(21, -201)
+dialogue = ExtResource("9_ln6mx")

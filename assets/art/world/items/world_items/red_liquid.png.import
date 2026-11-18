@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doo8utc0eg52e"
-path="res://.godot/imported/Cart.png-5b34c2506aae02b90a7a041c8b8bf58b.ctex"
+uid="uid://2cslv6qt2eql"
+path="res://.godot/imported/red_liquid.png-0aeb912029b2933c8fd1f4f48621e46e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/crafting/Cart.png"
-dest_files=["res://.godot/imported/Cart.png-5b34c2506aae02b90a7a041c8b8bf58b.ctex"]
+source_file="res://assets/art/world/items/world_items/red_liquid.png"
+dest_files=["res://.godot/imported/red_liquid.png-0aeb912029b2933c8fd1f4f48621e46e.ctex"]
 
 [params]
 

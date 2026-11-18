@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_bagwb")
-display_name = "Rubbert Ducky"
+display_name = "Rubber Ducky"
 icon = ExtResource("1_prh6r")
 slot_type = "throwing"
 projectile_scene = ExtResource("2_ghqir")

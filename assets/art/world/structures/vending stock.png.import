@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq03m3h766cax"
-path="res://.godot/imported/Cabinet.png-3cce047310384bac8caefc6ded9ad3e7.ctex"
+uid="uid://bydw8pm6mp1tr"
+path="res://.godot/imported/vending stock.png-c04857c35dd924b827813ef3b1013140.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/crafting/Cabinet.png"
-dest_files=["res://.godot/imported/Cabinet.png-3cce047310384bac8caefc6ded9ad3e7.ctex"]
+source_file="res://assets/art/world/structures/vending stock.png"
+dest_files=["res://.godot/imported/vending stock.png-c04857c35dd924b827813ef3b1013140.ctex"]
 
 [params]
 

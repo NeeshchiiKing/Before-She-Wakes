@@ -2,6 +2,14 @@ class_name MerchantNPC extends NPC
 
 @export var stock: Array[ShopEntry] = []
 
+## Same short names the HUD uses
+const RESOURCE_SHORT := {
+	"vitality": "Vit",
+	"intelligence": "Int",
+	"charisma": "Cha",
+	"strength": "Str",
+	"dexterity": "Dex",
+}
 
 func get_price(index: int) -> int:
 	return stock[index].price
@@ -68,11 +76,15 @@ func _get_wallet() -> Wallet:
 	return player.wallet
 
 ## "Pouch - 10 Paper", shown as a shop option in dialogue
+## "Bottled Water - 5 Paper  (+2 Dex)", shown as a shop option in dialogue
 func get_listing(index: int) -> String:
 	var entry := stock[index]
-	return "%s - %d %s" % [entry.item.display_name, entry.price, entry.currency.display_name]
-
-
+	var text := "%s - %d %s" % [entry.item.display_name, entry.price, entry.currency.display_name]
+	if entry.item is ItemDefinition:
+		var item := entry.item as ItemDefinition
+		text += "  (+%d %s, %d tier)" % [item.heal_amount, RESOURCE_SHORT.get(item.heals, item.heals), item.tier_cost]
+	return text
+	
 func get_currency_name(index: int) -> String:
 	return stock[index].currency.display_name
 
@@ -81,3 +93,11 @@ func get_fail_reason(index: int) -> String:
 	if entry.item is ItemDefinition and not _get_inventory().can_add(entry.item):
 		return "Your bag's full, friend."
 	return "You're short on %s." % entry.currency.display_name
+
+## False when the item is a consumable and the bag has no room for it
+func can_fit(index: int) -> bool:
+	var entry := stock[index]
+	if entry.item is ItemDefinition:
+		var inventory := _get_inventory()
+		return inventory != null and inventory.can_add(entry.item)
+	return true

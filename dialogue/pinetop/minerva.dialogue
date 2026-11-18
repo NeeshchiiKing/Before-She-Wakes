@@ -1,24 +1,54 @@
 ~ start
 if quest_complete()
-	Minerva: The mushroom was exactly what I needed. Come back when you want company.
+	Minerva The Witch: That mushroom was exactly what these old bones needed. Thank you, Coren.
+	Minerva The Witch: Now go on, before Saberhagen starts judging you too.
 	=> END
 elif quest_started() and has_items()
-	Minerva: You found it. Give it here.
+	Minerva The Witch: Is that my mushroom? Oh, you're a dear. Hand it here.
 	if turn_in()
-		Minerva: Wonderful. Take this for your trouble, {{reward_text()}}.
+		Minerva The Witch: Wonderful. Take this for your trouble, {{reward_text()}}.
+		Minerva The Witch: And don't tell the boys I spoil you.
 	=> END
 elif quest_started()
-	Minerva: Still no mushroom? Keep looking.
-	=> END
+	Minerva The Witch: It only grows in that one quiet place, deep in the forest. You know the one.
+	=> waiting
+	
 else
 	=> offer
 
 ~ offer
-Minerva: I need a mushroom. Will you find one for me?
-- I'll look for it.
-	do start_quest()
-	Minerva: Good. Don't eat it.
+Minerva The Witch: Oh, look. Another glorious morning. Makes me sick! (Minerva giggles)
+Minerva The Witch: Good morning, Coren. I'm afraid I need my mushroom today.
+=> choices
+
+~ choices
+- I'll get your mushroom.
+	if start_quest()
+		Minerva The Witch: Bless you. Don't eat it on the way, it's not that kind of mushroom.
 	=> END
+- Sick?
+	Minerva The Witch: Not me, dear. Chaunt.
+	Minerva The Witch: He came in this morning trembling. He wouldn't tell me what happened, so I brewed him an elixir to relax his mind.
+	Minerva The Witch: He'd been running, and said he couldn't get me my mushroom.
+	Minerva The Witch: That boy. Forty-some years old and he still comes running to me when he's scared.
+	=> choices
 - Not right now.
-	Minerva: Then go away, I'm busy.
+	Minerva The Witch: That's alright, I'll be here. Where else would an old witch go?
+	=> END
+	
+~ waiting
+- Sick?
+	Minerva The Witch: Not me, dear. Chaunt.
+	Minerva The Witch: He came in this morning trembling. He wouldn't tell me what happened, so I brewed him an elixir to relax his mind.
+	Minerva The Witch: He'd been running, and said he couldn't get me my mushroom.
+	Minerva The Witch: That boy. Forty-some years old and he still comes running to me when he's scared.
+	=> waiting
+- Mushroom?
+	Minerva The Witch: No mushroom yet? That's alright. I'm old, not impatient.
+	Minerva The Witch: ...Well. A little impatient. (Minerva giggles)
+	Minerva The Witch: I'm sorry, Coren. I know what it costs you to go there.
+	Minerva The Witch: Nothing else grows that well in this forest. I suppose the soil there is... well cared for.
+	Minerva The Witch: Leave a flower for her while you're there.
+	=> END
+- Leave.
 	=> END

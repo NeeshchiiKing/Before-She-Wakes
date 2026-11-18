@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3 uid="uid://y7v21kfps45x"]
+
+[ext_resource type="Script" uid="uid://ds1wsjhavgit8" path="res://src/scripts/core/resources/items/item_definition.gd" id="1_evqp0"]
+[ext_resource type="Texture2D" uid="uid://cshig4npgcclk" path="res://assets/art/world/items/base_items/condiment.png" id="1_waych"]
+[ext_resource type="Texture2D" uid="uid://ywxpacsn8tky" path="res://assets/art/world/items/world_items/condiment.png" id="3_6x0sh"]
+
+[resource]
+script = ExtResource("1_evqp0")
+display_name = "Hot Sauce Packet"
+icon = ExtResource("1_waych")
+world_sprite = ExtResource("3_6x0sh")
+base_type = "condiments"
+heals = "charisma"
+heal_amount = 10
+tier_cost = 2
+metadata/_custom_type_script = "uid://ds1wsjhavgit8"

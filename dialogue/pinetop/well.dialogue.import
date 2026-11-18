@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dahti27ihj4xm"
+path="res://.godot/imported/well.dialogue-b472268e68dfc03943147ec2b854840d.tres"
+
+[deps]
+
+source_file="res://dialogue/pinetop/well.dialogue"
+dest_files=["res://.godot/imported/well.dialogue-b472268e68dfc03943147ec2b854840d.tres"]
+
+[params]
+
+defaults=true

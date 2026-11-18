@@ -29,6 +29,9 @@ var temporary_game_states: Array = []
 ## See if we are waiting for the player
 var is_waiting_for_input: bool = false
 
+## True while a line with choices has finished and is waiting for a click before showing them
+var _waiting_for_choices: bool = false
+
 ## See if we are running a long mutation and should hide the balloon
 var will_hide_balloon: bool = false
 
@@ -90,8 +93,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_instance_valid(dialogue_line):
-		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
-
+		progress.visible = not dialogue_label.is_typing and (dialogue_line.responses.size() == 0 or _waiting_for_choices) and not dialogue_line.has_tag("voice")
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
@@ -127,6 +129,7 @@ func apply_dialogue_line() -> void:
 
 	progress.hide()
 	is_waiting_for_input = false
+	_waiting_for_choices = false
 	balloon.focus_mode = Control.FOCUS_ALL
 	balloon.grab_focus()
 
@@ -155,8 +158,11 @@ func apply_dialogue_line() -> void:
 		await audio_stream_player.finished
 		next(dialogue_line.next_id)
 	elif dialogue_line.responses.size() > 0:
-		balloon.focus_mode = Control.FOCUS_NONE
-		responses_menu.show()
+		# Let the player finish reading; choices appear on the next click
+		_waiting_for_choices = true
+		is_waiting_for_input = true
+		balloon.focus_mode = Control.FOCUS_ALL
+		balloon.grab_focus()
 	elif dialogue_line.time != "":
 		var time: float = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
 		await get_tree().create_timer(time).timeout

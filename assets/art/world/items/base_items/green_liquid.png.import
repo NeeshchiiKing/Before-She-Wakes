@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvseyoc701eb0"
-path="res://.godot/imported/Vanity.png-6313de5b1df33d3387db71955c0add1a.ctex"
+uid="uid://d0xottjccckb4"
+path="res://.godot/imported/green_liquid.png-2385370cba1197d0bd14d44e23ef0af8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/crafting/Vanity.png"
-dest_files=["res://.godot/imported/Vanity.png-6313de5b1df33d3387db71955c0add1a.ctex"]
+source_file="res://assets/art/world/items/base_items/green_liquid.png"
+dest_files=["res://.godot/imported/green_liquid.png-2385370cba1197d0bd14d44e23ef0af8.ctex"]
 
 [params]
 

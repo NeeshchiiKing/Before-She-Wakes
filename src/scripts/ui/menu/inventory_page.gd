@@ -19,12 +19,16 @@ func _build() -> void:
 		var row := HBoxContainer.new()
 		column.add_child(row)
 		row.add_child(_make_icon(item.icon))
-		var text := "%s x%d  (+%d %s, %d tier)" % [item.display_name, inventory.count_of(item), item.heal_amount, item.heals.capitalize(), item.tier_cost]
+		#var text := "%s x%d  (+%d %s, %d tier)" % [item.display_name, inventory.count_of(item), item.heal_amount, item.heals.capitalize(), item.tier_cost]
+		var text := "%s x%d" % [item.display_name, inventory.count_of(item)]
+		if item.usable:
+			text += "  (+%d %s, %d tier)" % [item.heal_amount, item.heals.capitalize(), item.tier_cost]
 		var label := _add_drag_label(row, text, item)
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var use := Button.new()
 		use.text = "Use"
-		use.disabled = player.stats.is_worst_status(item.heals)
+		#use.disabled = player.stats.is_worst_status(item.heals)
+		use.disabled = not item.usable or player.stats.is_worst_status(item.heals)
 		use.pressed.connect(_on_use_pressed.bind(item))
 		row.add_child(use)
 		

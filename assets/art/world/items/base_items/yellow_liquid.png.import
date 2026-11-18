@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0is7kh5ne0gx"
-path="res://.godot/imported/beehive.png-cb9570567d78a5ec9f0c33fb8e663899.ctex"
+uid="uid://b0bgu0lw6dowm"
+path="res://.godot/imported/yellow_liquid.png-e60377cbda8a428bf9518edf5b54e144.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/world/items/environment/beehive.png"
-dest_files=["res://.godot/imported/beehive.png-cb9570567d78a5ec9f0c33fb8e663899.ctex"]
+source_file="res://assets/art/world/items/base_items/yellow_liquid.png"
+dest_files=["res://.godot/imported/yellow_liquid.png-e60377cbda8a428bf9518edf5b54e144.ctex"]
 
 [params]
 

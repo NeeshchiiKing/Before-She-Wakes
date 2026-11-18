@@ -1,11 +1,24 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Nathan: For more information see the online documentation.
-=> END
+if Story.set_flag("met_chant_trembling")
+	Chauntecleer The Tracker: My hands haven't trembled like this since Saberhagen.
+=> questions
+
+~ questions
+- Saberhagen?
+	=> saberhagen
+- Why are your hands trembling?
+	=> hands
+- Never mind.
+	=> END
+
+~ hands
+Chauntecleer The Tracker: I ran so fast, all I saw were the talons of a bird, wings like a dragon, and a tail that looked like a snake.
+Chauntecleer The Tracker: I've never seen anything like it. I ran and didn't look back.
+Chauntecleer The Tracker: Oh... Gorek is still in the forest. I hope he's okay.
+=> questions
+
+~ saberhagen
+Chauntecleer The Tracker: I was only a young man when we defeated him...
+Chauntecleer The Tracker: But I have nightmares that one day Minerva won't be strong enough to bind Saberhagen any longer.
+Chauntecleer The Tracker: He may look like a cat, but he is still very powerful.
+=> questions

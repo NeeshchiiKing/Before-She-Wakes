@@ -1,5 +1,18 @@
 ~ start
+if not Story.is_set("puck_toll_story")
+	=> first_meet
 Puck The Merchant: Coren![wait=0.2] Business is slow,[wait=0.3] but the road is never quiet.
+=> menu
+
+~ first_meet
+if Story.set_flag("puck_toll_story")
+	Puck The Merchant: Coren! I made it through the woods in one piece![wait=0.3] Barely.
+	Puck The Merchant: On my way here, a goblin sprang up out of nowhere and demanded a toll.[wait=0.3] Five Gold to pass.
+	Puck The Merchant: I paid it, and he let me through. Just like that.
+	Puck The Merchant: I was relieved.[wait=0.3] Most goblins I've met would've taken everything I own.
+	Puck The Merchant: This one's just trying to make a living.[wait=0.3] I can respect that.
+	Puck The Merchant: Strange thing, though...[wait=0.5] the woods were quiet. Not a single bird singing.
+	Puck The Merchant: Probably nothing.[wait=0.3] Anyway!
 => menu
 
 ~ menu

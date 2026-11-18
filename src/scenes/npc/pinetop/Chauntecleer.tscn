@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4fko8xn6n1oo"]
+[gd_scene load_steps=8 format=3 uid="uid://b4fko8xn6n1oo"]
 
 [ext_resource type="PackedScene" uid="uid://c77uusy8yhabd" path="res://src/scenes/npc/pinetop/npc_base.tscn" id="1_j3tbq"]
 [ext_resource type="Texture2D" uid="uid://dfaj8bdhms6et" path="res://assets/art/characters/npc/Chauntecleer.png" id="2_0lj4x"]
+[ext_resource type="Resource" uid="uid://buicryfh5je1s" path="res://dialogue/pinetop/chauntecleer.dialogue" id="2_vi75v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vi75v"]
 atlas = ExtResource("2_0lj4x")
@@ -25,6 +26,8 @@ size = Vector2(26, 28)
 radius = 20.22375
 
 [node name="Npc Base" instance=ExtResource("1_j3tbq")]
+npc_name = "Chauntecleer"
+dialogue = ExtResource("2_vi75v")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_e7lnb")

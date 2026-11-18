@@ -55,12 +55,14 @@ func remove(item: ItemDefinition, amount: int = 1) -> bool:
 
 ## Heals, then worsens the status tier. Blocked once that Resource is at its worst tier.
 func use(item: ItemDefinition, stats: Stats) -> bool:
-	if count_of(item) <= 0 or stats.is_worst_status(item.heals):
+	if not item.usable or count_of(item) <= 0 or stats.is_worst_status(item.heals):
 		return false
 	var maximum : int = stats.get("max_" + item.heals)
 	stats.set(item.heals, mini(stats.get(item.heals) + item.heal_amount, maximum))
 	stats.worsen_status(item.heals, item.tier_cost)
 	remove(item)
+	if item.leaves_behind != null:
+		add(item.leaves_behind) # bottles always come back, even into a full bag
 	return true
 
 func get_quick_slot(index: int) -> Resource:
